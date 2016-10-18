@@ -1,0 +1,108 @@
+18th October 2016
+
+Bunny, Mayoress, Prostitute & Succubus (BMPS) started as a project on Saturday 24th September 2016
+
+While this is less than a month between when I started and when the game was essentially complete, it was less than a month "part time".
+
+This whole project was done during the evenings on weekdays, and during weekends. As opposed to my previous projects where I actually had time off work to work on them. My previous project, Hedonism Quest, Wilda's Ascension (HQWA), was barely completed within a calendar month.
+
+My first published project, Xyla's Little Elven Adventure (XLEA), took two calendar months from start to finish.
+
+My current plan is to release this project on the Wednesday 19th October 2016, which will be roughly one month from where I started.
+
+BMPS does not have much in the way of dialog. This was done on purpose to reduce the workload in creating the game, that way I could concentrate more of the logic beneath the surface. In fact, after abandoning the 2 projects that I drafted between when I finished HQWA and started BMPS, I wanted to keep the entire plot as simple as possible.
+
+The entire plot line is basically:
+Construct a medieval village, that is full of chauvinistic men (NPCs), who have a past history of raping and breaking women.
+Drop in a succubus (Playable Character), who will look upon the NPCs as cattle.
+Watch the resultant fun as the PC runs around having sex with the NPCs, slowly bending them to her will. It is a 'what goes around, comes around' sort of situation.
+
+Beyond the plot and the hint of a backstory. There has been human women before the PC. All of the characters had no real backstory other than the fetishes that some of them have. Keeping the detail to a minimum meant that I would not get hung up on writing the game. This was one of the reasons that I could construct it so quickly (and why it is so short). I did not have to explain how the village was created, how the men got there, or what happened to the unfortunate women who preceded the PC.
+
+We do know that the mayor arranged for the PC to come to the village, and she was lured to be the local prostitute. Previous women did not understand how hard it was going to be treated as the sole sexual object by a village full of rapists and sexual predators. The PC is different, as she is going to be living off these men. All of the previous women were human, while the PC is a succubus.
+
+As a result, there is only one good ending and one bad ending. It does not get much simpler than that. The PC has a one track mind, the NPCs only want to "stick and stir", and there is only one successful outcome. Because the PC is a demon, the bad ending was rather rather obvious.
+
+Except for the very start of the introduction, the storyline is told from the perspective of the PC. Except for a handful of events (that keep some of the NPCs locked), there is hardly much dialog.
+
+I tried to keep the fetishes that I was accommodating to a minimum:
+Femdom is obvious (consider what the PC did to the previous mayor when she announced that she is the new mayoress).
+Monsters (demons specifically) is the PC. She spends most of the storyline hiding her demonic traits, while slowly breaking the minds of the NPCs that she was having sex with.
+Whenever the PC runs into one or more ready and willing NPCs, she WILL have sex with them, and sometimes the NPCs are going to be rough.
+The PC is a definite cumslut, and has no problems with having sex with 5 other sexual partners at the same time.
+There is a single storyline event where a NPC rips off the PC's clothes, and a linked storyline event where the PC gets an item of leather clothing.
+There is a single storyline event that involves pee drinking (by a single NPC).
+There are 2 linked storyline events involving dildos and vibrators.
+There is a multi-event storyline that involves breast growth and clitoris growth.
+There is a single storyline event that links into the breast growth from above, involving lactation.
+
+One thing that is obvious, is the 'Fade to Black' (FtB) transitions. It was something that I did not use enough of when I wrote XLEA, where I was becoming too graphic in describing many of sex scenes, which created a dialog Quality Check nightmare. I started to FtB seriously use more of when I wrote HQWA. For a lot of BMPS encounters, I just say that the PC got to the location, the other participants are identified, how the sex gets going is described, then, 'Fade to Black', and we are at the end of the 40-45 minute time slot, see the results of progression of the participants, and now it is time to chose where we are going next.
+
+I would be lying if I said I wasn't partially emulating what 'Corruption of Champions' (CoC) originally looked like. If you look at how CoC originally appeared, it was rather simple in structure. BMPS was created with those same original limitations in mind, but dumbed down even further.
+
+Could I expand BMPS? : Yes.
+
+Will I expand BMPS? : Probably not. I think I have taken BMPS as far as I can currently take it. With only one ommission, I stuck to the plan that I drafted for it. When you create a game that caters to a group of core fetishes, and then start adding new ones, eventually it is going to turn into a mess. That being said, I would not mind seeing someone else have a shot at expanding it. As it is, I think I catered for a few too many feishes (and only mentioned the secondary ones in a handful of events).
+
+
+During the storyline events, there are hints in there that the PC corrupted/enslaved the previous mayor, so he would will willingly tell her everything that he knew about the other NPCs. There are also hints that the PC knew that there were previous human female prostitutes that the village had hired, broken, and that they were "disposed rid of". What happened to those women was specifically not written down. It is possible that the PC might know, but that detail is not revealed.
+
+
+Where HQWA was about navigating a dungeon, BMPS is a different gameplay layout in wondering around locations within a single village. The interface is the same, but the guts of the game underneath the hood is very different.
+
+With each game, I come up with improvements in how I make them.
+
+HQWA changed the way that work with save files, as well as creating a simple dungeon map navigation system (which was not reused in BMPS). The overhauled save structure was necessary because of the use of a RNG to alter the game outcome, so I could not keep the pre-save state that I constructed with XLEA, I had to work with post-save data instead.
+
+BMPS introduced search/replace tags for the dialog, and a function that takes care of looking for the search tags and replacing them with the character names. This was necessary because the PC had to approach a group of NPCs, and have sex with them. While the descriptions of the sex acts followed a selection of dialog, it was passed across as a single string, instead of assembling the dialog string, the hard way. I did access the NPC names "the hard way" in some parts of the program, but that was because I could get away with it, and cut down the overheads a tiny amount.
+
+The other big change between HQWA and BMPS is how I handled the NPCs (more on that below).
+
+Search/Replace of character names is something that was an idea after working on XLEA, but there was no immediate need for it with HQWA. BMPS needed Search/Replacement for the way that the sex scenes work, so I finally built one.
+
+The search/replace function in BMPS has two aspects to it, static and dynamic. Static is used for fixed event scene dialog, but dynamic is used for the random encounters. Dynamic involves populating another lookup table in advance that specifies which dynamic id is related to a static NPC name. The code populates the offset positions, then throws the single dialog string (for the encounter event) at the Search/Replace front end function, and let the function take care of it. No slicing up of the dialog into little bits in the calling function to insert the NPC names manually. The randomly selected string event contains all of the search replace tags, and let the underlying function do the hard work.
+
+
+I made the "destination selection" of navigation in BMPS hierarchal, with 22 top-level destination selections off the first level leading up to 64 actual destinations underneath. Some of those destinations have event triggers associated with them. The whole navigation menu revolves around those 22 top-level destinations.
+
+A NPC and a PC can go to those 22(areas)/64(locations) and have an encounter.
+
+All of the NPCs actually have assigned roles, which defined the daily schedules that they follow.
+
+BMPS has a concept of "time of the day". At a specific time, the PC can navigate to a new location (but not back to the buidling/area she is already at). The NPCs also shift locations and activities.
+
+I felt that an hour was too long, and a half-hour was too short. So broke up the day into 45-minute segments, which turned into 32 segments for 24-hours (day).
+
+Also, because the PC is not human, she never sleeps. Primarily because she is surrounded by so much food.
+
+HQWA had the NPCs at fixed locations, so outside of dialog and events, they really didn't exist in the code.
+
+In BMPS, the NPCs exist in the code. Most of the initial effort of the game (1 week of writing) was drafting their schedules and turning them into arrays, and getting those arrays to be referenced. The reason that their schedules were so complex is that I wanted to have a concept of a NPC schedule slot being linked to another NPC, as well as a RNG to give priority between multiple actions by the one NPC (with others following him). Some NPCs have very simple schedules, while others (such as the original mayor) can have a large number of destinations to select from (with the prioritized RNG).
+
+NPCs have other parameters, that dictate if the PC knows their face, if she "knows" them (after having sex with them), if the NPC trusts them, and from there the obedience level of the NPC. There is also an "energy" value associated with the NPCs, which is reset after they have sex with the PC. Till that "energy" value passes the halfway point, the NPC will be too tired to have sex with the PC again.
+
+The NPC action for the timeslot identifies how much energy they get back (they get more back if they are sleeping). There are 9 action identifiers for the NPC (which comes from the schedule array), that identifies what they are doing, and also contributes to their "willingness" to have sex with the PC. 1 of those identifiers means that the NPC is hidden (in the forest), so the PC cannot find them.
+
+When encountering a group of NPCs in an area, some NPCs are going to follow the PC from other sub-locations in the area. Their presence contributes to their priority to be selected. The RNG also comes into play with this. It is near impossible to get the same results in replaying the game a second time (unless you were to hack the code).
+
+For sex scenes, I capped it at 6p (5 NPCs), with everyone else who showed up, or was there and not participating, being voyeurs. There can be NPCs who are present, who are sound-asleep.
+
+HQWA and BMPS have the concept of difficulty levels. In HQWA, I went through the effort of making that selection part of the storyline. With BMPS, I could not be bothered dreaming up a storyline themed question that resulted in the player picking the easy/medium/hard settings. So I just threw some text up the front that explains the success/failure conditions for each mode, allow the player to select the mode, and get into the game introduction... done... less text to read, and stuff to misunderstand.
+
+
+While some people might have issues with the interface that I used for XLEA, HQWA, and now BMPS, there is a method in the madness.
+
+The interface sort of looks like old school interactive fiction (IF), but it isn't. Proper IF allows the user to enter a command string then tries to parse it, after entry. The thing that I have created has a list of allowed commands available, and allows the player to select from them (either using arrow-selection, or using the auto-complete). Really, it is nothing more than a list of "actions".
+
+The "action selection" is nothing more than number associated with a menu string, which turns into a scene function inside the program. When I wrote XLEA, I wanted to have the option to potentially make the game available online.
+
+The selection of an action to get the results, mimics how web browsers interact with dynamic web page applications. You do something, a request goes to the server (game code), you get a response returned back to you (dialog and new selections to pick from).
+
+The reason for making BMPS so simple in the terms of gameplay in the first place, was to get 3rd game that I can use as fodder for constructing a common interface for. I am not sure if it will work out (I never am with any of my projects). I am not sure if anyone is going to take interest in it, but at least it gives me a platform that some people are going to be a little happier with.
+
+I am currently aiming for a web server/browser model, instead of something to be downloaded into the web browser. I am not interested in refactoring any of my 3 game projects into any form of JavaScript, because JavaScript is not C based in the first place.
+
+
+M100
+18th October 2016
+

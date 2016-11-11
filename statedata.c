@@ -6215,7 +6215,7 @@ int statedata_allocAndInit ()
         if (gstructLocationList[sOffset1].cLocationId != (char)((char)sOffset1 + (char)1))
         {
             sprintf (szWorkBuffer, "Location: Invalid offset in list %d !\n", (int)sOffset1 + 1);
-            iRet = mutils_addToDialogBuffer (szWorkBuffer);
+            iRet = mdialog_addToDialogWithSrchRep (szWorkBuffer);
             if (iRet != 0) return iRet;
             return 6;
         }
@@ -6313,9 +6313,13 @@ int statedata_allocAndInit ()
         if (gpstructNPC_Base[sOffset1].structNPCSched == NULL)
         {
             sprintf (szWorkBuffer, "Schedule: NPC %d has no Schedule data !\n", (int)sOffset1 + 1);
-            iRet = mutils_addToDialogBuffer (szWorkBuffer);
+#ifdef INTERFACE_CURSES
+            iRet = mdialog_addToDialogWithSrchRep (szWorkBuffer);
             if (iRet != 0) return iRet;
             return 6;
+#else
+            httpcgi_errorOutput (szWorkBuffer, 101);
+#endif
         }
 
         for (sOffset2 = 0; sOffset2 < STATEDATA_TIMESLOTS; sOffset2++)
@@ -6323,17 +6327,25 @@ int statedata_allocAndInit ()
             if ((gpstructNPC_Base[sOffset1].structNPCSched[sOffset2].cLinkId == 0) && (gpstructNPC_Base[sOffset1].structNPCSched[sOffset2].pstructList == NULL))
             {
                 sprintf (szWorkBuffer, "Schedule: NPC %d-%d Missing Slot data !\n", (int)sOffset1 + 1, (int)sOffset2 + 1);
-                iRet = mutils_addToDialogBuffer (szWorkBuffer);
+#ifdef INTERFACE_CURSES
+                iRet = mdialog_addToDialogWithSrchRep (szWorkBuffer);
                 if (iRet != 0) return iRet;
                 return 6;
+#else
+                httpcgi_errorOutput (szWorkBuffer, 102);
+#endif
             }
 
             if ((gpstructNPC_Base[sOffset1].structNPCSched[sOffset2].cLinkId != 0) && (gpstructNPC_Base[sOffset1].structNPCSched[sOffset2].pstructList != NULL))
             {
                 sprintf (szWorkBuffer, "Schedule: NPC %d-%d Cannot have Slot data AND a link reference !\n", (int)sOffset1 + 1, (int)sOffset2 + 1);
-                iRet = mutils_addToDialogBuffer (szWorkBuffer);
+#ifdef INTERFACE_CURSES
+                iRet = mdialog_addToDialogWithSrchRep (szWorkBuffer);
                 if (iRet != 0) return iRet;
                 return 6;
+#else
+                httpcgi_errorOutput (szWorkBuffer, 103);
+#endif
             }
 
             if (gpstructNPC_Base[sOffset1].structNPCSched[sOffset2].cLinkId != 0)
@@ -6341,9 +6353,13 @@ int statedata_allocAndInit ()
                 if (gpstructNPC_Base[sOffset1].structNPCSched[sOffset2].cLinkId > STATEDATA_NPCS)
                 {
                     sprintf (szWorkBuffer, "Schedule: NPC %d-%d Link reference is out of bounds !\n", (int)sOffset1 + 1, (int)sOffset2 + 1);
-                    iRet = mutils_addToDialogBuffer (szWorkBuffer);
+#ifdef INTERFACE_CURSES
+                    iRet = mdialog_addToDialogWithSrchRep (szWorkBuffer);
                     if (iRet != 0) return iRet;
                     return 6;
+#else
+                    httpcgi_errorOutput (szWorkBuffer, 104);
+#endif
                 }
 
                 continue;
@@ -6361,9 +6377,13 @@ int statedata_allocAndInit ()
                 if (iCount > 20)
                 {
                     sprintf (szWorkBuffer, "Schedule: NPC %d-%d Corrupt Slot data !\n", (int)sOffset1 + 1, (int)sOffset2 + 1);
-                    iRet = mutils_addToDialogBuffer (szWorkBuffer);
+#ifdef INTERFACE_CURSES
+                    iRet = mdialog_addToDialogWithSrchRep (szWorkBuffer);
                     if (iRet != 0) return iRet;
                     return 6;
+#else
+                    httpcgi_errorOutput (szWorkBuffer, 105);
+#endif
                 }
 
                 if (gpstructNPC_Base[sOffset1].structNPCSched[sOffset2].pstructList[sOffset3].sPercentValue == 0)
@@ -6371,9 +6391,13 @@ int statedata_allocAndInit ()
                     if ((sOffset3) || (gpstructNPC_Base[sOffset1].structNPCSched[sOffset2].pstructList[sOffset3 + 1].cActionId != -1))
                     {
                         sprintf (szWorkBuffer, "Schedule: NPC %d-%d-%d Percent value invalid (zero) !\n", (int)sOffset1 + 1, (int)sOffset2 + 1, (int)sOffset3 + 1);
-                        iRet = mutils_addToDialogBuffer (szWorkBuffer);
+#ifdef INTERFACE_CURSES
+                        iRet = mdialog_addToDialogWithSrchRep (szWorkBuffer);
                         if (iRet != 0) return iRet;
                         return 6;
+#else
+                        httpcgi_errorOutput (szWorkBuffer, 106);
+#endif
                     }
                 }
 
@@ -6385,9 +6409,13 @@ int statedata_allocAndInit ()
             if (sOffset3 == 0)
             {
                 sprintf (szWorkBuffer, "Schedule: NPC %d-%d Invalid Slot data !\n", (int)sOffset1 + 1, (int)sOffset2 + 1);
-                iRet = mutils_addToDialogBuffer (szWorkBuffer);
+#ifdef INTERFACE_CURSES
+                iRet = mdialog_addToDialogWithSrchRep (szWorkBuffer);
                 if (iRet != 0) return iRet;
                 return 6;
+#else
+                httpcgi_errorOutput (szWorkBuffer, 107);
+#endif
             }
 
             if (sOffset3 == 1)
@@ -6395,24 +6423,34 @@ int statedata_allocAndInit ()
                 if (gpstructNPC_Base[sOffset1].structNPCSched[sOffset2].pstructList[0].sPercentValue != 0)
                 {
                     sprintf (szWorkBuffer, "Schedule: NPC %d-%d-1 Percent value invalid (non-zero) !\n", (int)sOffset1 + 1, (int)sOffset2 + 1);
-                    iRet = mutils_addToDialogBuffer (szWorkBuffer);
+#ifdef INTERFACE_CURSES
+                    iRet = mdialog_addToDialogWithSrchRep (szWorkBuffer);
                     if (iRet != 0) return iRet;
                     return 6;
+#else
+                    httpcgi_errorOutput (szWorkBuffer, 108);
+#endif
                 }
             }
 
             if (sCalc >= STATEDATA_ARRAYMAX)
             {
                 sprintf (szWorkBuffer, "Schedule: NPC %d-%d Total percent value larger than max !\n", (int)sOffset1 + 1, (int)sOffset2 + 1);
-                iRet = mutils_addToDialogBuffer (szWorkBuffer);
+#ifdef INTERFACE_CURSES
+                iRet = mdialog_addToDialogWithSrchRep (szWorkBuffer);
                 if (iRet != 0) return iRet;
                 return 6;
+#else
+                httpcgi_errorOutput (szWorkBuffer, 109);
+#endif
             }
         }
     }
 
-    iRet = mutils_addToDialogBuffer ("Schedule: 64 NPCs loaded and checked.\n");
+#ifdef INTERFACE_CURSES
+    iRet = mdialog_addToDialogWithSrchRep ("Schedule: 64 NPCs loaded and checked.\n");
     if (iRet != 0) return iRet;
+#endif
 
     return 0;
 }
@@ -6688,20 +6726,20 @@ int statedata_nameLocalNPCs (char cLocationId)
     {
         iCountDown = iUnknownCount;
 
-        iRet = mutils_addToDialogBuffer (" ");
+        iRet = mdialog_addToDialogWithSrchRep (" ");
         if (iRet != 0) return iRet;
 
-        iRet = mutils_addToDialogBuffer (gstructSrchRepList[0].pszReplace);
+        iRet = mdialog_addToDialogWithSrchRep (gstructSrchRepList[0].pszReplace);
         if (iRet != 0) return iRet;
 
-        iRet = mutils_addToDialogBuffer (" meets ");
+        iRet = mdialog_addToDialogWithSrchRep (" meets ");
         if (iRet != 0) return iRet;
 
         for (sOffset1 = 0; sOffset1 < STATEDATA_NPCS; sOffset1++)
         {
             if (cArray2[sOffset1] == 2)
             {
-                iRet = mutils_addToDialogBuffer (gstructSrchRepList[sOffset1 + 1].pszReplace);
+                iRet = mdialog_addToDialogWithSrchRep (gstructSrchRepList[sOffset1 + 1].pszReplace);
                 if (iRet != 0) return iRet;
 
                 // change this NPC to being known.
@@ -6713,9 +6751,9 @@ int statedata_nameLocalNPCs (char cLocationId)
                 iCountDown--;
 
                 if (iCountDown == 1)
-                    iRet = mutils_addToDialogBuffer (" and ");
+                    iRet = mdialog_addToDialogWithSrchRep (" and ");
                 else if (iCountDown != 0)
-                    iRet = mutils_addToDialogBuffer (", ");
+                    iRet = mdialog_addToDialogWithSrchRep (", ");
 
                 if (iRet != 0) return iRet;
             }
@@ -6724,7 +6762,7 @@ int statedata_nameLocalNPCs (char cLocationId)
                 break;
         }
 
-        iRet = mutils_addToDialogBuffer (" for the first time.");
+        iRet = mdialog_addToDialogWithSrchRep (" for the first time.");
         if (iRet != 0) return iRet;
     }
 
@@ -6732,14 +6770,14 @@ int statedata_nameLocalNPCs (char cLocationId)
     {
         iCountDown = iKnownCount;
 
-        iRet = mutils_addToDialogBuffer (" ");
+        iRet = mdialog_addToDialogWithSrchRep (" ");
         if (iRet != 0) return iRet;
 
         for (sOffset1 = 0; sOffset1 < STATEDATA_NPCS; sOffset1++)
         {
             if (cArray2[sOffset1] == 1)
             {
-                iRet = mutils_addToDialogBuffer (gstructSrchRepList[sOffset1 + 1].pszReplace);
+                iRet = mdialog_addToDialogWithSrchRep (gstructSrchRepList[sOffset1 + 1].pszReplace);
                 if (iRet != 0) return iRet;
 
                 if (iKnownCount == 1)
@@ -6748,9 +6786,9 @@ int statedata_nameLocalNPCs (char cLocationId)
                 iCountDown--;
 
                 if (iCountDown == 1)
-                    iRet = mutils_addToDialogBuffer (" and ");
+                    iRet = mdialog_addToDialogWithSrchRep (" and ");
                 else if (iCountDown != 0)
-                    iRet = mutils_addToDialogBuffer (", ");
+                    iRet = mdialog_addToDialogWithSrchRep (", ");
 
                 if (iRet != 0) return iRet;
             }
@@ -6760,9 +6798,9 @@ int statedata_nameLocalNPCs (char cLocationId)
         }
 
         if (iKnownCount == 1)
-            iRet = mutils_addToDialogBuffer (" is here as well.");
+            iRet = mdialog_addToDialogWithSrchRep (" is here as well.");
         else
-            iRet = mutils_addToDialogBuffer (" are here as well.");
+            iRet = mdialog_addToDialogWithSrchRep (" are here as well.");
     }
 
     if (iUnknownCount != 0)
@@ -6843,20 +6881,20 @@ int statedata_nameLocalNPCsx2 (char cLocationId1, char cLocationId2)
     {
         iCountDown = iUnknownCount;
 
-        iRet = mutils_addToDialogBuffer (" ");
+        iRet = mdialog_addToDialogWithSrchRep (" ");
         if (iRet != 0) return iRet;
 
-        iRet = mutils_addToDialogBuffer (gstructSrchRepList[0].pszReplace);
+        iRet = mdialog_addToDialogWithSrchRep (gstructSrchRepList[0].pszReplace);
         if (iRet != 0) return iRet;
 
-        iRet = mutils_addToDialogBuffer (" meets ");
+        iRet = mdialog_addToDialogWithSrchRep (" meets ");
         if (iRet != 0) return iRet;
 
         for (sOffset1 = 0; sOffset1 < STATEDATA_NPCS; sOffset1++)
         {
             if (cArray2[sOffset1] == 2)
             {
-                iRet = mutils_addToDialogBuffer (gstructSrchRepList[sOffset1 + 1].pszReplace);
+                iRet = mdialog_addToDialogWithSrchRep (gstructSrchRepList[sOffset1 + 1].pszReplace);
                 if (iRet != 0) return iRet;
 
                 // change this NPC to being known.
@@ -6868,9 +6906,9 @@ int statedata_nameLocalNPCsx2 (char cLocationId1, char cLocationId2)
                 iCountDown--;
 
                 if (iCountDown == 1)
-                    iRet = mutils_addToDialogBuffer (" and ");
+                    iRet = mdialog_addToDialogWithSrchRep (" and ");
                 else if (iCountDown != 0)
-                    iRet = mutils_addToDialogBuffer (", ");
+                    iRet = mdialog_addToDialogWithSrchRep (", ");
 
                 if (iRet != 0) return iRet;
             }
@@ -6879,7 +6917,7 @@ int statedata_nameLocalNPCsx2 (char cLocationId1, char cLocationId2)
                 break;
         }
 
-        iRet = mutils_addToDialogBuffer (" for the first time.");
+        iRet = mdialog_addToDialogWithSrchRep (" for the first time.");
         if (iRet != 0) return iRet;
     }
 
@@ -6887,14 +6925,14 @@ int statedata_nameLocalNPCsx2 (char cLocationId1, char cLocationId2)
     {
         iCountDown = iKnownCount;
 
-        iRet = mutils_addToDialogBuffer (" ");
+        iRet = mdialog_addToDialogWithSrchRep (" ");
         if (iRet != 0) return iRet;
 
         for (sOffset1 = 0; sOffset1 < STATEDATA_NPCS; sOffset1++)
         {
             if (cArray2[sOffset1] == 1)
             {
-                iRet = mutils_addToDialogBuffer (gstructSrchRepList[sOffset1 + 1].pszReplace);
+                iRet = mdialog_addToDialogWithSrchRep (gstructSrchRepList[sOffset1 + 1].pszReplace);
                 if (iRet != 0) return iRet;
 
                 if (iKnownCount == 1)
@@ -6903,9 +6941,9 @@ int statedata_nameLocalNPCsx2 (char cLocationId1, char cLocationId2)
                 iCountDown--;
 
                 if (iCountDown == 1)
-                    iRet = mutils_addToDialogBuffer (" and ");
+                    iRet = mdialog_addToDialogWithSrchRep (" and ");
                 else if (iCountDown != 0)
-                    iRet = mutils_addToDialogBuffer (", ");
+                    iRet = mdialog_addToDialogWithSrchRep (", ");
 
                 if (iRet != 0) return iRet;
             }
@@ -6915,9 +6953,9 @@ int statedata_nameLocalNPCsx2 (char cLocationId1, char cLocationId2)
         }
 
         if (iKnownCount == 1)
-            iRet = mutils_addToDialogBuffer (" is here as well.");
+            iRet = mdialog_addToDialogWithSrchRep (" is here as well.");
         else
-            iRet = mutils_addToDialogBuffer (" are here as well.");
+            iRet = mdialog_addToDialogWithSrchRep (" are here as well.");
     }
 
     if (iUnknownCount != 0)
@@ -7407,25 +7445,25 @@ int statedata_nameShowupNPCs (char cLocationId1)
     {
         iCountDown = iArrayCount2;
 
-        iRet = mutils_addToDialogBuffer (gstructSrchRepList[0].pszReplace);
+        iRet = mdialog_addToDialogWithSrchRep (gstructSrchRepList[0].pszReplace);
         if (iRet != 0) return iRet;
 
-        iRet = mutils_addToDialogBuffer (" is introduced to ");
+        iRet = mdialog_addToDialogWithSrchRep (" is introduced to ");
         if (iRet != 0) return iRet;
 
         for (sOffset1 = 0; sOffset1 < STATEDATA_NPCS; sOffset1++)
         {
             if (cArray1[sOffset1] == 2)
             {
-                iRet = mutils_addToDialogBuffer (gstructSrchRepList[sOffset1 + 1].pszReplace);
+                iRet = mdialog_addToDialogWithSrchRep (gstructSrchRepList[sOffset1 + 1].pszReplace);
                 if (iRet != 0) return iRet;
 
                 iCountDown--;
 
                 if (iCountDown == 1)
-                    iRet = mutils_addToDialogBuffer (" and ");
+                    iRet = mdialog_addToDialogWithSrchRep (" and ");
                 else if (iCountDown != 0)
-                    iRet = mutils_addToDialogBuffer (", ");
+                    iRet = mdialog_addToDialogWithSrchRep (", ");
 
                 if (iRet != 0) return iRet;
             }
@@ -7435,18 +7473,18 @@ int statedata_nameShowupNPCs (char cLocationId1)
         }
 
         if (iArrayCount2 == 1)
-            iRet = mutils_addToDialogBuffer (" as he decided to see ");
+            iRet = mdialog_addToDialogWithSrchRep (" as he decided to see ");
         else
-            iRet = mutils_addToDialogBuffer (" as they decided to visit ");
+            iRet = mdialog_addToDialogWithSrchRep (" as they decided to visit ");
         if (iRet != 0) return iRet;
 
-        iRet = mutils_addToDialogBuffer (gstructSrchRepList[0].pszReplace);
+        iRet = mdialog_addToDialogWithSrchRep (gstructSrchRepList[0].pszReplace);
         if (iRet != 0) return iRet;
 
         if (iArrayCount1 != 0)
-            iRet = mutils_addToDialogBuffer (". ");
+            iRet = mdialog_addToDialogWithSrchRep (". ");
         else
-            iRet = mutils_addToDialogBuffer (".\n\n");
+            iRet = mdialog_addToDialogWithSrchRep (".\n\n");
         if (iRet != 0) return iRet;
     }
 
@@ -7458,15 +7496,15 @@ int statedata_nameShowupNPCs (char cLocationId1)
         {
             if (cArray1[sOffset1] == 1)
             {
-                iRet = mutils_addToDialogBuffer (gstructSrchRepList[sOffset1 + 1].pszReplace);
+                iRet = mdialog_addToDialogWithSrchRep (gstructSrchRepList[sOffset1 + 1].pszReplace);
                 if (iRet != 0) return iRet;
 
                 iCountDown--;
 
                 if (iCountDown == 1)
-                    iRet = mutils_addToDialogBuffer (" and ");
+                    iRet = mdialog_addToDialogWithSrchRep (" and ");
                 else if (iCountDown != 0)
-                    iRet = mutils_addToDialogBuffer (", ");
+                    iRet = mdialog_addToDialogWithSrchRep (", ");
 
                 if (iRet != 0) return iRet;
             }
@@ -7478,24 +7516,24 @@ int statedata_nameShowupNPCs (char cLocationId1)
         if (iArrayCount2 != 0)
         {
             if (iArrayCount1 == 1)
-                iRet = mutils_addToDialogBuffer (" also dropped by.\n\n");
+                iRet = mdialog_addToDialogWithSrchRep (" also dropped by.\n\n");
             else
-                iRet = mutils_addToDialogBuffer (" also tagged along.\n\n");
+                iRet = mdialog_addToDialogWithSrchRep (" also tagged along.\n\n");
         }
         else
         {
             if (iArrayCount1 == 1)
             {
-                iRet = mutils_addToDialogBuffer (" also came to see ");
+                iRet = mdialog_addToDialogWithSrchRep (" also came to see ");
                 if (iRet != 0) return iRet;
 
-                iRet = mutils_addToDialogBuffer (gstructSrchRepList[0].pszReplace);
+                iRet = mdialog_addToDialogWithSrchRep (gstructSrchRepList[0].pszReplace);
                 if (iRet != 0) return iRet;
 
-                iRet = mutils_addToDialogBuffer (".\n\n");
+                iRet = mdialog_addToDialogWithSrchRep (".\n\n");
             }
             else
-                iRet = mutils_addToDialogBuffer (" also showed up.\n\n");
+                iRet = mdialog_addToDialogWithSrchRep (" also showed up.\n\n");
         }
         if (iRet != 0) return iRet;
     }
@@ -7623,17 +7661,17 @@ int statedata_namePresentNPCs (char cLocationId1, short sCutOff)
     {
         iCountDown = iArrayCount3;
 
-        iRet = mutils_addToDialogBuffer (gstructSrchRepList[0].pszReplace);
+        iRet = mdialog_addToDialogWithSrchRep (gstructSrchRepList[0].pszReplace);
         if (iRet != 0) return iRet;
 
-        iRet = mutils_addToDialogBuffer (" is introduced to ");
+        iRet = mdialog_addToDialogWithSrchRep (" is introduced to ");
         if (iRet != 0) return iRet;
 
         for (sOffset1 = 0; sOffset1 < STATEDATA_NPCS; sOffset1++)
         {
             if (cArray3[sOffset1] != 0)
             {
-                iRet = mutils_addToDialogBuffer (gstructSrchRepList[sOffset1 + 1].pszReplace);
+                iRet = mdialog_addToDialogWithSrchRep (gstructSrchRepList[sOffset1 + 1].pszReplace);
                 if (iRet != 0) return iRet;
 
                 if (iArrayCount3 == 1)
@@ -7642,9 +7680,9 @@ int statedata_namePresentNPCs (char cLocationId1, short sCutOff)
                 iCountDown--;
 
                 if (iCountDown == 1)
-                    iRet = mutils_addToDialogBuffer (" and ");
+                    iRet = mdialog_addToDialogWithSrchRep (" and ");
                 else if (iCountDown != 0)
-                    iRet = mutils_addToDialogBuffer (", ");
+                    iRet = mdialog_addToDialogWithSrchRep (", ");
 
                 if (iRet != 0) return iRet;
             }
@@ -7654,9 +7692,9 @@ int statedata_namePresentNPCs (char cLocationId1, short sCutOff)
         }
 
         if (iArrayCount3 == 1)
-            iRet = mutils_addToDialogBuffer (", who is sleeping soundly nearby.\n\n");
+            iRet = mdialog_addToDialogWithSrchRep (", who is sleeping soundly nearby.\n\n");
         else
-            iRet = mutils_addToDialogBuffer (", who are sleeping soundly nearby.\n\n");
+            iRet = mdialog_addToDialogWithSrchRep (", who are sleeping soundly nearby.\n\n");
 
         if (iRet != 0) return iRet;
     }
@@ -7669,14 +7707,14 @@ int statedata_namePresentNPCs (char cLocationId1, short sCutOff)
     {
         iCountDown = iArrayCount2;
 
-        iRet = mutils_addToDialogBuffer ("While ");
+        iRet = mdialog_addToDialogWithSrchRep ("While ");
         if (iRet != 0) return iRet;
 
         for (sOffset1 = 0; sOffset1 < STATEDATA_NPCS; sOffset1++)
         {
             if (cArray2[sOffset1] != 0)
             {
-                iRet = mutils_addToDialogBuffer (gstructSrchRepList[sOffset1 + 1].pszReplace);
+                iRet = mdialog_addToDialogWithSrchRep (gstructSrchRepList[sOffset1 + 1].pszReplace);
                 if (iRet != 0) return iRet;
 
                 if (iArrayCount2 == 1)
@@ -7685,9 +7723,9 @@ int statedata_namePresentNPCs (char cLocationId1, short sCutOff)
                 iCountDown--;
 
                 if (iCountDown == 1)
-                    iRet = mutils_addToDialogBuffer (" and ");
+                    iRet = mdialog_addToDialogWithSrchRep (" and ");
                 else if (iCountDown != 0)
-                    iRet = mutils_addToDialogBuffer (", ");
+                    iRet = mdialog_addToDialogWithSrchRep (", ");
 
                 if (iRet != 0) return iRet;
             }
@@ -7697,15 +7735,15 @@ int statedata_namePresentNPCs (char cLocationId1, short sCutOff)
         }
 
         if (iArrayCount2 == 1)
-            iRet = mutils_addToDialogBuffer (" is sleeping soundly nearby, ");
+            iRet = mdialog_addToDialogWithSrchRep (" is sleeping soundly nearby, ");
         else
-            iRet = mutils_addToDialogBuffer (" are sleeping soundly nearby, ");
+            iRet = mdialog_addToDialogWithSrchRep (" are sleeping soundly nearby, ");
 
         if (iRet != 0) return iRet;
 
         if (iArrayCount1 != 0)
         {
-            iRet = mutils_addToDialogBuffer ("and ");
+            iRet = mdialog_addToDialogWithSrchRep ("and ");
             if (iRet != 0) return iRet;
         }
     }
@@ -7717,7 +7755,7 @@ int statedata_namePresentNPCs (char cLocationId1, short sCutOff)
 
         if (iArrayCount2 == 0)
         {
-            iRet = mutils_addToDialogBuffer ("While ");
+            iRet = mdialog_addToDialogWithSrchRep ("While ");
             if (iRet != 0) return iRet;
         }
 
@@ -7725,7 +7763,7 @@ int statedata_namePresentNPCs (char cLocationId1, short sCutOff)
         {
             if (cArray1[sOffset1] != 0)
             {
-                iRet = mutils_addToDialogBuffer (gstructSrchRepList[sOffset1 + 1].pszReplace);
+                iRet = mdialog_addToDialogWithSrchRep (gstructSrchRepList[sOffset1 + 1].pszReplace);
                 if (iRet != 0) return iRet;
 
                 if (iArrayCount2 == 1)
@@ -7734,9 +7772,9 @@ int statedata_namePresentNPCs (char cLocationId1, short sCutOff)
                 iCountDown--;
 
                 if (iCountDown == 1)
-                    iRet = mutils_addToDialogBuffer (" and ");
+                    iRet = mdialog_addToDialogWithSrchRep (" and ");
                 else if (iCountDown != 0)
-                    iRet = mutils_addToDialogBuffer (", ");
+                    iRet = mdialog_addToDialogWithSrchRep (", ");
 
                 if (iRet != 0) return iRet;
             }
@@ -7746,9 +7784,9 @@ int statedata_namePresentNPCs (char cLocationId1, short sCutOff)
         }
 
         if (iArrayCount1 == 1)
-            iRet = mutils_addToDialogBuffer (" observes, ");
+            iRet = mdialog_addToDialogWithSrchRep (" observes, ");
         else
-            iRet = mutils_addToDialogBuffer (" watch, ");
+            iRet = mdialog_addToDialogWithSrchRep (" watch, ");
     }
 
     return 0;
@@ -7786,25 +7824,25 @@ int statedata_showNPCChanges (short sCutOff)
     {
         iCountDown = iArrayCount1;
 
-        iRet = mutils_addToDialogBuffer (gstructSrchRepList[0].pszReplace);
+        iRet = mdialog_addToDialogWithSrchRep (gstructSrchRepList[0].pszReplace);
         if (iRet != 0) return iRet;
 
-        iRet = mutils_addToDialogBuffer (" knows ");
+        iRet = mdialog_addToDialogWithSrchRep (" knows ");
         if (iRet != 0) return iRet;
 
         for (sOffset1 = 0; sOffset1 < sCutOff; sOffset1++)
         {
             if (gpstructNPC_Priority[sOffset1].cResult == 5)
             {
-                iRet = mutils_addToDialogBuffer (gstructSrchRepList[gpstructNPC_Priority[sOffset1].sOffset + 1].pszReplace);
+                iRet = mdialog_addToDialogWithSrchRep (gstructSrchRepList[gpstructNPC_Priority[sOffset1].sOffset + 1].pszReplace);
                 if (iRet != 0) return iRet;
 
                 iCountDown--;
 
                 if (iCountDown == 1)
-                    iRet = mutils_addToDialogBuffer (" and ");
+                    iRet = mdialog_addToDialogWithSrchRep (" and ");
                 else if (iCountDown != 0)
-                    iRet = mutils_addToDialogBuffer (", ");
+                    iRet = mdialog_addToDialogWithSrchRep (", ");
 
                 if (iRet != 0) return iRet;
             }
@@ -7813,7 +7851,7 @@ int statedata_showNPCChanges (short sCutOff)
                 break;
         }
 
-        iRet = mutils_addToDialogBuffer (" rather well now.\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (" rather well now.\n\n");
         if (iRet != 0) return iRet;
     }
 
@@ -7825,15 +7863,15 @@ int statedata_showNPCChanges (short sCutOff)
         {
             if (gpstructNPC_Priority[sOffset1].cResult == 6)
             {
-                iRet = mutils_addToDialogBuffer (gstructSrchRepList[gpstructNPC_Priority[sOffset1].sOffset + 1].pszReplace);
+                iRet = mdialog_addToDialogWithSrchRep (gstructSrchRepList[gpstructNPC_Priority[sOffset1].sOffset + 1].pszReplace);
                 if (iRet != 0) return iRet;
 
                 iCountDown--;
 
                 if (iCountDown == 1)
-                    iRet = mutils_addToDialogBuffer (" and ");
+                    iRet = mdialog_addToDialogWithSrchRep (" and ");
                 else if (iCountDown != 0)
-                    iRet = mutils_addToDialogBuffer (", ");
+                    iRet = mdialog_addToDialogWithSrchRep (", ");
 
                 if (iRet != 0) return iRet;
             }
@@ -7842,13 +7880,16 @@ int statedata_showNPCChanges (short sCutOff)
                 break;
         }
 
-        iRet = mutils_addToDialogBuffer (" trusts ");
+        if (iArrayCount2 == 1)
+            iRet = mdialog_addToDialogWithSrchRep (" trusts ");
+        else
+            iRet = mdialog_addToDialogWithSrchRep (" trust ");
         if (iRet != 0) return iRet;
 
-        iRet = mutils_addToDialogBuffer (gstructSrchRepList[0].pszReplace);
+        iRet = mdialog_addToDialogWithSrchRep (gstructSrchRepList[0].pszReplace);
         if (iRet != 0) return iRet;
 
-        iRet = mutils_addToDialogBuffer (" now.\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (" now.\n\n");
         if (iRet != 0) return iRet;
     }
 
@@ -7860,15 +7901,15 @@ int statedata_showNPCChanges (short sCutOff)
         {
             if (gpstructNPC_Priority[sOffset1].cResult == 7)
             {
-                iRet = mutils_addToDialogBuffer (gstructSrchRepList[gpstructNPC_Priority[sOffset1].sOffset + 1].pszReplace);
+                iRet = mdialog_addToDialogWithSrchRep (gstructSrchRepList[gpstructNPC_Priority[sOffset1].sOffset + 1].pszReplace);
                 if (iRet != 0) return iRet;
 
                 iCountDown--;
 
                 if (iCountDown == 1)
-                    iRet = mutils_addToDialogBuffer (" and ");
+                    iRet = mdialog_addToDialogWithSrchRep (" and ");
                 else if (iCountDown != 0)
-                    iRet = mutils_addToDialogBuffer (", ");
+                    iRet = mdialog_addToDialogWithSrchRep (", ");
 
                 if (iRet != 0) return iRet;
             }
@@ -7878,18 +7919,18 @@ int statedata_showNPCChanges (short sCutOff)
         }
 
         if (iArrayCount3 == 1)
-            iRet = mutils_addToDialogBuffer (" has become ");
+            iRet = mdialog_addToDialogWithSrchRep (" has become ");
         else
-            iRet = mutils_addToDialogBuffer (" have become ");
+            iRet = mdialog_addToDialogWithSrchRep (" have become ");
         if (iRet != 0) return iRet;
 
-        iRet = mutils_addToDialogBuffer (gstructSrchRepList[0].pszReplace);
+        iRet = mdialog_addToDialogWithSrchRep (gstructSrchRepList[0].pszReplace);
         if (iRet != 0) return iRet;
 
         if (iArrayCount3 == 1)
-            iRet = mutils_addToDialogBuffer ("\'s loyal \'sperm bag\'.\n\n");
+            iRet = mdialog_addToDialogWithSrchRep ("\'s loyal \'sperm bag\'.\n\n");
         else
-            iRet = mutils_addToDialogBuffer ("\'s loyal \'sperm bags\'.\n\n");
+            iRet = mdialog_addToDialogWithSrchRep ("\'s loyal \'sperm bags\'.\n\n");
         if (iRet != 0) return iRet;
     }
 

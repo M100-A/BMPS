@@ -7,7 +7,7 @@
 //
 // Given that I tend to write "semi-portable" code, there is a lot of ifdef WIN32 stuff in here..
 //
-// Unless I test for the platform, there is no gurantee that it will work..
+// Unless I test for the platform, there is no guarantee that it will work..
 //
 
 #define INTERFACE_CURSES 1

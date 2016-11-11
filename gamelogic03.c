@@ -41,13 +41,13 @@ int gamelogic03_scene1061 (int iSubSceneId, char cSubFlag)
 
     if (cSubFlag == 0)
     {
-        iRet = mutils_addToDialogBuffer (">Give me a hint\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Give me a hint\n\n");
         if (iRet != 0) return iRet;
     }
 
     if (gcDebugFlag != 0)
     {
-        iRet = mutils_addToDialogBuffer ("-- NPCs with a * after their names are sleeping. NPCs with a # are low on energy. NPCs with $ are locked.\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("-- NPCs with a * after their names are sleeping. NPCs with a # are low on energy. NPCs with $ are locked.\n\n");
         if (iRet != 0) return iRet;
     }
 
@@ -58,17 +58,14 @@ int gamelogic03_scene1061 (int iSubSceneId, char cSubFlag)
         iKnownCount = 0;
         iTrustCount = 0;
         iObedientCount = 0;
+        iUnknownCount = 0;
+        iPartialKnownCount = 0;
 
         if (gcDebugFlag == 0)
         {
             // ignore the current area.
             if ((char)(sOffset1 + 1) == gpstructPC_Global.cAreaId)
                 continue;
-        }
-        else
-        {
-            iUnknownCount = 0;
-            iPartialKnownCount = 0;
         }
 
         // first pass is to count the number of NPCs at a given location.
@@ -129,7 +126,7 @@ int gamelogic03_scene1061 (int iSubSceneId, char cSubFlag)
         {
             if ((char)(sOffset1 + 1) == gpstructPC_Global.cAreaId)
             {
-                iRet = mutils_addToDialogBuffer ("(blocked) ");
+                iRet = mdialog_addToDialogWithSrchRep ("(blocked) ");
                 if (iRet != 0) return iRet;
             }
         }
@@ -137,91 +134,91 @@ int gamelogic03_scene1061 (int iSubSceneId, char cSubFlag)
         switch (sOffset1)
         {
         case 0:
-            iRet = mutils_addToDialogBuffer ("At the mayor\'s house, ");
+            iRet = mdialog_addToDialogWithSrchRep ("At the mayor\'s house, ");
             break;
 
         case 1:
-            iRet = mutils_addToDialogBuffer ("At the constable\'s residence, ");
+            iRet = mdialog_addToDialogWithSrchRep ("At the constable\'s residence, ");
             break;
 
         case 2:
-            iRet = mutils_addToDialogBuffer ("At the guard barracks, ");
+            iRet = mdialog_addToDialogWithSrchRep ("At the guard barracks, ");
             break;
 
         case 3:
-            iRet = mutils_addToDialogBuffer ("At the moneylender\'s house, ");
+            iRet = mdialog_addToDialogWithSrchRep ("At the moneylender\'s house, ");
             break;
 
         case 4:
-            iRet = mutils_addToDialogBuffer ("At the merchant\'s house, ");
+            iRet = mdialog_addToDialogWithSrchRep ("At the merchant\'s house, ");
             break;
 
         case 5:
-            iRet = mutils_addToDialogBuffer ("At the physician\'s residence, ");
+            iRet = mdialog_addToDialogWithSrchRep ("At the physician\'s residence, ");
             break;
 
         case 6:
-            iRet = mutils_addToDialogBuffer ("At the warehouse, ");
+            iRet = mdialog_addToDialogWithSrchRep ("At the warehouse, ");
             break;
 
         case 7:
-            iRet = mutils_addToDialogBuffer ("At the brewery, ");
+            iRet = mdialog_addToDialogWithSrchRep ("At the brewery, ");
             break;
 
         case 8:
-            iRet = mutils_addToDialogBuffer ("At the tavern, ");
+            iRet = mdialog_addToDialogWithSrchRep ("At the tavern, ");
             break;
 
         case 9:
-            iRet = mutils_addToDialogBuffer ("At the kitchen, ");
+            iRet = mdialog_addToDialogWithSrchRep ("At the kitchen, ");
             break;
 
         case 10:
-            iRet = mutils_addToDialogBuffer ("At the workshop, ");
+            iRet = mdialog_addToDialogWithSrchRep ("At the workshop, ");
             break;
 
         case 11:
-            iRet = mutils_addToDialogBuffer ("At the goat corral, ");
+            iRet = mdialog_addToDialogWithSrchRep ("At the goat corral, ");
             break;
 
         case 12:
-            iRet = mutils_addToDialogBuffer ("At the lumber mill, ");
+            iRet = mdialog_addToDialogWithSrchRep ("At the lumber mill, ");
             break;
 
         case 13:
-            iRet = mutils_addToDialogBuffer ("At the forest, ");
+            iRet = mdialog_addToDialogWithSrchRep ("At the forest, ");
             break;
 
         case 14:
-            iRet = mutils_addToDialogBuffer ("At the target range, ");
+            iRet = mdialog_addToDialogWithSrchRep ("At the target range, ");
             break;
 
         case 15:
-            iRet = mutils_addToDialogBuffer ("At the lake, ");
+            iRet = mdialog_addToDialogWithSrchRep ("At the lake, ");
             break;
 
         case 16:
-            iRet = mutils_addToDialogBuffer ("At the northern farm, ");
+            iRet = mdialog_addToDialogWithSrchRep ("At the northern farm, ");
             break;
 
         case 17:
-            iRet = mutils_addToDialogBuffer ("At the eastern farm, ");
+            iRet = mdialog_addToDialogWithSrchRep ("At the eastern farm, ");
             break;
 
         case 18:
-            iRet = mutils_addToDialogBuffer ("At the southern farm, ");
+            iRet = mdialog_addToDialogWithSrchRep ("At the southern farm, ");
             break;
 
         case 19:
-            iRet = mutils_addToDialogBuffer ("At the western farm, ");
+            iRet = mdialog_addToDialogWithSrchRep ("At the western farm, ");
             break;
 
         case 20:
-            iRet = mutils_addToDialogBuffer ("At the procurer\'s shack, ");
+            iRet = mdialog_addToDialogWithSrchRep ("At the procurer\'s shack, ");
             break;
 
         default:
-            iRet = mutils_addToDialogBuffer ("At the smuggler\'s shack, ");
+            iRet = mdialog_addToDialogWithSrchRep ("At the smuggler\'s shack, ");
             break;
         }
         if (iRet != 0) return iRet;
@@ -246,24 +243,24 @@ int gamelogic03_scene1061 (int iSubSceneId, char cSubFlag)
                     if (gpstructNPC_Base[sOffset2].cNameToFaceFlag != 0)
                         continue;
 
-                    iRet = mutils_addToDialogBuffer (gstructSrchRepList[sOffset2 + 1].pszReplace);
+                    iRet = mdialog_addToDialogWithSrchRep (gstructSrchRepList[sOffset2 + 1].pszReplace);
                     if (iRet != 0) return iRet;
 
                     if (gcDebugFlag != 0)
                     {
                         if (gpstructNPC_Base[sOffset2].iEnergyValue < STATEDATA_ENERGYAVAIL)
                         {
-                            iRet = mutils_addToDialogBuffer ("#");
+                            iRet = mdialog_addToDialogWithSrchRep ("#");
                             if (iRet != 0) return iRet;
                         }
                         if (gpstructNPC_Base[sOffset2].cActionId == STATEACTION_SLP_D)
                         {
-                            iRet = mutils_addToDialogBuffer ("*");
+                            iRet = mdialog_addToDialogWithSrchRep ("*");
                             if (iRet != 0) return iRet;
                         }
                         if (gpstructNPC_Base[sOffset2].cInteractionLockFlag != 0)
                         {
-                            iRet = mutils_addToDialogBuffer ("$");
+                            iRet = mdialog_addToDialogWithSrchRep ("$");
                             if (iRet != 0) return iRet;
                         }
                     }
@@ -271,9 +268,9 @@ int gamelogic03_scene1061 (int iSubSceneId, char cSubFlag)
                     iCountDown--;
 
                     if (iCountDown == 1)
-                        iRet = mutils_addToDialogBuffer (" and ");
+                        iRet = mdialog_addToDialogWithSrchRep (" and ");
                     else if (iCountDown != 0)
-                        iRet = mutils_addToDialogBuffer (", ");
+                        iRet = mdialog_addToDialogWithSrchRep (", ");
                     if (iRet != 0) return iRet;
 
                     if (iCountDown == 0)
@@ -281,15 +278,15 @@ int gamelogic03_scene1061 (int iSubSceneId, char cSubFlag)
                 }
 
                 if (iUnknownCount == 1)
-                    iRet = mutils_addToDialogBuffer (" is unknown");
+                    iRet = mdialog_addToDialogWithSrchRep (" is unknown");
                 else
-                    iRet = mutils_addToDialogBuffer (" are unknown");
+                    iRet = mdialog_addToDialogWithSrchRep (" are unknown");
                 if (iRet != 0) return iRet;
 
                 if ((iObedientCount == 0) && (iTrustCount == 0) && (iPartialKnownCount == 0) && (iKnownCount == 0))
-                    iRet = mutils_addToDialogBuffer (".\n\n");
+                    iRet = mdialog_addToDialogWithSrchRep (".\n\n");
                 else
-                    iRet = mutils_addToDialogBuffer (", ");
+                    iRet = mdialog_addToDialogWithSrchRep (", ");
                 if (iRet != 0) return iRet;
             }
 
@@ -318,28 +315,28 @@ int gamelogic03_scene1061 (int iSubSceneId, char cSubFlag)
                     if (gcDebugFlag != 0)
                     {
                         sprintf (szWorking, "(%d/30)", gpstructNPC_Base[sOffset2].iKnownValue);
-                        iRet = mutils_addToDialogBuffer (szWorking);
+                        iRet = mdialog_addToDialogWithSrchRep (szWorking);
                         if (iRet != 0) return iRet;
                     }
 
-                    iRet = mutils_addToDialogBuffer (gstructSrchRepList[sOffset2 + 1].pszReplace);
+                    iRet = mdialog_addToDialogWithSrchRep (gstructSrchRepList[sOffset2 + 1].pszReplace);
                     if (iRet != 0) return iRet;
 
                     if (gcDebugFlag != 0)
                     {
                         if (gpstructNPC_Base[sOffset2].iEnergyValue < STATEDATA_ENERGYAVAIL)
                         {
-                            iRet = mutils_addToDialogBuffer ("#");
+                            iRet = mdialog_addToDialogWithSrchRep ("#");
                             if (iRet != 0) return iRet;
                         }
                         if (gpstructNPC_Base[sOffset2].cActionId == STATEACTION_SLP_D)
                         {
-                            iRet = mutils_addToDialogBuffer ("*");
+                            iRet = mdialog_addToDialogWithSrchRep ("*");
                             if (iRet != 0) return iRet;
                         }
                         if (gpstructNPC_Base[sOffset2].cInteractionLockFlag != 0)
                         {
-                            iRet = mutils_addToDialogBuffer ("$");
+                            iRet = mdialog_addToDialogWithSrchRep ("$");
                             if (iRet != 0) return iRet;
                         }
                     }
@@ -347,9 +344,9 @@ int gamelogic03_scene1061 (int iSubSceneId, char cSubFlag)
                     iCountDown--;
 
                     if (iCountDown == 1)
-                        iRet = mutils_addToDialogBuffer (" and ");
+                        iRet = mdialog_addToDialogWithSrchRep (" and ");
                     else if (iCountDown != 0)
-                        iRet = mutils_addToDialogBuffer (", ");
+                        iRet = mdialog_addToDialogWithSrchRep (", ");
                     if (iRet != 0) return iRet;
 
                     if (iCountDown == 0)
@@ -357,15 +354,15 @@ int gamelogic03_scene1061 (int iSubSceneId, char cSubFlag)
                 }
 
                 if (iPartialKnownCount == 1)
-                    iRet = mutils_addToDialogBuffer (" is partially known");
+                    iRet = mdialog_addToDialogWithSrchRep (" is partially known");
                 else
-                    iRet = mutils_addToDialogBuffer (" are partially known");
+                    iRet = mdialog_addToDialogWithSrchRep (" are partially known");
                 if (iRet != 0) return iRet;
 
                 if ((iObedientCount == 0) && (iTrustCount == 0) && (iKnownCount == 0))
-                    iRet = mutils_addToDialogBuffer (".\n\n");
+                    iRet = mdialog_addToDialogWithSrchRep (".\n\n");
                 else
-                    iRet = mutils_addToDialogBuffer (", ");
+                    iRet = mdialog_addToDialogWithSrchRep (", ");
                 if (iRet != 0) return iRet;
             }
         }
@@ -399,28 +396,28 @@ int gamelogic03_scene1061 (int iSubSceneId, char cSubFlag)
                 if (gcDebugFlag != 0)
                 {
                     sprintf (szWorking, "(%d/100)", gpstructNPC_Base[sOffset2].iTrustValue);
-                    iRet = mutils_addToDialogBuffer (szWorking);
+                    iRet = mdialog_addToDialogWithSrchRep (szWorking);
                     if (iRet != 0) return iRet;
                 }
 
-                iRet = mutils_addToDialogBuffer (gstructSrchRepList[sOffset2 + 1].pszReplace);
+                iRet = mdialog_addToDialogWithSrchRep (gstructSrchRepList[sOffset2 + 1].pszReplace);
                 if (iRet != 0) return iRet;
 
                 if (gcDebugFlag != 0)
                 {
                     if (gpstructNPC_Base[sOffset2].iEnergyValue < STATEDATA_ENERGYAVAIL)
                     {
-                        iRet = mutils_addToDialogBuffer ("#");
+                        iRet = mdialog_addToDialogWithSrchRep ("#");
                         if (iRet != 0) return iRet;
                     }
                     if (gpstructNPC_Base[sOffset2].cActionId == STATEACTION_SLP_D)
                     {
-                        iRet = mutils_addToDialogBuffer ("*");
+                        iRet = mdialog_addToDialogWithSrchRep ("*");
                         if (iRet != 0) return iRet;
                     }
                     if (gpstructNPC_Base[sOffset2].cInteractionLockFlag != 0)
                     {
-                        iRet = mutils_addToDialogBuffer ("$");
+                        iRet = mdialog_addToDialogWithSrchRep ("$");
                         if (iRet != 0) return iRet;
                     }
                 }
@@ -428,9 +425,9 @@ int gamelogic03_scene1061 (int iSubSceneId, char cSubFlag)
                 iCountDown--;
 
                 if (iCountDown == 1)
-                    iRet = mutils_addToDialogBuffer (" and ");
+                    iRet = mdialog_addToDialogWithSrchRep (" and ");
                 else if (iCountDown != 0)
-                    iRet = mutils_addToDialogBuffer (", ");
+                    iRet = mdialog_addToDialogWithSrchRep (", ");
                 if (iRet != 0) return iRet;
 
                 if (iCountDown == 0)
@@ -438,18 +435,18 @@ int gamelogic03_scene1061 (int iSubSceneId, char cSubFlag)
             }
 
             if (iKnownCount == 1)
-                iRet = mutils_addToDialogBuffer (" is known to ");
+                iRet = mdialog_addToDialogWithSrchRep (" is known to ");
             else
-                iRet = mutils_addToDialogBuffer (" are known to ");
+                iRet = mdialog_addToDialogWithSrchRep (" are known to ");
             if (iRet != 0) return iRet;
 
-            iRet = mutils_addToDialogBuffer (gstructSrchRepList[0].pszReplace);
+            iRet = mdialog_addToDialogWithSrchRep (gstructSrchRepList[0].pszReplace);
             if (iRet != 0) return iRet;
 
             if ((iObedientCount == 0) && (iTrustCount == 0))
-                iRet = mutils_addToDialogBuffer (".\n\n");
+                iRet = mdialog_addToDialogWithSrchRep (".\n\n");
             else
-                iRet = mutils_addToDialogBuffer (", while ");
+                iRet = mdialog_addToDialogWithSrchRep (", while ");
             if (iRet != 0) return iRet;
         }
 
@@ -482,28 +479,28 @@ int gamelogic03_scene1061 (int iSubSceneId, char cSubFlag)
                 if (gcDebugFlag != 0)
                 {
                     sprintf (szWorking, "(%d/200)", gpstructNPC_Base[sOffset2].iObedienceValue);
-                    iRet = mutils_addToDialogBuffer (szWorking);
+                    iRet = mdialog_addToDialogWithSrchRep (szWorking);
                     if (iRet != 0) return iRet;
                 }
 
-                iRet = mutils_addToDialogBuffer (gstructSrchRepList[sOffset2 + 1].pszReplace);
+                iRet = mdialog_addToDialogWithSrchRep (gstructSrchRepList[sOffset2 + 1].pszReplace);
                 if (iRet != 0) return iRet;
 
                 if (gcDebugFlag != 0)
                 {
                     if (gpstructNPC_Base[sOffset2].iEnergyValue < STATEDATA_ENERGYAVAIL)
                     {
-                        iRet = mutils_addToDialogBuffer ("#");
+                        iRet = mdialog_addToDialogWithSrchRep ("#");
                         if (iRet != 0) return iRet;
                     }
                     if (gpstructNPC_Base[sOffset2].cActionId == STATEACTION_SLP_D)
                     {
-                        iRet = mutils_addToDialogBuffer ("*");
+                        iRet = mdialog_addToDialogWithSrchRep ("*");
                         if (iRet != 0) return iRet;
                     }
                     if (gpstructNPC_Base[sOffset2].cInteractionLockFlag != 0)
                     {
-                        iRet = mutils_addToDialogBuffer ("$");
+                        iRet = mdialog_addToDialogWithSrchRep ("$");
                         if (iRet != 0) return iRet;
                     }
                 }
@@ -511,9 +508,9 @@ int gamelogic03_scene1061 (int iSubSceneId, char cSubFlag)
                 iCountDown--;
 
                 if (iCountDown == 1)
-                    iRet = mutils_addToDialogBuffer (" and ");
+                    iRet = mdialog_addToDialogWithSrchRep (" and ");
                 else if (iCountDown != 0)
-                    iRet = mutils_addToDialogBuffer (", ");
+                    iRet = mdialog_addToDialogWithSrchRep (", ");
                 if (iRet != 0) return iRet;
 
                 if (iCountDown == 0)
@@ -521,20 +518,20 @@ int gamelogic03_scene1061 (int iSubSceneId, char cSubFlag)
             }
 
             if (iTrustCount == 1)
-                iRet = mutils_addToDialogBuffer (" trusts ");
+                iRet = mdialog_addToDialogWithSrchRep (" trusts ");
             else
-                iRet = mutils_addToDialogBuffer (" trust ");
+                iRet = mdialog_addToDialogWithSrchRep (" trust ");
             if (iRet != 0) return iRet;
 
-            iRet = mutils_addToDialogBuffer (gstructSrchRepList[0].pszReplace);
+            iRet = mdialog_addToDialogWithSrchRep (gstructSrchRepList[0].pszReplace);
             if (iRet != 0) return iRet;
 
             if (iObedientCount == 0)
-                iRet = mutils_addToDialogBuffer (".\n\n");
+                iRet = mdialog_addToDialogWithSrchRep (".\n\n");
             else if (iKnownCount != 0)
-                iRet = mutils_addToDialogBuffer (", and ");
+                iRet = mdialog_addToDialogWithSrchRep (", and ");
             else
-                iRet = mutils_addToDialogBuffer (", while ");
+                iRet = mdialog_addToDialogWithSrchRep (", while ");
             if (iRet != 0) return iRet;
         }
 
@@ -560,24 +557,24 @@ int gamelogic03_scene1061 (int iSubSceneId, char cSubFlag)
                 if (gpstructNPC_Base[sOffset2].iObedienceValue < STATEDATA_OBEDIENCEMAX)
                     continue;
 
-                iRet = mutils_addToDialogBuffer (gstructSrchRepList[sOffset2 + 1].pszReplace);
+                iRet = mdialog_addToDialogWithSrchRep (gstructSrchRepList[sOffset2 + 1].pszReplace);
                 if (iRet != 0) return iRet;
 
                 if (gcDebugFlag != 0)
                 {
                     if (gpstructNPC_Base[sOffset2].iEnergyValue < STATEDATA_ENERGYAVAIL)
                     {
-                        iRet = mutils_addToDialogBuffer ("#");
+                        iRet = mdialog_addToDialogWithSrchRep ("#");
                         if (iRet != 0) return iRet;
                     }
                     if (gpstructNPC_Base[sOffset2].cActionId == STATEACTION_SLP_D)
                     {
-                        iRet = mutils_addToDialogBuffer ("*");
+                        iRet = mdialog_addToDialogWithSrchRep ("*");
                         if (iRet != 0) return iRet;
                     }
                     if (gpstructNPC_Base[sOffset2].cInteractionLockFlag != 0)
                     {
-                        iRet = mutils_addToDialogBuffer ("$");
+                        iRet = mdialog_addToDialogWithSrchRep ("$");
                         if (iRet != 0) return iRet;
                     }
                 }
@@ -585,9 +582,9 @@ int gamelogic03_scene1061 (int iSubSceneId, char cSubFlag)
                 iCountDown--;
 
                 if (iCountDown == 1)
-                    iRet = mutils_addToDialogBuffer (" and ");
+                    iRet = mdialog_addToDialogWithSrchRep (" and ");
                 else if (iCountDown != 0)
-                    iRet = mutils_addToDialogBuffer (", ");
+                    iRet = mdialog_addToDialogWithSrchRep (", ");
                 if (iRet != 0) return iRet;
 
                 if (iCountDown == 0)
@@ -597,23 +594,23 @@ int gamelogic03_scene1061 (int iSubSceneId, char cSubFlag)
             if ((iKnownCount != 0) && (iTrustCount != 0))
             {
                 if (iObedientCount == 1)
-                    iRet = mutils_addToDialogBuffer (" is obedient.\n\n");
+                    iRet = mdialog_addToDialogWithSrchRep (" is obedient.\n\n");
                 else
-                    iRet = mutils_addToDialogBuffer (" are obedient.\n\n");
+                    iRet = mdialog_addToDialogWithSrchRep (" are obedient.\n\n");
                 if (iRet != 0) return iRet;
             }
             else
             {
                 if (iObedientCount == 1)
-                    iRet = mutils_addToDialogBuffer (" obeys ");
+                    iRet = mdialog_addToDialogWithSrchRep (" obeys ");
                 else
-                    iRet = mutils_addToDialogBuffer (" are obedient to ");
+                    iRet = mdialog_addToDialogWithSrchRep (" are obedient to ");
                 if (iRet != 0) return iRet;
 
-                iRet = mutils_addToDialogBuffer (gstructSrchRepList[0].pszReplace);
+                iRet = mdialog_addToDialogWithSrchRep (gstructSrchRepList[0].pszReplace);
                 if (iRet != 0) return iRet;
 
-                iRet = mutils_addToDialogBuffer (".\n\n");
+                iRet = mdialog_addToDialogWithSrchRep (".\n\n");
                 if (iRet != 0) return iRet;
             }
         }

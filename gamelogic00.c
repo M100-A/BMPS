@@ -113,7 +113,7 @@ int gamelogic00_scene0003 (int iSubSceneId, char cSubFlag)
     if (cSubFlag > MAXGAMESCENENESTS)
         return 101;
 
-    iRet = mutils_addToDialogBuffer (">Credits\n\nHedonism Quest, Wilda\'s Ascension (HQWA) is licensed under the Creative Commons Attribution 4.0 International license (CC BY 4.0).\n\nhttp://creativecommons.org/licenses/by/4.0/\n..and..\n(LICENSE file) http://creativecommons.org/licenses/by/4.0/legalcode\n\nIf you take this game and/or story, modify it (or translate it into another language), you need to leave everything on this credit page alone and add your own details to it (of course).\n\n");
+    iRet = mutils_addToDialogBuffer (">Credits\n\nBunny, Mayoress, Prostitute & Succubus (BMPS) is licensed under the Creative Commons Attribution 4.0 International license (CC BY 4.0).\n\nhttp://creativecommons.org/licenses/by/4.0/\n..and..\n(LICENSE file) http://creativecommons.org/licenses/by/4.0/legalcode\n\nIf you take this game and/or story, modify it (or translate it into another language), you need to leave everything on this credit page alone and add your own details to it (of course).\n\n");
     if (iRet != 0) return iRet;
 
     iRet = mutils_addToDialogBuffer ("Concept, dialog and code was originally by M100.\nThanks to the participants on the #/d/evs rizon.net IRC channel for guidance, as well as putting up with occasional ranting while making this.\n\n");

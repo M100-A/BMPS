@@ -7,41 +7,23 @@
 //
 // Given that I tend to write "semi-portable" code, there is a lot of ifdef WIN32 stuff in here..
 //
-// Unless I test for the platform, there is no guarantee that it will work..
+// Unless I test for the platform, there is no gurantee that it will work..
 //
 
-#define INTERFACE_CURSES 1
+// this is the CGI-version of the program, so the curses interface is knocked out.
+//#define INTERFACE_CURSES 1
 
-#ifdef WIN32
+#define INTERFACE_CGI 1
 
-#include	<curses.h>
-#include	<stdio.h>		// for sprintf
-#include	<stdlib.h>
-#include	<fcntl.h>
-#include	<io.h>
-#include	<math.h>
-#include	<sys/types.h>
-#include	<sys/stat.h>
-#include	<string.h>		// for strlen
-#include	<memory.h>		// for malloc
-#include	<time.h>		// for localtime
-#include	<ctype.h>		// for islower, isupper
-//#include	<signal.h>
-
-#define PURE_WINDOWS_VERSION  1
-
-#ifdef PURE_WINDOWS_VERSION
-#undef MOUSE_MOVED
-#include <windows.h>
-#endif
-
-#else //WIN32
+// I knocked out all of the WIN32 cross compile stuff, as this is meant only to compile on *NIX.
 
 #ifdef HAVE_CONFIG_H
 #include	<config.h>
 #endif
 
+#ifdef INTERFACE_CURSES
 #include    <ncurses.h>     // for the *NIX curses library
+#endif // INTERFACE_CURSES
 #include	<stdio.h>
 #include	<stdarg.h>
 #include	<stdlib.h>
@@ -57,29 +39,9 @@
 //#include	<signal.h>		// for signal stuff
 #include	<poll.h>		// for poll (used to simulate sleep()).
 #include	<dirent.h>
-#include    <ncurses.h>     // for the *NIX curses library
-
-#endif //WIN32
 
 
-#ifdef WIN32
-
-//----------------------------------------------------------------------
-//
-// Windows port over stuff.
-//
-
-#define PERM_FILE (_S_IREAD | _S_IWRITE)
-
-#define VOID void
-#define BOOL int
-#define HANDLE int
-
-#define TRUE 1
-#define FALSE 0
-#define unlink _unlink
-
-#else
+// I knocked out all of the WIN32 cross compile stuff, as this is meant only to compile on *NIX.
 
 //----------------------------------------------------------------------
 //
@@ -112,7 +74,6 @@
 
 #define PERM_FILE (S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH)
 
-#endif // WIN32
 
 
 //----------------------------------------------------------------------
@@ -261,3 +222,36 @@ int savescreen_parseSaveFile (int iSaveId, char *pszDateTime);
 // function to load a save file
 int savescreen_loadSaveFile (int iSaveId);
 
+
+
+//----------------------------------------------------------------------
+//
+// defines for HTTP CGI-BIN functions..
+//
+
+// function to pre-convert the input data into a list.
+void httpcgi_urlConvertList (char *pPostData, char *pOutput, int iLen);
+
+// function to look for an entry in the input data.
+int httpcgi_extractEntry (char *pPostData, char *pszLock, char *pszOutput, int iMax);
+
+// generic error output.
+void httpcgi_errorOutput (char *szErrorResult, int iErrorCode);
+
+
+//----------------------------------------------------------------------
+//
+// defines for Menu CGI-BIN functions..
+//
+
+void menucgi_outputFullMenu (int iRestrict);
+
+void menucgi_outputMainMenu ();
+
+void menucgi_outputAboutMenu ();
+
+void menucgi_outputCreditsMenu ();
+
+void menucgi_outputSaveMenu ();
+
+void menucgi_outputLoadMenu ();

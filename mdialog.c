@@ -156,6 +156,7 @@ int mdialog_addToDialogWithSrchRep (char *pszString)
     int iStart = 0;
     int iPos = 0;
     int iLen = (int)strlen (pszString);
+    int iCalc;
 
     while (1)
     {
@@ -164,7 +165,7 @@ int mdialog_addToDialogWithSrchRep (char *pszString)
 
         if (pszString[iPos] == '#')
         {
-            int iCalc = iLen - iPos;
+            iCalc = iLen - iPos;
 
             // check that we have enough bytes to lock onto (so we are not potentially searching off the end of the string somewhere).
             if (iCalc > 4)
@@ -245,6 +246,114 @@ int mdialog_addToDialogWithSrchRep (char *pszString)
                 }
             }
         }
+#ifndef INTERFACE_CURSES
+        else if (pszString[iPos] == '&')
+        {
+            iCalc = iPos - iStart;
+
+            // first dump out the string that we have so far
+            iRet = mutils_addToDialogBufferLenSpec (&pszString[iStart], iCalc);
+            if (iRet != 0) return iRet;
+
+            // now set our new start position.
+            iPos++;
+            iStart = iPos;
+
+            // insert the replacement character entity.
+            iRet = mutils_addToDialogBuffer ("&amp;");
+            if (iRet != 0) return iRet;
+
+            continue;
+        }
+        else if (pszString[iPos] == '<')
+        {
+            iCalc = iPos - iStart;
+
+            // first dump out the string that we have so far
+            iRet = mutils_addToDialogBufferLenSpec (&pszString[iStart], iCalc);
+            if (iRet != 0) return iRet;
+
+            // now set our new start position.
+            iPos++;
+            iStart = iPos;
+
+            // insert the replacement character entity.
+            iRet = mutils_addToDialogBuffer ("&lt;");
+            if (iRet != 0) return iRet;
+
+            continue;
+        }
+        else if (pszString[iPos] == '>')
+        {
+            iCalc = iPos - iStart;
+
+            // first dump out the string that we have so far
+            iRet = mutils_addToDialogBufferLenSpec (&pszString[iStart], iCalc);
+            if (iRet != 0) return iRet;
+
+            // now set our new start position.
+            iPos++;
+            iStart = iPos;
+
+            // insert the replacement character entity.
+            iRet = mutils_addToDialogBuffer ("&gt;");
+            if (iRet != 0) return iRet;
+
+            continue;
+        }
+        else if (pszString[iPos] == '\"')
+        {
+            iCalc = iPos - iStart;
+
+            // first dump out the string that we have so far
+            iRet = mutils_addToDialogBufferLenSpec (&pszString[iStart], iCalc);
+            if (iRet != 0) return iRet;
+
+            // now set our new start position.
+            iPos++;
+            iStart = iPos;
+
+            // insert the replacement character entity.
+            iRet = mutils_addToDialogBuffer ("&quot;");
+            if (iRet != 0) return iRet;
+
+            continue;
+        }
+        else if (pszString[iPos] == '\'')
+        {
+            iCalc = iPos - iStart;
+
+            // first dump out the string that we have so far
+            iRet = mutils_addToDialogBufferLenSpec (&pszString[iStart], iCalc);
+            if (iRet != 0) return iRet;
+
+            // now set our new start position.
+            iPos++;
+            iStart = iPos;
+
+            // insert the replacement character entity.
+            iRet = mutils_addToDialogBuffer ("&apos;");
+            if (iRet != 0) return iRet;
+
+            continue;
+        }
+        else if (pszString[iPos] == '\n')
+        {
+            iCalc = iPos - iStart;
+
+            // first dump out the string that we have so far
+            iRet = mutils_addToDialogBufferLenSpec (&pszString[iStart], iCalc);
+            if (iRet != 0) return iRet;
+
+            // now set our new start position.
+            iStart = iPos;
+
+            // now put in the extra HTML formatting
+            iRet = mutils_addToDialogBuffer ("<br/>");
+            if (iRet != 0) return iRet;
+
+        }
+#endif // INTERFACE_CURSES
 
 
         iPos++;

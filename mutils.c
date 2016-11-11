@@ -76,6 +76,7 @@ int mutils_initAndClearCommandList ()
     return 0;
 }
 
+
 //
 // function to add an entry to the command list (which sorts the entry into the list)
 //
@@ -87,9 +88,11 @@ int mutils_addToCommandList (char *pszCommand, int iSceneId, int iSubSceneId)
 {
     int iLen;
     int iOffset;
+#ifdef INTERFACE_CURSES
     int iRevOffset;
     char *pszTemp1;
     int iTemp1;
+#endif // INTERFACE_CURSES
 
     iLen = strlen (pszCommand);
 
@@ -157,6 +160,7 @@ int mutils_addToCommandList (char *pszCommand, int iSceneId, int iSubSceneId)
             }
         }
 
+#ifdef INTERFACE_CURSES
         // this is for inserting INTO the list..
         if (iOffset < giCommandListUsed)
         {
@@ -195,6 +199,10 @@ int mutils_addToCommandList (char *pszCommand, int iSceneId, int iSubSceneId)
             gstruct_CommandList[iOffset].iSceneId = -1;
             gstruct_CommandList[iOffset].iSubSceneId = -1;
         }
+#else
+        // don't bother with the sort code.. just insert it at the end.
+        iOffset = giCommandListUsed;
+#endif // INTERFACE_CURSES
     }
 
     // it does not matter if it this is an appendage, insert or a new.. the code is the same..
@@ -265,7 +273,11 @@ int mutils_initAndClearDialogBuffer ()
     {
         // I only allocate the archive buffer once.
 
+#ifdef INTERFACE_CURSES
         giArchiveBufferSize = 65534;
+#else
+        giArchiveBufferSize = 16382;
+#endif // INTERFACE_CURSES
 
         gpszArchiveBuffer = (char *)malloc ((size_t)(giArchiveBufferSize + 2));
 
@@ -306,6 +318,7 @@ int mutils_initAndClearDialogBuffer ()
     return 0;
 }
 
+
 //
 // function to add dialog onto the end of a memory buffer..
 //  .. while making sure that the dialog string can fit..
@@ -321,6 +334,7 @@ int mutils_addToDialogBuffer (char *pszString)
 
     return (mutils_addToDialogBufferLenSpec (pszString, iStrLen));
 }
+
 
 //
 // function to add dialog onto the end of a memory buffer..
@@ -384,6 +398,7 @@ int mutils_addToDialogBufferLenSpec (char *pszString, int iStrLen)
     return 0;
 }
 
+
 //
 // function to take what is in the dialog buffer and shove it into the archive buffer.
 // this also clears the dialog buffer.
@@ -415,6 +430,7 @@ void mutils_addDialogToArchive (int iEndSubtract)
     {
         int iLen2;
         char *pszTemp;
+        char cFitLock = 0;
 
         iOffset = 0;
 
@@ -425,28 +441,112 @@ void mutils_addDialogToArchive (int iEndSubtract)
         {
             // this should not happen.. bail out..
             if ((iOffset >= giArchiveBufferUsed) || (gpszArchiveBuffer[iOffset] == 0))
-                return;
+            {
+                break;
+            }
 
-            // this should not happen either.. bail out..
+            // look for the newlines.
             if (gpszArchiveBuffer[iOffset] == '\n')
             {
                 while (gpszArchiveBuffer[iOffset] == '\n')
                     iOffset++;
 
-                // this should not happen.. bail out..
+                // this should not happen either.. bail out..
                 if ((iOffset >= giArchiveBufferUsed) || (gpszArchiveBuffer[iOffset] == 0))
-                    return;
+                {
+                    break;
+                }
 
                 iLen2 = iLen1 - iOffset;
 
                 // if the calculated size is now smaller than the memory allocation.
                 if (iLen2 < giArchiveBufferSize)
+                {
                     // break out of the loop
+                    cFitLock = 1;
                     break;
+                }
             }
 
             // otherwise increment the start offset.
             iOffset++;
+        }
+
+        //
+        // if we cannot make the archive buffer small enough, we have to change tack,
+        //  and make the dialog fit into the archive (wiping the archive).
+        //
+        if (cFitLock == 0)
+        {
+            iOffset = 0;
+
+            iLen1 = giDialogBufferUsed + iEndSubtract;
+
+            //
+            // This is the code that knocks out the older dialog, until things fit.
+            //
+            while (1)
+            {
+                // this should not happen.. bail out..
+                if ((iOffset >= giDialogBufferUsed) || (gpszDialogBuffer[iOffset] == 0))
+                {
+                    break;
+                }
+
+                // look for the newlines.
+                if (gpszDialogBuffer[iOffset] == '\n')
+                {
+                    while (gpszDialogBuffer[iOffset] == '\n')
+                        iOffset++;
+
+                    // this should not happen either.. bail out..
+                    if ((iOffset >= giDialogBufferUsed) || (gpszDialogBuffer[iOffset] == 0))
+                    {
+                        break;
+                    }
+
+                    iLen2 = iLen1 - iOffset;
+
+                    // if the calculated size is now smaller than the memory allocation.
+                    if (iLen2 < giArchiveBufferSize)
+                    {
+                        // break out of the loop
+                        cFitLock = 1;
+                        break;
+                    }
+                }
+
+                // otherwise increment the start offset.
+                iOffset++;
+            }
+
+            // if this happens, then there is something seriously wrong !!
+            if (cFitLock == 0)
+                return;
+
+            // Reduce the buffer used by the start subtraction.
+            iLen2 -= iEndSubtract;
+
+            //
+            // Now to overwrite.
+            //
+            memcpy ((void *)gpszArchiveBuffer, (void *)(gpszDialogBuffer + iOffset), iLen2);
+            giArchiveBufferUsed = iLen2;
+
+            // cap the end of the string.
+            gpszArchiveBuffer[iLen2] = 0;
+
+            //
+            // Finish by clearing out the dialog buffer before returning.
+            //
+            for (iOffset = 0; iOffset < giDialogBufferUsed; iOffset++)
+            {
+                gpszDialogBuffer[iOffset] = 0;
+            }
+
+            giDialogBufferUsed = 0;
+
+            return;
         }
 
         // Reduce the buffer used by the start offset.
@@ -483,6 +583,8 @@ void mutils_addDialogToArchive (int iEndSubtract)
     giDialogBufferUsed = 0;
 }
 
+
+#ifdef INTERFACE_CURSES
 //
 // function to to figure out the row start based upon the number of lines the archive buffer.
 //
@@ -575,6 +677,7 @@ int mutils_calcRowStartOffset (int iScrWidth)
     return (iRows);
 }
 
+
 //
 // function to figure out the number of rows in the dialog buffer.
 //
@@ -666,4 +769,5 @@ int mutils_calcDialogRows (int iScrWidth)
 
     return (iRows);
 }
+#endif // INTERFACE_CURSES
 

@@ -9,7 +9,7 @@
 #include "statedata.h"
 
 // linkage to the file load structure..
-extern  struct	futils_filebuff         gstruct_FileBuff;
+extern  struct	futils_filebuff         gstruct_FileBuffGen;
 
 // linkage to the mutils data.
 extern  struct  mutils_commandlist  *gstruct_CommandList;
@@ -24,6 +24,9 @@ extern  int     giArchiveBufferUsed;
 extern struct  statedata_NPCData *gpstructNPC_Base;
 extern struct  statedata_GlobalData gpstructPC_Global;
 
+#ifndef INTERFACE_CURSES
+extern char     gszSessionTrackingId[50];
+#endif //INTERFACE_CURSES
 
 //
 // function to load in a save file and to partially parse it, verifying if it is usable.
@@ -45,7 +48,9 @@ int statefile_parseSaveFile (char *pszFileName, char *pszDateTime)
     int     iValue;
     int     iYear;
     int     iMonth;
+#ifdef INTERFACE_CURSES
     char    *pszMonth;
+#endif // INTERFACE_CURSES
     int     iDay;
     int     iHour;
     int     iMin;
@@ -53,21 +58,28 @@ int statefile_parseSaveFile (char *pszFileName, char *pszDateTime)
     int     iRet;
 
     // load the entire save file into the memory buffer
-    iRet = futils_loadFileIntoMemory (pszFileName, &gstruct_FileBuff);
+    iRet = futils_loadFileIntoMemory (pszFileName, &gstruct_FileBuffGen);
 
     if (iRet != 0)
         return 2;
 
     // start with the version line..
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 898) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 898) != 0)
     {
         return 2;
     }
     szInputString[898] = 0;
 
+#ifdef INTERFACE_CURSES
     // check to see if it starts with what we want
     if (szInputString[0] != '!')
         return 2;
+#else
+    // check to see if it starts with what we want
+    if (szInputString[0] != '*')
+        return 2;
+#endif //INTERFACE_CURSES
+
     // otherwise I don't care what it says
 
     //
@@ -75,7 +87,7 @@ int statefile_parseSaveFile (char *pszFileName, char *pszDateTime)
     //
 
     // next the global values section (first line)
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 2;
     szInputString[18] = 0;
 
@@ -84,7 +96,7 @@ int statefile_parseSaveFile (char *pszFileName, char *pszDateTime)
         return 2;
 
     // next the global values section (size line)
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 2;
     szInputString[18] = 0;
 
@@ -93,7 +105,7 @@ int statefile_parseSaveFile (char *pszFileName, char *pszDateTime)
         return 2;
 
     // next the date/time field
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 20) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 20) != 0)
         return 2;
     szInputString[20] = 0;
 
@@ -126,6 +138,7 @@ int statefile_parseSaveFile (char *pszFileName, char *pszDateTime)
         return 2;
     }
 
+#ifdef INTERFACE_CURSES
     switch (iMonth)
     {
     case 1:
@@ -176,27 +189,47 @@ int statefile_parseSaveFile (char *pszFileName, char *pszDateTime)
             iHour,
             iMin,
             iSec);
+#else
+
+    {
+        struct tm tmDateTime;
+        time_t tTimeNow;
+
+        tmDateTime.tm_year = iYear - 1900;
+        tmDateTime.tm_mon = iMonth - 1;
+        tmDateTime.tm_mday = iDay;
+        tmDateTime.tm_hour = iHour;
+        tmDateTime.tm_min = iMin;
+        tmDateTime.tm_sec = iSec;
+        tmDateTime.tm_isdst = -1;
+
+        tTimeNow = mktime (&tmDateTime);
+
+        sprintf (pszDateTime, "%ld", tTimeNow);
+    }
+
+#endif //INTERFACE_CURSES
 
     // the following 10 fields are not checked, but skipped.
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
 
     //
@@ -206,7 +239,7 @@ int statefile_parseSaveFile (char *pszFileName, char *pszDateTime)
     for (sOffset2 = 0; sOffset2 < STATEDATA_NPCS; sOffset2++)
     {
         // next the global values section (first line)
-        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
             return 1;
         szInputString[18] = 0;
 
@@ -217,7 +250,7 @@ int statefile_parseSaveFile (char *pszFileName, char *pszDateTime)
             return 1;
 
         // next the global values section (size line)
-        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
             return 1;
         szInputString[18] = 0;
 
@@ -226,23 +259,23 @@ int statefile_parseSaveFile (char *pszFileName, char *pszDateTime)
             return 1;
 
         // the following 9 fields are not checked, but skipped.
-        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
             return 1;
-        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
             return 1;
-        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
             return 1;
-        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
             return 1;
-        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
             return 1;
-        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
             return 1;
-        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
             return 1;
-        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
             return 1;
-        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
             return 1;
     }
 
@@ -251,7 +284,7 @@ int statefile_parseSaveFile (char *pszFileName, char *pszDateTime)
     //
 
     // section identifier (first line)
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
     szInputString[18] = 0;
 
@@ -260,7 +293,7 @@ int statefile_parseSaveFile (char *pszFileName, char *pszDateTime)
         return 1;
 
     // following line count (second line)
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
     szInputString[18] = 0;
 
@@ -272,7 +305,7 @@ int statefile_parseSaveFile (char *pszFileName, char *pszDateTime)
     // just verify that we can load the data.
     for (iOffset = 0; iValue > iOffset; iOffset++)
     {
-        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 148) != 0)
+        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 148) != 0)
             return 1;
     }
 
@@ -281,7 +314,7 @@ int statefile_parseSaveFile (char *pszFileName, char *pszDateTime)
     //
 
     // section identifier (first line)
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
     szInputString[18] = 0;
 
@@ -290,7 +323,7 @@ int statefile_parseSaveFile (char *pszFileName, char *pszDateTime)
         return 1;
 
     // following line count (second line)
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
     szInputString[18] = 0;
 
@@ -300,14 +333,14 @@ int statefile_parseSaveFile (char *pszFileName, char *pszDateTime)
     iValue = atoi (&szInputString[1]);
 
     // make the buffer reader jump ahead by the value we have defined.
-    gstruct_FileBuff.ulBufferPos += (unsigned long)iValue;
+    gstruct_FileBuffGen.ulBufferPos += (unsigned long)iValue;
 
     //
     // Dialog Buffer section
     //
 
     // section identifier (first line)
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
     szInputString[18] = 0;
 
@@ -316,7 +349,7 @@ int statefile_parseSaveFile (char *pszFileName, char *pszDateTime)
         return 1;
 
     // following line count (second line)
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
     szInputString[18] = 0;
 
@@ -326,14 +359,14 @@ int statefile_parseSaveFile (char *pszFileName, char *pszDateTime)
     iValue = atoi (&szInputString[1]);
 
     // make the buffer reader jump ahead by the value we have defined.
-    gstruct_FileBuff.ulBufferPos += (unsigned long)iValue;
+    gstruct_FileBuffGen.ulBufferPos += (unsigned long)iValue;
 
     //
     // Trailer line
     //
 
     // section identifier (first line)
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
     szInputString[18] = 0;
 
@@ -356,7 +389,7 @@ int statefile_loadCommandElement ()
     int     iSceneId;
     int     iSubSceneId;
 
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 148) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 148) != 0)
         return 1;
     szInputString[148] = 0;
     szInputString[149] = 0;
@@ -444,29 +477,39 @@ int statefile_loadSaveFile (char *pszFileName)
 #endif
 
     // load the entire save file into the memory buffer
-    iRet = futils_loadFileIntoMemory (pszFileName, &gstruct_FileBuff);
+    iRet = futils_loadFileIntoMemory (pszFileName, &gstruct_FileBuffGen);
 
     if (iRet != 0)
         return 1;
 
     // start with the version line..
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 898) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 898) != 0)
     {
         return 1;
     }
     szInputString[898] = 0;
 
+#ifdef INTERFACE_CURSES
     // check to see if it starts with what we want
     if (szInputString[0] != '!')
-        return 1;
+        return 2;
     // otherwise I don't care what it says
+#else
+    // check to see if it starts with what we want
+    if (szInputString[0] != '*')
+        return 2;
+
+    // copy aside the tracking id.
+    strncpy (gszSessionTrackingId, &szInputString[1], 48);
+    gszSessionTrackingId[48] = 0;
+#endif //INTERFACE_CURSES
 
     //
     // Global values section
     //
 
     // next the global values section (first line)
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
     szInputString[18] = 0;
 
@@ -475,7 +518,7 @@ int statefile_loadSaveFile (char *pszFileName)
         return 1;
 
     // next the global values section (size line)
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
     szInputString[18] = 0;
 
@@ -484,7 +527,7 @@ int statefile_loadSaveFile (char *pszFileName)
         return 1;
 
     // next the date/time field
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 20) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 20) != 0)
         return 1;
     szInputString[20] = 0;
 
@@ -502,7 +545,7 @@ int statefile_loadSaveFile (char *pszFileName)
     // we are not doing anything with the date/time other than verifying it's format.
 
     // the LocationId field
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
     szInputString[18] = 0;
     iRet = statefile_checkLineNonString (szInputString);
@@ -511,7 +554,7 @@ int statefile_loadSaveFile (char *pszFileName)
     gpstructPC_Global.cLocationId = (char)atoi (szInputString);
 
     // the AreaId field
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
     szInputString[18] = 0;
     iRet = statefile_checkLineNonString (szInputString);
@@ -520,7 +563,7 @@ int statefile_loadSaveFile (char *pszFileName)
     gpstructPC_Global.cAreaId = (char)atoi (szInputString);
 
     // the ClothesValue field
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
     szInputString[18] = 0;
     iRet = statefile_checkLineNonString (szInputString);
@@ -529,7 +572,7 @@ int statefile_loadSaveFile (char *pszFileName)
     gpstructPC_Global.cClothesValue = (char)atoi (szInputString);
 
     // the DildoValue field
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
     szInputString[18] = 0;
     iRet = statefile_checkLineNonString (szInputString);
@@ -538,7 +581,7 @@ int statefile_loadSaveFile (char *pszFileName)
     gpstructPC_Global.cDildoValue = (char)atoi (szInputString);
 
     // the BreastsValue field
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
     szInputString[18] = 0;
     iRet = statefile_checkLineNonString (szInputString);
@@ -547,7 +590,7 @@ int statefile_loadSaveFile (char *pszFileName)
     gpstructPC_Global.cBreastsValue = (char)atoi (szInputString);
 
     // the ClitorisValue field
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
     szInputString[18] = 0;
     iRet = statefile_checkLineNonString (szInputString);
@@ -556,7 +599,7 @@ int statefile_loadSaveFile (char *pszFileName)
     gpstructPC_Global.cClitorisValue = (char)atoi (szInputString);
 
     // the DayCount field
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
     szInputString[18] = 0;
     iRet = statefile_checkLineNonString (szInputString);
@@ -565,7 +608,7 @@ int statefile_loadSaveFile (char *pszFileName)
     gpstructPC_Global.iDayCount = (int)atoi (szInputString);
 
     // the TimeValue field
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
     szInputString[18] = 0;
     iRet = statefile_checkLineNonString (szInputString);
@@ -574,7 +617,7 @@ int statefile_loadSaveFile (char *pszFileName)
     gpstructPC_Global.cTimeValue = (char)atoi (szInputString);
 
     // the DifficultyLevel field
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
     szInputString[18] = 0;
     iRet = statefile_checkLineNonString (szInputString);
@@ -583,7 +626,7 @@ int statefile_loadSaveFile (char *pszFileName)
     gpstructPC_Global.cDifficultyLevel = (char)atoi (szInputString);
 
     // the HintCountDown field
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
     szInputString[18] = 0;
     iRet = statefile_checkLineNonString (szInputString);
@@ -605,7 +648,7 @@ int statefile_loadSaveFile (char *pszFileName)
     for (sOffset2 = 0; sOffset2 < STATEDATA_NPCS; sOffset2++)
     {
         // next the global values section (first line)
-        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
             return 1;
         szInputString[18] = 0;
 
@@ -616,7 +659,7 @@ int statefile_loadSaveFile (char *pszFileName)
             return 1;
 
         // next the global values section (size line)
-        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
             return 1;
         szInputString[18] = 0;
 
@@ -625,7 +668,7 @@ int statefile_loadSaveFile (char *pszFileName)
             return 1;
 
         // the LocationId field
-        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
             return 1;
         szInputString[18] = 0;
         iRet = statefile_checkLineNonString (szInputString);
@@ -634,7 +677,7 @@ int statefile_loadSaveFile (char *pszFileName)
         gpstructNPC_Base[sOffset2].cLocationId = (char)atoi (szInputString);
 
         // the AreaId field
-        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
             return 1;
         szInputString[18] = 0;
         iRet = statefile_checkLineNonString (szInputString);
@@ -643,7 +686,7 @@ int statefile_loadSaveFile (char *pszFileName)
         gpstructNPC_Base[sOffset2].cAreaId = (char)atoi (szInputString);
 
         // the ActionId field
-        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
             return 1;
         szInputString[18] = 0;
         iRet = statefile_checkLineNonString (szInputString);
@@ -652,7 +695,7 @@ int statefile_loadSaveFile (char *pszFileName)
         gpstructNPC_Base[sOffset2].cActionId = (char)atoi (szInputString);
 
         // the NameToFaceFlag field
-        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
             return 1;
         szInputString[18] = 0;
         iRet = statefile_checkLineNonString (szInputString);
@@ -661,7 +704,7 @@ int statefile_loadSaveFile (char *pszFileName)
         gpstructNPC_Base[sOffset2].cNameToFaceFlag = (char)atoi (szInputString);
 
         // the InteractionLockFlag field
-        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
             return 1;
         szInputString[18] = 0;
         iRet = statefile_checkLineNonString (szInputString);
@@ -670,7 +713,7 @@ int statefile_loadSaveFile (char *pszFileName)
         gpstructNPC_Base[sOffset2].cInteractionLockFlag = (char)atoi (szInputString);
 
         // the KnownValue field
-        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
             return 1;
         szInputString[18] = 0;
         iRet = statefile_checkLineNonString (szInputString);
@@ -679,7 +722,7 @@ int statefile_loadSaveFile (char *pszFileName)
         gpstructNPC_Base[sOffset2].iKnownValue = (int)atoi (szInputString);
 
         // the TrustValue field
-        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
             return 1;
         szInputString[18] = 0;
         iRet = statefile_checkLineNonString (szInputString);
@@ -688,7 +731,7 @@ int statefile_loadSaveFile (char *pszFileName)
         gpstructNPC_Base[sOffset2].iTrustValue = (int)atoi (szInputString);
 
         // the ObedienceValue field
-        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
             return 1;
         szInputString[18] = 0;
         iRet = statefile_checkLineNonString (szInputString);
@@ -697,7 +740,7 @@ int statefile_loadSaveFile (char *pszFileName)
         gpstructNPC_Base[sOffset2].iObedienceValue = (int)atoi (szInputString);
 
         // the EnergyValue field
-        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+        if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
             return 1;
         szInputString[18] = 0;
         iRet = statefile_checkLineNonString (szInputString);
@@ -718,7 +761,7 @@ int statefile_loadSaveFile (char *pszFileName)
     //
 
     // section identifier (first line)
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
     szInputString[18] = 0;
 
@@ -727,7 +770,7 @@ int statefile_loadSaveFile (char *pszFileName)
         return 1;
 
     // following line count (second line)
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
     szInputString[18] = 0;
 
@@ -759,7 +802,7 @@ int statefile_loadSaveFile (char *pszFileName)
     //
 
     // section identifier (first line)
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
     szInputString[18] = 0;
 
@@ -768,7 +811,7 @@ int statefile_loadSaveFile (char *pszFileName)
         return 1;
 
     // following line count (second line)
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
     szInputString[18] = 0;
 
@@ -777,23 +820,28 @@ int statefile_loadSaveFile (char *pszFileName)
 
     iValue = atoi (&szInputString[1]);
 
+#ifdef INTERFACE_CURSES
     if (iValue > 65535)
         return 1;
+#else
+    if (iValue > 16383)
+        return 1;
+#endif // INTERFACE_CURSES
 
     // copy the archive data straight over
-    strncpy (gpszArchiveBuffer, &gstruct_FileBuff.pcData[gstruct_FileBuff.ulBufferPos], iValue);
+    strncpy (gpszArchiveBuffer, &gstruct_FileBuffGen.pcData[gstruct_FileBuffGen.ulBufferPos], iValue);
     gpszArchiveBuffer[iValue] = 0;
     giArchiveBufferUsed = iValue;
 
     // make the buffer reader jump ahead by the value we have defined.
-    gstruct_FileBuff.ulBufferPos += (unsigned long)iValue;
+    gstruct_FileBuffGen.ulBufferPos += (unsigned long)iValue;
 
     //
     // Dialog Buffer section
     //
 
     // section identifier (first line)
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
     szInputString[18] = 0;
 
@@ -802,7 +850,7 @@ int statefile_loadSaveFile (char *pszFileName)
         return 1;
 
     // following line count (second line)
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
     szInputString[18] = 0;
 
@@ -839,19 +887,19 @@ int statefile_loadSaveFile (char *pszFileName)
     }
 
     // copy the archive data straight over
-    strncpy (gpszDialogBuffer, &gstruct_FileBuff.pcData[gstruct_FileBuff.ulBufferPos], iValue);
+    strncpy (gpszDialogBuffer, &gstruct_FileBuffGen.pcData[gstruct_FileBuffGen.ulBufferPos], iValue);
     gpszDialogBuffer[iValue] = 0;
     giDialogBufferUsed = iValue;
 
     // make the buffer reader jump ahead by the value we have defined.
-    gstruct_FileBuff.ulBufferPos += (unsigned long)iValue;
+    gstruct_FileBuffGen.ulBufferPos += (unsigned long)iValue;
 
     //
     // Trailer line
     //
 
     // section identifier (first line)
-    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuff, szInputString, 18) != 0)
+    if (futils_readLineFromMemoryNoEndLineCombo (&gstruct_FileBuffGen, szInputString, 18) != 0)
         return 1;
     szInputString[18] = 0;
 
@@ -880,7 +928,7 @@ int statefile_writeSaveFile (char *pszFileName)
     int     iRet;
 
     // wipe the file buffer
-    iRet = futils_wipeFileBuffer (&gstruct_FileBuff);
+    iRet = futils_wipeFileBuffer (&gstruct_FileBuffGen);
     if (iRet != 0)
         return 1;
 
@@ -914,7 +962,7 @@ int statefile_writeSaveFile (char *pszFileName)
                 (int)gpstructPC_Global.cHintCountDown);
     }
 
-    iRet = futils_addStringToFileBufferEnd (szInputString, &gstruct_FileBuff);
+    iRet = futils_addStringToFileBufferEnd (szInputString, &gstruct_FileBuffGen);
     if (iRet != 0)
         return 1;
 
@@ -936,7 +984,7 @@ int statefile_writeSaveFile (char *pszFileName)
                 (int)gpstructNPC_Base[sOffset2].iObedienceValue,
                 (int)gpstructNPC_Base[sOffset2].iEnergyValue);
 
-        iRet = futils_addStringToFileBufferEnd (szInputString, &gstruct_FileBuff);
+        iRet = futils_addStringToFileBufferEnd (szInputString, &gstruct_FileBuffGen);
         if (iRet != 0)
             return 1;
     }
@@ -947,7 +995,7 @@ int statefile_writeSaveFile (char *pszFileName)
 
     sprintf (szInputString, "##CommandList\n=%d\n", (int)giCommandListUsed);
 
-    iRet = futils_addStringToFileBufferEnd (szInputString, &gstruct_FileBuff);
+    iRet = futils_addStringToFileBufferEnd (szInputString, &gstruct_FileBuffGen);
     if (iRet != 0)
         return 1;
 
@@ -958,7 +1006,7 @@ int statefile_writeSaveFile (char *pszFileName)
                 (int)gstruct_CommandList[iOffset].iSubSceneId,
                 gstruct_CommandList[iOffset].pszCommand);
 
-        iRet = futils_addStringToFileBufferEnd (szInputString, &gstruct_FileBuff);
+        iRet = futils_addStringToFileBufferEnd (szInputString, &gstruct_FileBuffGen);
 
         if (iRet != 0)
             return 1;
@@ -970,11 +1018,11 @@ int statefile_writeSaveFile (char *pszFileName)
 
     sprintf (szInputString, "##ArchiveBuf\n-%d\n", (int)strlen (gpszArchiveBuffer));
 
-    iRet = futils_addStringToFileBufferEnd (szInputString, &gstruct_FileBuff);
+    iRet = futils_addStringToFileBufferEnd (szInputString, &gstruct_FileBuffGen);
     if (iRet != 0)
         return 1;
 
-    iRet = futils_addStringToFileBufferEnd (gpszArchiveBuffer, &gstruct_FileBuff);
+    iRet = futils_addStringToFileBufferEnd (gpszArchiveBuffer, &gstruct_FileBuffGen);
     if (iRet != 0)
         return 1;
 
@@ -984,11 +1032,11 @@ int statefile_writeSaveFile (char *pszFileName)
 
     sprintf (szInputString, "##DialogBuf\n-%d\n", (int)strlen (gpszDialogBuffer));
 
-    iRet = futils_addStringToFileBufferEnd (szInputString, &gstruct_FileBuff);
+    iRet = futils_addStringToFileBufferEnd (szInputString, &gstruct_FileBuffGen);
     if (iRet != 0)
         return 1;
 
-    iRet = futils_addStringToFileBufferEnd (gpszDialogBuffer, &gstruct_FileBuff);
+    iRet = futils_addStringToFileBufferEnd (gpszDialogBuffer, &gstruct_FileBuffGen);
     if (iRet != 0)
         return 1;
 
@@ -996,7 +1044,7 @@ int statefile_writeSaveFile (char *pszFileName)
     // trailer line.
     //
 
-    iRet = futils_addStringToFileBufferEnd ("##End##\n\n", &gstruct_FileBuff);
+    iRet = futils_addStringToFileBufferEnd ("##End##\n\n", &gstruct_FileBuffGen);
     if (iRet != 0)
         return 1;
 
@@ -1005,7 +1053,14 @@ int statefile_writeSaveFile (char *pszFileName)
     //
 
     unlink (pszFileName);
-    futils_writeFileHeaderAndData (pszFileName, "!Version 0.01\n", gstruct_FileBuff.pcData);
+
+#ifdef INTERFACE_CURSES
+    futils_writeFileHeaderAndData (pszFileName, "!Version 0.70\n", gstruct_FileBuffGen.pcData);
+#else
+    sprintf (szInputString, "*%s\n", gszSessionTrackingId);
+
+    futils_writeFileHeaderAndData (pszFileName, szInputString, gstruct_FileBuffGen.pcData);
+#endif //INTERFACE_CURSES
 
     return 0;
 }

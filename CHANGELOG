@@ -1,4 +1,15 @@
 
+# Version 0.70 - Friday 11th October 2016
+
+Some grammar and spelling errors have been fixed, but most of the changes were with the underlying code.
+
+As part of the CGI-BIN conversion of this project (BMPS), and my two earlier projects (HQWA and XLEA), I found some faults in some of the lower level functions and those have been corrected.
+
+I have added the CGI-BIN conversion directory to this release.
+
+Note: I did not make the CGI-BIN version cross platform capable.
+
+
 # Version 0.60 - Wednesday 19th October 2016
 
 Initial alpha version released.

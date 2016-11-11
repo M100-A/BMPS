@@ -68,19 +68,19 @@ int gamelogic02_newNPCDialog ()
     switch (cRand1)
     {
     case 0:
-        iRet = mutils_addToDialogBuffer (", to get to know the her new friends.\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (", to get to know the her new friends.\n\n");
         break;
 
     case 1:
-        iRet = mutils_addToDialogBuffer (", to meet the new penises in her life.\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (", to meet the new penises in her life.\n\n");
         break;
 
     case 2:
-        iRet = mutils_addToDialogBuffer (", as it is good to greet a new cock every now and then.\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (", as it is good to greet a new cock every now and then.\n\n");
         break;
 
     default:
-        iRet = mutils_addToDialogBuffer (", as it would be plain rude for her to not say hello to a new dick or two.\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (", as it would be plain rude for her to not say hello to a new dick or two.\n\n");
         break;
     }
     if (iRet != 0) return iRet;
@@ -138,7 +138,7 @@ int gamelogic02_encounterProcess ()
             }
             if (iRet != 0) return iRet;
 
-            iRet = mutils_addToDialogBuffer ("\n\n\n[A while later...]\n\n");
+            iRet = mdialog_addToDialogWithSrchRep ("\n\n\n[A while later...]\n\n");
             if (iRet != 0) return iRet;
 
             return 0;
@@ -156,11 +156,11 @@ int gamelogic02_encounterProcess ()
             {
             case 0:
                 if (gpstructPC_Global.cDildoValue == 0)
-                    iRet = mutils_addToDialogBuffer ("fingering herself then massaging her breasts and nipples.");
+                    iRet = mdialog_addToDialogWithSrchRep ("fingering herself then massaging her breasts and nipples.");
                 else if (gpstructPC_Global.cDildoValue == 1)
-                    iRet = mutils_addToDialogBuffer ("playing with the dildos in her ass and pussy.");
+                    iRet = mdialog_addToDialogWithSrchRep ("playing with the dildos in her ass and pussy.");
                 else
-                    iRet = mutils_addToDialogBuffer ("playing with the vibrators in her pussy and ass.");
+                    iRet = mdialog_addToDialogWithSrchRep ("playing with the vibrators in her pussy and ass.");
                 break;
 
             case 1:
@@ -172,14 +172,14 @@ int gamelogic02_encounterProcess ()
 
             default:
                 if (gpstructPC_Global.cBreastsValue < 2)
-                    iRet = mutils_addToDialogBuffer ("inquiring about their sexual alignment and preferences.");
+                    iRet = mdialog_addToDialogWithSrchRep ("inquiring about their sexual alignment and preferences.");
                 else
-                    iRet = mutils_addToDialogBuffer ("asking if they like smaller breasts, or bigger ones.");
+                    iRet = mdialog_addToDialogWithSrchRep ("asking if they like smaller breasts, or bigger ones.");
                 break;
             }
             if (iRet != 0) return iRet;
 
-            iRet = mutils_addToDialogBuffer ("\n\n\n[A while later...]\n\n");
+            iRet = mdialog_addToDialogWithSrchRep ("\n\n\n[A while later...]\n\n");
             if (iRet != 0) return iRet;
 
             return 0;
@@ -196,15 +196,15 @@ int gamelogic02_encounterProcess ()
             switch (cRand1)
             {
             case 0:
-                iRet = mutils_addToDialogBuffer ("With the absence of any penises to play with");
+                iRet = mdialog_addToDialogWithSrchRep ("With the absence of any penises to play with");
                 break;
 
             case 1:
-                iRet = mutils_addToDialogBuffer ("With the lack of energetic cocks being present");
+                iRet = mdialog_addToDialogWithSrchRep ("With the lack of energetic cocks being present");
                 break;
 
             default:
-                iRet = mutils_addToDialogBuffer ("With no dicks in plain sight");
+                iRet = mdialog_addToDialogWithSrchRep ("With no dicks in plain sight");
                 break;
             }
             if (iRet != 0) return iRet;
@@ -218,14 +218,14 @@ int gamelogic02_encounterProcess ()
             {
             case 0:
                 if (gpstructPC_Global.cClothesValue < 2)
-                    iRet = mutils_addToDialogBuffer ("is forced to jill herself off in private.");
+                    iRet = mdialog_addToDialogWithSrchRep ("is forced to jill herself off in private.");
                 else
-                    iRet = mutils_addToDialogBuffer ("pleasures herself, while considering further alterations to her wardrobe.");
+                    iRet = mdialog_addToDialogWithSrchRep ("pleasures herself, while considering further alterations to her wardrobe.");
                 break;
 
             case 1:
                 if (gpstructPC_Global.cDildoValue == 0)
-                    iRet = mutils_addToDialogBuffer ("has to pleasure herself.");
+                    iRet = mdialog_addToDialogWithSrchRep ("has to pleasure herself.");
                 else if (gpstructPC_Global.cDildoValue == 1)
                     iRet = mdialog_addToDialogWithSrchRep ("plays with the dildos she received from #!60#.");
                 else
@@ -234,21 +234,21 @@ int gamelogic02_encounterProcess ()
 
             case 2:
                 if (gpstructPC_Global.cBreastsValue < 2)
-                    iRet = mutils_addToDialogBuffer ("keeps herself occupied with her own fingers.");
+                    iRet = mdialog_addToDialogWithSrchRep ("keeps herself occupied with her own fingers.");
                 else
-                    iRet = mutils_addToDialogBuffer ("massages her breasts and nipples.");
+                    iRet = mdialog_addToDialogWithSrchRep ("massages her breasts and nipples.");
                 break;
 
             default:
                 if (gpstructPC_Global.cClitorisValue < 2)
-                    iRet = mutils_addToDialogBuffer ("resorts to slicking herself off.");
+                    iRet = mdialog_addToDialogWithSrchRep ("resorts to slicking herself off.");
                 else
-                    iRet = mutils_addToDialogBuffer ("plays around with the size of her clitoris.");
+                    iRet = mdialog_addToDialogWithSrchRep ("plays around with the size of her clitoris.");
                 break;
             }
             if (iRet != 0) return iRet;
 
-            iRet = mutils_addToDialogBuffer ("\n\n\n[A while later...]\n\n");
+            iRet = mdialog_addToDialogWithSrchRep ("\n\n\n[A while later...]\n\n");
             if (iRet != 0) return iRet;
 
             return 0;
@@ -273,7 +273,7 @@ int gamelogic02_encounterProcess ()
         // reset this NPC energy to 0.
         gpstructNPC_Base[sRet].iEnergyValue = 0;
 
-        iRet = mutils_addToDialogBuffer ("\n\n\n[A little while later...]\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n\n[A little while later...]\n\n");
         if (iRet != 0) return iRet;
 
         return 0;
@@ -501,7 +501,7 @@ int gamelogic02_encounterProcess ()
     // this is how the values are increased for the stored parameters
     statedata_incrementPrioritizedNPCs (sCutoff, 150);
 
-    iRet = mutils_addToDialogBuffer ("\n[A while later...]\n\n");
+    iRet = mdialog_addToDialogWithSrchRep ("\n[A while later...]\n\n");
     if (iRet != 0) return iRet;
 
     // this function highlights if there are many/any changes with the participating NPCs.
@@ -574,137 +574,137 @@ int gamelogic02_scene1020 (int iSubSceneId, char cSubFlag)
 
         statedata_incrementDateTimeAndUpdate ();
 
-        iRet = mutils_addToDialogBuffer ("It is currently ");
+        iRet = mdialog_addToDialogWithSrchRep ("It is currently ");
         if (iRet != 0) return iRet;
 
         switch (gpstructPC_Global.cTimeValue)
         {
         case 1:
-            iRet = mutils_addToDialogBuffer ("00:00");
+            iRet = mdialog_addToDialogWithSrchRep ("00:00");
             break;
 
         case 2:
-            iRet = mutils_addToDialogBuffer ("00:45");
+            iRet = mdialog_addToDialogWithSrchRep ("00:45");
             break;
 
         case 3:
-            iRet = mutils_addToDialogBuffer ("01:30");
+            iRet = mdialog_addToDialogWithSrchRep ("01:30");
             break;
 
         case 4:
-            iRet = mutils_addToDialogBuffer ("02:15");
+            iRet = mdialog_addToDialogWithSrchRep ("02:15");
             break;
 
         case 5:
-            iRet = mutils_addToDialogBuffer ("03:00");
+            iRet = mdialog_addToDialogWithSrchRep ("03:00");
             break;
 
         case 6:
-            iRet = mutils_addToDialogBuffer ("03:45");
+            iRet = mdialog_addToDialogWithSrchRep ("03:45");
             break;
 
         case 7:
-            iRet = mutils_addToDialogBuffer ("04:30");
+            iRet = mdialog_addToDialogWithSrchRep ("04:30");
             break;
 
         case 8:
-            iRet = mutils_addToDialogBuffer ("05:15");
+            iRet = mdialog_addToDialogWithSrchRep ("05:15");
             break;
 
         case 9:
-            iRet = mutils_addToDialogBuffer ("06:00");
+            iRet = mdialog_addToDialogWithSrchRep ("06:00");
             break;
 
         case 10:
-            iRet = mutils_addToDialogBuffer ("06:45");
+            iRet = mdialog_addToDialogWithSrchRep ("06:45");
             break;
 
         case 11:
-            iRet = mutils_addToDialogBuffer ("07:30");
+            iRet = mdialog_addToDialogWithSrchRep ("07:30");
             break;
 
         case 12:
-            iRet = mutils_addToDialogBuffer ("08:15");
+            iRet = mdialog_addToDialogWithSrchRep ("08:15");
             break;
 
         case 13:
-            iRet = mutils_addToDialogBuffer ("09:00");
+            iRet = mdialog_addToDialogWithSrchRep ("09:00");
             break;
 
         case 14:
-            iRet = mutils_addToDialogBuffer ("09:45");
+            iRet = mdialog_addToDialogWithSrchRep ("09:45");
             break;
 
         case 15:
-            iRet = mutils_addToDialogBuffer ("10:30");
+            iRet = mdialog_addToDialogWithSrchRep ("10:30");
             break;
 
         case 16:
-            iRet = mutils_addToDialogBuffer ("11:15");
+            iRet = mdialog_addToDialogWithSrchRep ("11:15");
             break;
 
         case 17:
-            iRet = mutils_addToDialogBuffer ("12:00");
+            iRet = mdialog_addToDialogWithSrchRep ("12:00");
             break;
 
         case 18:
-            iRet = mutils_addToDialogBuffer ("12:45");
+            iRet = mdialog_addToDialogWithSrchRep ("12:45");
             break;
 
         case 19:
-            iRet = mutils_addToDialogBuffer ("13:30");
+            iRet = mdialog_addToDialogWithSrchRep ("13:30");
             break;
 
         case 20:
-            iRet = mutils_addToDialogBuffer ("14:15");
+            iRet = mdialog_addToDialogWithSrchRep ("14:15");
             break;
 
         case 21:
-            iRet = mutils_addToDialogBuffer ("15:00");
+            iRet = mdialog_addToDialogWithSrchRep ("15:00");
             break;
 
         case 22:
-            iRet = mutils_addToDialogBuffer ("15:45");
+            iRet = mdialog_addToDialogWithSrchRep ("15:45");
             break;
 
         case 23:
-            iRet = mutils_addToDialogBuffer ("16:30");
+            iRet = mdialog_addToDialogWithSrchRep ("16:30");
             break;
 
         case 24:
-            iRet = mutils_addToDialogBuffer ("17:15");
+            iRet = mdialog_addToDialogWithSrchRep ("17:15");
             break;
 
         case 25:
-            iRet = mutils_addToDialogBuffer ("18:00");
+            iRet = mdialog_addToDialogWithSrchRep ("18:00");
             break;
 
         case 26:
-            iRet = mutils_addToDialogBuffer ("18:45");
+            iRet = mdialog_addToDialogWithSrchRep ("18:45");
             break;
 
         case 27:
-            iRet = mutils_addToDialogBuffer ("19:30");
+            iRet = mdialog_addToDialogWithSrchRep ("19:30");
             break;
 
         case 28:
-            iRet = mutils_addToDialogBuffer ("20:15");
+            iRet = mdialog_addToDialogWithSrchRep ("20:15");
             break;
 
         case 29:
-            iRet = mutils_addToDialogBuffer ("21:00");
+            iRet = mdialog_addToDialogWithSrchRep ("21:00");
             break;
 
         case 30:
-            iRet = mutils_addToDialogBuffer ("21:45");
+            iRet = mdialog_addToDialogWithSrchRep ("21:45");
             break;
 
         case 31:
-            iRet = mutils_addToDialogBuffer ("22:30");
+            iRet = mdialog_addToDialogWithSrchRep ("22:30");
             break;
 
         default:
-            iRet = mutils_addToDialogBuffer ("23:15");
+            iRet = mdialog_addToDialogWithSrchRep ("23:15");
             break;
         }
         if (iRet != 0) return iRet;
@@ -720,7 +720,7 @@ int gamelogic02_scene1020 (int iSubSceneId, char cSubFlag)
 
         if ((gpstructPC_Global.cLocationId > 0) && (gpstructPC_Global.cLocationId < 67))
         {
-            iRet = mutils_addToDialogBuffer (gstructLocationList[gpstructPC_Global.cLocationId - 1].pszDesc);
+            iRet = mdialog_addToDialogWithSrchRep (gstructLocationList[gpstructPC_Global.cLocationId - 1].pszDesc);
             if (iRet != 0) return iRet;
         }
 
@@ -890,7 +890,7 @@ int gamelogic02_scene1021 (int iSubSceneId, char cSubFlag)
     switch (iSubSceneId)
     {
     case 0:
-        iRet = mutils_addToDialogBuffer (">Mayor\'s house\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Mayor\'s house\n\n");
         if (iRet != 0) return iRet;
 
         iRet = mdialog_addToDialogWithSrchRep ("#!00# is outside of the mayor\'s house.");
@@ -930,7 +930,7 @@ int gamelogic02_scene1021 (int iSubSceneId, char cSubFlag)
         return 0;
 
     case 1:
-        iRet = mutils_addToDialogBuffer (">Stay outside the mayor\'s house\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Stay outside the mayor\'s house\n\n");
         if (iRet != 0) return iRet;
         break;
 
@@ -938,7 +938,7 @@ int gamelogic02_scene1021 (int iSubSceneId, char cSubFlag)
         if (iRet != 0) return iRet;
 
     case 2:
-        iRet = mutils_addToDialogBuffer (">Go inside the mayor\'s house\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Go inside the mayor\'s house\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 2;
@@ -948,13 +948,13 @@ int gamelogic02_scene1021 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (2);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
 
     case 3:
-        iRet = mutils_addToDialogBuffer (">Visit the gardener\'s shack next to the mayor\'s house\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Visit the gardener\'s shack next to the mayor\'s house\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 3;
@@ -964,7 +964,7 @@ int gamelogic02_scene1021 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (3);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
@@ -993,7 +993,7 @@ int gamelogic02_scene1022 (int iSubSceneId, char cSubFlag)
     switch (iSubSceneId)
     {
     case 0:
-        iRet = mutils_addToDialogBuffer (">Constable\'s residence\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Constable\'s residence\n\n");
         if (iRet != 0) return iRet;
 
         iRet = mdialog_addToDialogWithSrchRep ("#!00# is outside of the constable\'s residence.");
@@ -1031,12 +1031,12 @@ int gamelogic02_scene1022 (int iSubSceneId, char cSubFlag)
         return 0;
 
     case 1:
-        iRet = mutils_addToDialogBuffer (">Stay outside the constable\'s residence\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Stay outside the constable\'s residence\n\n");
         if (iRet != 0) return iRet;
         break;
 
     case 2:
-        iRet = mutils_addToDialogBuffer (">Go inside the constable\'s residence\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Go inside the constable\'s residence\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 5;
@@ -1046,7 +1046,7 @@ int gamelogic02_scene1022 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (5);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
@@ -1075,7 +1075,7 @@ int gamelogic02_scene1023 (int iSubSceneId, char cSubFlag)
     switch (iSubSceneId)
     {
     case 0:
-        iRet = mutils_addToDialogBuffer (">Guard barracks\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Guard barracks\n\n");
         if (iRet != 0) return iRet;
 
         iRet = mdialog_addToDialogWithSrchRep ("#!00# is outside of the guard barracks.");
@@ -1113,12 +1113,12 @@ int gamelogic02_scene1023 (int iSubSceneId, char cSubFlag)
         return 0;
 
     case 1:
-        iRet = mutils_addToDialogBuffer (">Stay outside the guard barracks\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Stay outside the guard barracks\n\n");
         if (iRet != 0) return iRet;
         break;
 
     case 2:
-        iRet = mutils_addToDialogBuffer (">Go inside the guard barracks\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Go inside the guard barracks\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 7;
@@ -1128,7 +1128,7 @@ int gamelogic02_scene1023 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (7);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
@@ -1157,7 +1157,7 @@ int gamelogic02_scene1024 (int iSubSceneId, char cSubFlag)
     switch (iSubSceneId)
     {
     case 0:
-        iRet = mutils_addToDialogBuffer (">Moneylender\'s house\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Moneylender\'s house\n\n");
         if (iRet != 0) return iRet;
 
         iRet = mdialog_addToDialogWithSrchRep ("#!00# is outside of the moneylender\'s house.");
@@ -1197,12 +1197,12 @@ int gamelogic02_scene1024 (int iSubSceneId, char cSubFlag)
         return 0;
 
     case 1:
-        iRet = mutils_addToDialogBuffer (">Stay outside the moneylender\'s house\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Stay outside the moneylender\'s house\n\n");
         if (iRet != 0) return iRet;
         break;
 
     case 2:
-        iRet = mutils_addToDialogBuffer (">Go inside the moneylender\'s house\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Go inside the moneylender\'s house\n\n");
         if (iRet != 0) return iRet;
 
         iRet = mdialog_addToDialogWithSrchRep ("#!00# is inside the hallway of the moneylender\'s house.");
@@ -1241,7 +1241,7 @@ int gamelogic02_scene1024 (int iSubSceneId, char cSubFlag)
         return 0;
 
     case 3:
-        iRet = mutils_addToDialogBuffer (">Visit the gardener\'s shack next to the moneylender\'s house\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Visit the gardener\'s shack next to the moneylender\'s house\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 12;
@@ -1251,18 +1251,18 @@ int gamelogic02_scene1024 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (12);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
 
     case 11:
-        iRet = mutils_addToDialogBuffer (">Hang around in the hallway of the moneylender\'s house\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Hang around in the hallway of the moneylender\'s house\n\n");
         if (iRet != 0) return iRet;
         break;
 
     case 12:
-        iRet = mutils_addToDialogBuffer (">Visit the moneylender\'s room\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Visit the moneylender\'s room\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 10;
@@ -1276,7 +1276,7 @@ int gamelogic02_scene1024 (int iSubSceneId, char cSubFlag)
             char szWorking[400];
 
             sprintf (szWorking, "\n(debug) Loc 10(A): %d, %d\n", (int)gpstructNPC_Base[7].cInteractionLockFlag, (int)gpstructNPC_Base[7].cNameToFaceFlag);
-            iRet = mutils_addToDialogBuffer (szWorking);
+            iRet = mdialog_addToDialogWithSrchRep (szWorking);
             if (iRet != 0) return iRet;
         }
 #endif // BMPS_LVL2_DEBUG
@@ -1301,7 +1301,7 @@ int gamelogic02_scene1024 (int iSubSceneId, char cSubFlag)
                 char szWorking[400];
 
                 sprintf (szWorking, "(debug) Loc 10(B): %d, %d", (int)gsNPC_PriorityUsed, (int)gpstructNPC_Priority[0].sOffset);
-                iRet = mutils_addToDialogBuffer (szWorking);
+                iRet = mdialog_addToDialogWithSrchRep (szWorking);
                 if (iRet != 0) return iRet;
             }
 #endif // BMPS_LVL2_DEBUG
@@ -1332,13 +1332,13 @@ int gamelogic02_scene1024 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (10);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
 
     case 13:
-        iRet = mutils_addToDialogBuffer (">Visit the bodyguards room\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Visit the bodyguards room\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 11;
@@ -1348,7 +1348,7 @@ int gamelogic02_scene1024 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (11);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
@@ -1377,7 +1377,7 @@ int gamelogic02_scene1025 (int iSubSceneId, char cSubFlag)
     switch (iSubSceneId)
     {
     case 0:
-        iRet = mutils_addToDialogBuffer (">Merchant\'s house\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Merchant\'s house\n\n");
         if (iRet != 0) return iRet;
 
         iRet = mdialog_addToDialogWithSrchRep ("#!00# is outside of the merchant\'s house.");
@@ -1417,12 +1417,12 @@ int gamelogic02_scene1025 (int iSubSceneId, char cSubFlag)
         return 0;
 
     case 1:
-        iRet = mutils_addToDialogBuffer (">Stay outside the merchant\'s house\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Stay outside the merchant\'s house\n\n");
         if (iRet != 0) return iRet;
         break;
 
     case 2:
-        iRet = mutils_addToDialogBuffer (">Go inside the merchant\'s house\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Go inside the merchant\'s house\n\n");
         if (iRet != 0) return iRet;
 
         iRet = mdialog_addToDialogWithSrchRep ("#!00# is inside the hallway of the merchant\'s house.");
@@ -1461,7 +1461,7 @@ int gamelogic02_scene1025 (int iSubSceneId, char cSubFlag)
         return 0;
 
     case 3:
-        iRet = mutils_addToDialogBuffer (">Visit the gardener\'s shack next to the merchant\'s house\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Visit the gardener\'s shack next to the merchant\'s house\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 17;
@@ -1471,18 +1471,18 @@ int gamelogic02_scene1025 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (17);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
 
     case 11:
-        iRet = mutils_addToDialogBuffer (">Hang around in the hallway of the merchant\'s house\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Hang around in the hallway of the merchant\'s house\n\n");
         if (iRet != 0) return iRet;
         break;
 
     case 12:
-        iRet = mutils_addToDialogBuffer (">Visit the merchant\'s room\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Visit the merchant\'s room\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 15;
@@ -1492,13 +1492,13 @@ int gamelogic02_scene1025 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (15);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
 
     case 13:
-        iRet = mutils_addToDialogBuffer (">Visit the security guards room\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Visit the security guards room\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 16;
@@ -1508,7 +1508,7 @@ int gamelogic02_scene1025 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (16);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
@@ -1538,7 +1538,7 @@ int gamelogic02_scene1026 (int iSubSceneId, char cSubFlag)
     switch (iSubSceneId)
     {
     case 0:
-        iRet = mutils_addToDialogBuffer (">Physician\'s residence\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Physician\'s residence\n\n");
         if (iRet != 0) return iRet;
 
         iRet = mdialog_addToDialogWithSrchRep ("#!00# is outside of the physician\'s residence.");
@@ -1576,12 +1576,12 @@ int gamelogic02_scene1026 (int iSubSceneId, char cSubFlag)
         return 0;
 
     case 1:
-        iRet = mutils_addToDialogBuffer (">Stay outside the physician\'s residence\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Stay outside the physician\'s residence\n\n");
         if (iRet != 0) return iRet;
         break;
 
     case 2:
-        iRet = mutils_addToDialogBuffer (">Go inside the physician\'s residence\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Go inside the physician\'s residence\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 19;
@@ -1598,7 +1598,7 @@ int gamelogic02_scene1026 (int iSubSceneId, char cSubFlag)
             char szWorking[400];
 
             sprintf (szWorking, "\n(debug) Loc 19(A): %d, %d, %d\n", (int)gpstructPC_Global.cClothesValue, (int)cEval1, (int)gpstructNPC_Base[13].iKnownValue);
-            iRet = mutils_addToDialogBuffer (szWorking);
+            iRet = mdialog_addToDialogWithSrchRep (szWorking);
             if (iRet != 0) return iRet;
         }
 #endif // BMPS_LVL2_DEBUG
@@ -1619,7 +1619,7 @@ int gamelogic02_scene1026 (int iSubSceneId, char cSubFlag)
                 char szWorking[400];
 
                 sprintf (szWorking, "\n(debug) Loc 19(B): %d, %d\n", (int)gsNPC_PriorityUsed, (int)gpstructNPC_Priority[0].sOffset);
-                iRet = mutils_addToDialogBuffer (szWorking);
+                iRet = mdialog_addToDialogWithSrchRep (szWorking);
                 if (iRet != 0) return iRet;
             }
 #endif // BMPS_LVL2_DEBUG
@@ -1722,7 +1722,7 @@ int gamelogic02_scene1026 (int iSubSceneId, char cSubFlag)
                 }
                 if (iRet != 0) return iRet;
 
-                iRet = mutils_addToDialogBuffer ("\n\n\n[A while later...]\n\n");
+                iRet = mdialog_addToDialogWithSrchRep ("\n\n\n[A while later...]\n\n");
                 if (iRet != 0) return iRet;
 
                 // this is how the values are increased for the stored parameters (also resets the energy value).
@@ -1741,7 +1741,7 @@ int gamelogic02_scene1026 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (19);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
@@ -1769,7 +1769,7 @@ int gamelogic02_scene1027 (int iSubSceneId, char cSubFlag)
     switch (iSubSceneId)
     {
     case 0:
-        iRet = mutils_addToDialogBuffer (">Warehouse\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Warehouse\n\n");
         if (iRet != 0) return iRet;
 
         iRet = mdialog_addToDialogWithSrchRep ("#!00# is outside of the warehouse.");
@@ -1807,12 +1807,12 @@ int gamelogic02_scene1027 (int iSubSceneId, char cSubFlag)
         return 0;
 
     case 1:
-        iRet = mutils_addToDialogBuffer (">Stay outside the warehouse\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Stay outside the warehouse\n\n");
         if (iRet != 0) return iRet;
         break;
 
     case 2:
-        iRet = mutils_addToDialogBuffer (">Go inside the warehouse\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Go inside the warehouse\n\n");
         if (iRet != 0) return iRet;
 
         iRet = mdialog_addToDialogWithSrchRep ("#!00# is inside the warehouse.");
@@ -1849,12 +1849,12 @@ int gamelogic02_scene1027 (int iSubSceneId, char cSubFlag)
         return 0;
 
     case 11:
-        iRet = mutils_addToDialogBuffer (">Hang around the warehouse storage area\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Hang around the warehouse storage area\n\n");
         if (iRet != 0) return iRet;
         break;
 
     case 12:
-        iRet = mutils_addToDialogBuffer (">Visit the breakroom in the warehouse\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Visit the breakroom in the warehouse\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 22;
@@ -1864,7 +1864,7 @@ int gamelogic02_scene1027 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (22);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
@@ -1893,7 +1893,7 @@ int gamelogic02_scene1028 (int iSubSceneId, char cSubFlag)
     switch (iSubSceneId)
     {
     case 0:
-        iRet = mutils_addToDialogBuffer (">Brewery\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Brewery\n\n");
         if (iRet != 0) return iRet;
 
         iRet = mdialog_addToDialogWithSrchRep ("#!00# is outside of the brewery.");
@@ -1931,12 +1931,12 @@ int gamelogic02_scene1028 (int iSubSceneId, char cSubFlag)
         return 0;
 
     case 1:
-        iRet = mutils_addToDialogBuffer (">Stay outside the brewery\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Stay outside the brewery\n\n");
         if (iRet != 0) return iRet;
         break;
 
     case 2:
-        iRet = mutils_addToDialogBuffer (">Go inside the brewery\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Go inside the brewery\n\n");
         if (iRet != 0) return iRet;
 
         iRet = mdialog_addToDialogWithSrchRep ("#!00# is inside the brewery.");
@@ -1973,12 +1973,12 @@ int gamelogic02_scene1028 (int iSubSceneId, char cSubFlag)
         return 0;
 
     case 11:
-        iRet = mutils_addToDialogBuffer (">Hang around the inside the brewery\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Hang around the inside the brewery\n\n");
         if (iRet != 0) return iRet;
         break;
 
     case 12:
-        iRet = mutils_addToDialogBuffer (">Visit the bunk room in the brewery\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Visit the bunk room in the brewery\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 25;
@@ -1988,7 +1988,7 @@ int gamelogic02_scene1028 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (25);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
@@ -2017,7 +2017,7 @@ int gamelogic02_scene1029 (int iSubSceneId, char cSubFlag)
     switch (iSubSceneId)
     {
     case 0:
-        iRet = mutils_addToDialogBuffer (">Tavern\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Tavern\n\n");
         if (iRet != 0) return iRet;
 
         iRet = mdialog_addToDialogWithSrchRep ("#!00# is outside of the tavern.");
@@ -2055,12 +2055,12 @@ int gamelogic02_scene1029 (int iSubSceneId, char cSubFlag)
         return 0;
 
     case 1:
-        iRet = mutils_addToDialogBuffer (">Stay outside the tavern\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Stay outside the tavern\n\n");
         if (iRet != 0) return iRet;
         break;
 
     case 2:
-        iRet = mutils_addToDialogBuffer (">Go inside the tavern\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Go inside the tavern\n\n");
         if (iRet != 0) return iRet;
 
         iRet = mdialog_addToDialogWithSrchRep ("#!00# is inside the main hall of the tavern.");
@@ -2101,12 +2101,12 @@ int gamelogic02_scene1029 (int iSubSceneId, char cSubFlag)
         return 0;
 
     case 11:
-        iRet = mutils_addToDialogBuffer (">Hang around the tavern main hall\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Hang around the tavern main hall\n\n");
         if (iRet != 0) return iRet;
         break;
 
     case 12:
-        iRet = mutils_addToDialogBuffer (">Go behind the bar in the tavern\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Go behind the bar in the tavern\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 28;
@@ -2120,7 +2120,7 @@ int gamelogic02_scene1029 (int iSubSceneId, char cSubFlag)
             char szWorking[400];
 
             sprintf (szWorking, "\n(debug) Loc 28(A): %d, %d, %d\n", (int)gpstructNPC_Base[20].cLocationId, (int)gpstructPC_Global.cClothesValue, (int)gpstructNPC_Base[20].cNameToFaceFlag);
-            iRet = mutils_addToDialogBuffer (szWorking);
+            iRet = mdialog_addToDialogWithSrchRep (szWorking);
             if (iRet != 0) return iRet;
         }
 #endif // BMPS_LVL2_DEBUG
@@ -2142,7 +2142,7 @@ int gamelogic02_scene1029 (int iSubSceneId, char cSubFlag)
                 char szWorking[400];
 
                 sprintf (szWorking, "(debug) Loc 28(B): %d, %d\n", (int)gsNPC_PriorityUsed, (int)gpstructNPC_Priority[0].sOffset);
-                iRet = mutils_addToDialogBuffer (szWorking);
+                iRet = mdialog_addToDialogWithSrchRep (szWorking);
                 if (iRet != 0) return iRet;
             }
 #endif // BMPS_LVL2_DEBUG
@@ -2176,13 +2176,13 @@ int gamelogic02_scene1029 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCsx2 (27, 28);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
 
     case 13:
-        iRet = mutils_addToDialogBuffer (">Visit the tavern keeper\'s room\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Visit the tavern keeper\'s room\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 29;
@@ -2192,13 +2192,13 @@ int gamelogic02_scene1029 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (29);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
 
     case 14:
-        iRet = mutils_addToDialogBuffer (">Visit the whore\'s room\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Visit the whore\'s room\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 30;
@@ -2208,7 +2208,7 @@ int gamelogic02_scene1029 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (30);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
@@ -2237,7 +2237,7 @@ int gamelogic02_scene1030 (int iSubSceneId, char cSubFlag)
     switch (iSubSceneId)
     {
     case 0:
-        iRet = mutils_addToDialogBuffer (">Kitchen\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Kitchen\n\n");
         if (iRet != 0) return iRet;
 
         iRet = mdialog_addToDialogWithSrchRep ("#!00# is outside of the kitchen.");
@@ -2277,12 +2277,12 @@ int gamelogic02_scene1030 (int iSubSceneId, char cSubFlag)
         return 0;
 
     case 1:
-        iRet = mutils_addToDialogBuffer (">Stay outside the kitchen\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Stay outside the kitchen\n\n");
         if (iRet != 0) return iRet;
         break;
 
     case 2:
-        iRet = mutils_addToDialogBuffer (">Go inside the kitchen\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Go inside the kitchen\n\n");
         if (iRet != 0) return iRet;
 
         iRet = mdialog_addToDialogWithSrchRep ("#!00# is inside the kitchen.");
@@ -2319,7 +2319,7 @@ int gamelogic02_scene1030 (int iSubSceneId, char cSubFlag)
         return 0;
 
     case 3:
-        iRet = mutils_addToDialogBuffer (">Visit the beggar\'s shanty next to the kitchen\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Visit the beggar\'s shanty next to the kitchen\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 34;
@@ -2329,18 +2329,18 @@ int gamelogic02_scene1030 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (34);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
 
     case 11:
-        iRet = mutils_addToDialogBuffer (">Hang around inside the kitchen\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Hang around inside the kitchen\n\n");
         if (iRet != 0) return iRet;
         break;
 
     case 12:
-        iRet = mutils_addToDialogBuffer (">Visit the apartment above the kitchen\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Visit the apartment above the kitchen\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 33;
@@ -2350,7 +2350,7 @@ int gamelogic02_scene1030 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (33);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
@@ -2379,7 +2379,7 @@ int gamelogic02_scene1031 (int iSubSceneId, char cSubFlag)
     switch (iSubSceneId)
     {
     case 0:
-        iRet = mutils_addToDialogBuffer (">Workshop\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Workshop\n\n");
         if (iRet != 0) return iRet;
 
         iRet = mdialog_addToDialogWithSrchRep ("#!00# is outside of the workshop.");
@@ -2417,12 +2417,12 @@ int gamelogic02_scene1031 (int iSubSceneId, char cSubFlag)
         return 0;
 
     case 1:
-        iRet = mutils_addToDialogBuffer (">Stay outside the workshop\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Stay outside the workshop\n\n");
         if (iRet != 0) return iRet;
         break;
 
     case 2:
-        iRet = mutils_addToDialogBuffer (">Go inside the workshop\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Go inside the workshop\n\n");
         if (iRet != 0) return iRet;
 
         iRet = mdialog_addToDialogWithSrchRep ("#!00# is inside the workshop.");
@@ -2459,12 +2459,12 @@ int gamelogic02_scene1031 (int iSubSceneId, char cSubFlag)
         return 0;
 
     case 11:
-        iRet = mutils_addToDialogBuffer (">Hang around inside the workshop\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Hang around inside the workshop\n\n");
         if (iRet != 0) return iRet;
         break;
 
     case 12:
-        iRet = mutils_addToDialogBuffer (">Visit the apartment above the workshop\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Visit the apartment above the workshop\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 37;
@@ -2478,7 +2478,7 @@ int gamelogic02_scene1031 (int iSubSceneId, char cSubFlag)
             char szWorking[400];
 
             sprintf (szWorking, "\n(debug) Loc 37(A): %d, %d\n", (int)gpstructPC_Global.cDildoValue, (int)gpstructNPC_Base[26].cNameToFaceFlag);
-            iRet = mutils_addToDialogBuffer (szWorking);
+            iRet = mdialog_addToDialogWithSrchRep (szWorking);
             if (iRet != 0) return iRet;
         }
 #endif // BMPS_LVL2_DEBUG
@@ -2516,7 +2516,7 @@ int gamelogic02_scene1031 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (37);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
@@ -2545,7 +2545,7 @@ int gamelogic02_scene1032 (int iSubSceneId, char cSubFlag)
     switch (iSubSceneId)
     {
     case 0:
-        iRet = mutils_addToDialogBuffer (">Goat corral\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Goat corral\n\n");
         if (iRet != 0) return iRet;
 
         iRet = mdialog_addToDialogWithSrchRep ("#!00# is outside of the goat corral.");
@@ -2585,12 +2585,12 @@ int gamelogic02_scene1032 (int iSubSceneId, char cSubFlag)
         return 0;
 
     case 1:
-        iRet = mutils_addToDialogBuffer (">Stay outside the goat corral\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Stay outside the goat corral\n\n");
         if (iRet != 0) return iRet;
         break;
 
     case 2:
-        iRet = mutils_addToDialogBuffer (">Jump the fence into the goat corral\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Jump the fence into the goat corral\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 39;
@@ -2600,13 +2600,13 @@ int gamelogic02_scene1032 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCsx2 (38, 39);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
 
     case 3:
-        iRet = mutils_addToDialogBuffer (">Visit the shack next to the goat corral\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Visit the shack next to the goat corral\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 40;
@@ -2616,7 +2616,7 @@ int gamelogic02_scene1032 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (40);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
@@ -2645,7 +2645,7 @@ int gamelogic02_scene1033 (int iSubSceneId, char cSubFlag)
     switch (iSubSceneId)
     {
     case 0:
-        iRet = mutils_addToDialogBuffer (">Lumber mill\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Lumber mill\n\n");
         if (iRet != 0) return iRet;
 
         iRet = mdialog_addToDialogWithSrchRep ("#!00# is next the lumber mill.");
@@ -2683,12 +2683,12 @@ int gamelogic02_scene1033 (int iSubSceneId, char cSubFlag)
         return 0;
 
     case 1:
-        iRet = mutils_addToDialogBuffer (">Stay outside the lumber mill\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Stay outside the lumber mill\n\n");
         if (iRet != 0) return iRet;
         break;
 
     case 2:
-        iRet = mutils_addToDialogBuffer (">Visit the shack next to the lumber mill\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Visit the shack next to the lumber mill\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 42;
@@ -2698,7 +2698,7 @@ int gamelogic02_scene1033 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (42);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
@@ -2727,7 +2727,7 @@ int gamelogic02_scene1034 (int iSubSceneId, char cSubFlag)
     switch (iSubSceneId)
     {
     case 0:
-        iRet = mutils_addToDialogBuffer (">Forest edge\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Forest edge\n\n");
         if (iRet != 0) return iRet;
 
         iRet = mdialog_addToDialogWithSrchRep ("#!00# is near the edge of the forest.");
@@ -2767,12 +2767,12 @@ int gamelogic02_scene1034 (int iSubSceneId, char cSubFlag)
         return 0;
 
     case 1:
-        iRet = mutils_addToDialogBuffer (">Hang around the edge of the forest\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Hang around the edge of the forest\n\n");
         if (iRet != 0) return iRet;
         break;
 
     case 2:
-        iRet = mutils_addToDialogBuffer (">Venture into the forest\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Venture into the forest\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 45;
@@ -2782,13 +2782,13 @@ int gamelogic02_scene1034 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (45);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
 
     case 3:
-        iRet = mutils_addToDialogBuffer (">Visit the shack next to the edge of the forest\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Visit the shack next to the edge of the forest\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 44;
@@ -2798,7 +2798,7 @@ int gamelogic02_scene1034 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (44);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
@@ -2827,7 +2827,7 @@ int gamelogic02_scene1035 (int iSubSceneId, char cSubFlag)
     switch (iSubSceneId)
     {
     case 0:
-        iRet = mutils_addToDialogBuffer (">Target range\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Target range\n\n");
         if (iRet != 0) return iRet;
 
         iRet = mdialog_addToDialogWithSrchRep ("#!00# is outside of the target range.");
@@ -2867,12 +2867,12 @@ int gamelogic02_scene1035 (int iSubSceneId, char cSubFlag)
         return 0;
 
     case 1:
-        iRet = mutils_addToDialogBuffer (">Hang around outside the target range\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Hang around outside the target range\n\n");
         if (iRet != 0) return iRet;
         break;
 
     case 2:
-        iRet = mutils_addToDialogBuffer (">Jump the fence into the target range\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Jump the fence into the target range\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 47;
@@ -2882,13 +2882,13 @@ int gamelogic02_scene1035 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCsx2 (46, 47);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
 
     case 3:
-        iRet = mutils_addToDialogBuffer (">Visit the shack next to the target range\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Visit the shack next to the target range\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 48;
@@ -2898,7 +2898,7 @@ int gamelogic02_scene1035 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (48);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
@@ -2927,7 +2927,7 @@ int gamelogic02_scene1036 (int iSubSceneId, char cSubFlag)
     switch (iSubSceneId)
     {
     case 0:
-        iRet = mutils_addToDialogBuffer (">Lake edge\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Lake edge\n\n");
         if (iRet != 0) return iRet;
 
         iRet = mdialog_addToDialogWithSrchRep ("#!00# is near the edge of the lake.");
@@ -2965,12 +2965,12 @@ int gamelogic02_scene1036 (int iSubSceneId, char cSubFlag)
         return 0;
 
     case 1:
-        iRet = mutils_addToDialogBuffer (">Hang around the lake edge\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Hang around the lake edge\n\n");
         if (iRet != 0) return iRet;
         break;
 
     case 2:
-        iRet = mutils_addToDialogBuffer (">Visit the shack next to the edge of the lake\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Visit the shack next to the edge of the lake\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 50;
@@ -2980,7 +2980,7 @@ int gamelogic02_scene1036 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (50);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
@@ -3009,7 +3009,7 @@ int gamelogic02_scene1037 (int iSubSceneId, char cSubFlag)
     switch (iSubSceneId)
     {
     case 0:
-        iRet = mutils_addToDialogBuffer (">Northern farm\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Northern farm\n\n");
         if (iRet != 0) return iRet;
 
         iRet = mdialog_addToDialogWithSrchRep ("#!00# is at the edge of the northern farm.");
@@ -3047,12 +3047,12 @@ int gamelogic02_scene1037 (int iSubSceneId, char cSubFlag)
         return 0;
 
     case 1:
-        iRet = mutils_addToDialogBuffer (">Hang around the northern farm\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Hang around the northern farm\n\n");
         if (iRet != 0) return iRet;
         break;
 
     case 2:
-        iRet = mutils_addToDialogBuffer (">Visit the shack next to the northern farm\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Visit the shack next to the northern farm\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 52;
@@ -3066,7 +3066,7 @@ int gamelogic02_scene1037 (int iSubSceneId, char cSubFlag)
             char szWorking[400];
 
             sprintf (szWorking, "\n(debug) Loc 52(A): %d, %d, %d, %d, %d\n", (int)gpstructNPC_Base[46].cInteractionLockFlag, (int)gpstructNPC_Base[47].cInteractionLockFlag, (int)gpstructPC_Global.cBreastsValue, (int)gpstructNPC_Base[46].cNameToFaceFlag, (int)gpstructNPC_Base[47].cNameToFaceFlag);
-            iRet = mutils_addToDialogBuffer (szWorking);
+            iRet = mdialog_addToDialogWithSrchRep (szWorking);
             if (iRet != 0) return iRet;
         }
 #endif // BMPS_LVL2_DEBUG
@@ -3096,7 +3096,7 @@ int gamelogic02_scene1037 (int iSubSceneId, char cSubFlag)
                 char szWorking[400];
 
                 sprintf (szWorking, "(debug) Loc 52(B): %d, %d, %d\n", (int)gsNPC_PriorityUsed, (int)gpstructNPC_Priority[0].sOffset, (int)gpstructNPC_Priority[1].sOffset);
-                iRet = mutils_addToDialogBuffer (szWorking);
+                iRet = mdialog_addToDialogWithSrchRep (szWorking);
                 if (iRet != 0) return iRet;
             }
 #endif // BMPS_LVL2_DEBUG
@@ -3130,7 +3130,7 @@ int gamelogic02_scene1037 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (52);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
@@ -3159,7 +3159,7 @@ int gamelogic02_scene1038 (int iSubSceneId, char cSubFlag)
     switch (iSubSceneId)
     {
     case 0:
-        iRet = mutils_addToDialogBuffer (">Eastern farm\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Eastern farm\n\n");
         if (iRet != 0) return iRet;
 
         iRet = mdialog_addToDialogWithSrchRep ("#!00# is at the edge of the eastern farm.");
@@ -3197,12 +3197,12 @@ int gamelogic02_scene1038 (int iSubSceneId, char cSubFlag)
         return 0;
 
     case 1:
-        iRet = mutils_addToDialogBuffer (">Hang around the eastern farm\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Hang around the eastern farm\n\n");
         if (iRet != 0) return iRet;
         break;
 
     case 2:
-        iRet = mutils_addToDialogBuffer (">Visit the shack next to the eastern farm\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Visit the shack next to the eastern farm\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 54;
@@ -3212,7 +3212,7 @@ int gamelogic02_scene1038 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (54);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
@@ -3241,7 +3241,7 @@ int gamelogic02_scene1039 (int iSubSceneId, char cSubFlag)
     switch (iSubSceneId)
     {
     case 0:
-        iRet = mutils_addToDialogBuffer (">Southern farm\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Southern farm\n\n");
         if (iRet != 0) return iRet;
 
         iRet = mdialog_addToDialogWithSrchRep ("#!00# is at the edge of the southern farm.");
@@ -3279,12 +3279,12 @@ int gamelogic02_scene1039 (int iSubSceneId, char cSubFlag)
         return 0;
 
     case 1:
-        iRet = mutils_addToDialogBuffer (">Hang around the southern farm\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Hang around the southern farm\n\n");
         if (iRet != 0) return iRet;
         break;
 
     case 2:
-        iRet = mutils_addToDialogBuffer (">Visit the shack next to the southern farm\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Visit the shack next to the southern farm\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 56;
@@ -3294,7 +3294,7 @@ int gamelogic02_scene1039 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (56);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
@@ -3323,7 +3323,7 @@ int gamelogic02_scene1040 (int iSubSceneId, char cSubFlag)
     switch (iSubSceneId)
     {
     case 0:
-        iRet = mutils_addToDialogBuffer (">Western farm\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Western farm\n\n");
         if (iRet != 0) return iRet;
 
         iRet = mdialog_addToDialogWithSrchRep ("#!00# is at the edge of the western farm.");
@@ -3361,12 +3361,12 @@ int gamelogic02_scene1040 (int iSubSceneId, char cSubFlag)
         return 0;
 
     case 1:
-        iRet = mutils_addToDialogBuffer (">Hang around the western farm\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Hang around the western farm\n\n");
         if (iRet != 0) return iRet;
         break;
 
     case 2:
-        iRet = mutils_addToDialogBuffer (">Visit the shack next to the western farm\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Visit the shack next to the western farm\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 58;
@@ -3376,7 +3376,7 @@ int gamelogic02_scene1040 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (58);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
@@ -3405,7 +3405,7 @@ int gamelogic02_scene1041 (int iSubSceneId, char cSubFlag)
     switch (iSubSceneId)
     {
     case 0:
-        iRet = mutils_addToDialogBuffer (">Procurer\'s shack\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Procurer\'s shack\n\n");
         if (iRet != 0) return iRet;
 
         iRet = mdialog_addToDialogWithSrchRep ("#!00# is outside of the procurer\'s shack.");
@@ -3445,12 +3445,12 @@ int gamelogic02_scene1041 (int iSubSceneId, char cSubFlag)
         return 0;
 
     case 1:
-        iRet = mutils_addToDialogBuffer (">Stay outside the procurer\'s shack\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Stay outside the procurer\'s shack\n\n");
         if (iRet != 0) return iRet;
         break;
 
     case 2:
-        iRet = mutils_addToDialogBuffer (">Go inside the procurer\'s shack\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Go inside the procurer\'s shack\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 60;
@@ -3464,7 +3464,7 @@ int gamelogic02_scene1041 (int iSubSceneId, char cSubFlag)
             char szWorking[400];
 
             sprintf (szWorking, "\n(debug) Loc 60(A): %d, %d\n", (int)gpstructPC_Global.cClothesValue, (int)gpstructNPC_Base[56].cNameToFaceFlag);
-            iRet = mutils_addToDialogBuffer (szWorking);
+            iRet = mdialog_addToDialogWithSrchRep (szWorking);
             if (iRet != 0) return iRet;
         }
 #endif // BMPS_LVL2_DEBUG
@@ -3502,13 +3502,13 @@ int gamelogic02_scene1041 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (60);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
 
     case 3:
-        iRet = mutils_addToDialogBuffer (">Visit the thug\'s shanty next to the procurer\'s shack\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Visit the thug\'s shanty next to the procurer\'s shack\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 61;
@@ -3518,7 +3518,7 @@ int gamelogic02_scene1041 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (61);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
@@ -3547,7 +3547,7 @@ int gamelogic02_scene1042 (int iSubSceneId, char cSubFlag)
     switch (iSubSceneId)
     {
     case 0:
-        iRet = mutils_addToDialogBuffer (">Smuggler\'s shack\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Smuggler\'s shack\n\n");
         if (iRet != 0) return iRet;
 
         iRet = mdialog_addToDialogWithSrchRep ("#!00# is outside of the smuggler\'s shack.");
@@ -3587,12 +3587,12 @@ int gamelogic02_scene1042 (int iSubSceneId, char cSubFlag)
         return 0;
 
     case 1:
-        iRet = mutils_addToDialogBuffer (">Stay outside the smuggler\'s shack\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Stay outside the smuggler\'s shack\n\n");
         if (iRet != 0) return iRet;
         break;
 
     case 2:
-        iRet = mutils_addToDialogBuffer (">Go inside the smuggler\'s shack\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Go inside the smuggler\'s shack\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 63;
@@ -3606,7 +3606,7 @@ int gamelogic02_scene1042 (int iSubSceneId, char cSubFlag)
             char szWorking[400];
 
             sprintf (szWorking, "\n(debug) Loc 63(A): %d, %d, %d\n", (int)gpstructPC_Global.cClothesValue, (int)gpstructNPC_Base[59].cNameToFaceFlag, (int)gpstructPC_Global.cDildoValue);
-            iRet = mutils_addToDialogBuffer (szWorking);
+            iRet = mdialog_addToDialogWithSrchRep (szWorking);
             if (iRet != 0) return iRet;
         }
 #endif // BMPS_LVL2_DEBUG
@@ -3644,13 +3644,13 @@ int gamelogic02_scene1042 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (63);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;
 
     case 3:
-        iRet = mutils_addToDialogBuffer (">Visit the bandit\'s shanty next to the smuggler\'s shack\n\n");
+        iRet = mdialog_addToDialogWithSrchRep (">Visit the bandit\'s shanty next to the smuggler\'s shack\n\n");
         if (iRet != 0) return iRet;
 
         gpstructPC_Global.cLocationId = 64;
@@ -3660,7 +3660,7 @@ int gamelogic02_scene1042 (int iSubSceneId, char cSubFlag)
 
         iRet = statedata_nameLocalNPCs (64);
         if (iRet == 1) return 1;
-        iRet = mutils_addToDialogBuffer ("\n\n");
+        iRet = mdialog_addToDialogWithSrchRep ("\n\n");
         if (iRet != 0) return iRet;
 
         break;

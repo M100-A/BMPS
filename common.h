@@ -7,67 +7,37 @@
 //
 // Given that I tend to write "semi-portable" code, there is a lot of ifdef WIN32 stuff in here..
 //
-// Unless I test for the platform, there is no guarantee that it will work..
+// Unless I test for the platform, there is no gurantee that it will work..
 //
 
-#define INTERFACE_CURSES 1
+// this is the raw HTTP version of the program, so the curses interface is knocked out.
+//#define INTERFACE_CURSES 1
+//#define INTERFACE_CGI 1
+
+#define INTERFACE_RAW_HTTP 1
+
+// I knocked out all of the WIN32 cross compile stuff, as this is meant only to compile on *NIX.
 
 #ifdef WIN32
 
-#include	<curses.h>
+#include	<windows.h>
+#include	<winsock2.h>
+#include	<ws2tcpip.h>
+
 #include	<stdio.h>		// for sprintf
+#include	<stdarg.h>
 #include	<stdlib.h>
 #include	<fcntl.h>
 #include	<io.h>
-#include	<math.h>
-#include	<sys/types.h>
-#include	<sys/stat.h>
-#include	<string.h>		// for strlen
-#include	<memory.h>		// for malloc
-#include	<time.h>		// for localtime
-#include	<ctype.h>		// for islower, isupper
-//#include	<signal.h>
-
-#define PURE_WINDOWS_VERSION  1
-
-#ifdef PURE_WINDOWS_VERSION
-#undef MOUSE_MOVED
-#include <windows.h>
-#endif
-
-#else //WIN32
-
-#ifdef HAVE_CONFIG_H
-#include	<config.h>
-#endif
-
-#include    <ncurses.h>     // for the *NIX curses library
-#include	<stdio.h>
-#include	<stdarg.h>
-#include	<stdlib.h>
-#include	<unistd.h>
 #include	<sys/types.h>
 #include	<sys/stat.h>
 #include	<fcntl.h>
-#include	<math.h>
 #include	<ctype.h>
 #include	<string.h>		// for strlen
 #include	<memory.h>		// for malloc
 #include	<time.h>		// for localtime
-//#include	<signal.h>		// for signal stuff
-#include	<poll.h>		// for poll (used to simulate sleep()).
-#include	<dirent.h>
-#include    <ncurses.h>     // for the *NIX curses library
-
-#endif //WIN32
-
-
-#ifdef WIN32
-
-//----------------------------------------------------------------------
-//
-// Windows port over stuff.
-//
+#include	<ctype.h>		// for islower, isupper
+#include	<signal.h>		// for signal stuff
 
 #define PERM_FILE (_S_IREAD | _S_IWRITE)
 
@@ -80,6 +50,33 @@
 #define unlink _unlink
 
 #else
+
+#ifdef HAVE_CONFIG_H
+#include	<config.h>
+#endif
+
+#ifdef INTERFACE_CURSES
+#include    <ncurses.h>     // for the *NIX curses library
+#endif // INTERFACE_CURSES
+#include	<stdio.h>
+#include	<stdarg.h>
+#include	<stdlib.h>
+#include	<unistd.h>
+#include	<sys/types.h>
+#include	<sys/stat.h>
+#include	<fcntl.h>
+#include	<ctype.h>
+#include	<string.h>		// for strlen
+#include	<memory.h>		// for malloc
+#include	<time.h>		// for localtime
+#ifdef INTERFACE_RAW_HTTP
+#include	<signal.h>		// for signal stuff
+#include    <sys/socket.h>
+#include    <arpa/inet.h>
+#include    <netinet/in.h>
+#endif // INTERFACE_RAW_HTTP
+#include	<poll.h>		// for poll (used to simulate sleep()).
+#include	<dirent.h>
 
 //----------------------------------------------------------------------
 //
@@ -112,7 +109,13 @@
 
 #define PERM_FILE (S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH)
 
-#endif // WIN32
+#endif
+
+
+// I knocked out all of the WIN32 cross compile stuff, as this is meant only to compile on *NIX.
+
+// need to add this back in..
+
 
 
 //----------------------------------------------------------------------
@@ -148,6 +151,11 @@ int futils_preAllocateBuffer (unsigned long ulBufferSize, struct futils_filebuff
 
 // load text file into memory image
 int futils_loadFileIntoMemory (char *pszFileName, struct futils_filebuff *pstructFullFile);
+
+#ifdef INTERFACE_RAW_HTTP
+// load part of an already opened file into memory
+int futils_loadOpenedFileIntoMemory (int iFileHandle, int iSizeLoad, struct futils_filebuff *pstructFullFile);
+#endif // INTERFACE_RAW_HTTP
 
 // read a single line from a file
 int futils_readLineFromMemoryNoEndLineCombo (struct futils_filebuff *pstructFullFile, char *pszBuf, unsigned long ulMaxlen);
@@ -231,7 +239,7 @@ void mdialog_setDynamicEntry (short sOffset, short sEntry);
 int mdialog_addToDialogWithSrchRep (char *pszString);
 
 
-
+#ifdef INTERFACE_CURSES
 //----------------------------------------------------------------------
 //
 // defines for savescreen functions..
@@ -260,4 +268,82 @@ int savescreen_parseSaveFile (int iSaveId, char *pszDateTime);
 
 // function to load a save file
 int savescreen_loadSaveFile (int iSaveId);
+
+#endif // INTERFACE_CURSES
+
+
+#ifndef INTERFACE_CURSES
+//----------------------------------------------------------------------
+//
+// defines for HTTP post functions..
+//
+
+// function to pre-convert the input data into a list.
+void httppost_urlConvertList (char *pPostData, char *pOutput, int iLen);
+
+// function to look for an entry in the input data.
+int httppost_extractEntry (char *pPostData, char *pszLock, char *pszOutput, int iMax);
+
+#endif // INTERFACE_CURSES
+
+
+#ifdef INTERFACE_CGI
+
+//----------------------------------------------------------------------
+//
+// defines for Menu CGI-BIN functions..
+//
+
+void menucgi_outputFullMenu (int iRestrict);
+
+void menucgi_outputMainMenu ();
+
+void menucgi_outputAboutMenu ();
+
+void menucgi_outputCreditsMenu ();
+
+void menucgi_outputSaveMenu ();
+
+void menucgi_outputLoadMenu ();
+
+// generic error output.
+void menucgi_errorOutput (char *szErrorResult, int iErrorCode);
+
+#endif // INTERFACE_CGI
+
+
+#ifdef INTERFACE_RAW_HTTP
+
+//----------------------------------------------------------------------
+//
+// defines for Menu raw functions..
+//
+
+int menuraw_outputFullMenu (int iRestrict);
+
+int menuraw_outputMainMenu ();
+
+int menuraw_outputAboutMenu ();
+
+int menuraw_outputCreditsMenu ();
+
+int menuraw_outputSpoilersMenu ();
+
+int menuraw_outputSaveMenu ();
+
+int menuraw_outputLoadMenu ();
+
+
+//----------------------------------------------------------------------
+//
+// defines for html skin functions..
+//
+
+void htmlskin_loadStart ();
+
+int htmlskin_includeCurrentSkin (struct futils_filebuff *pstructFullFile);
+
+void htmlskin_setSkin (char *szValue);
+
+#endif // INTERFACE_RAW_HTTP
 

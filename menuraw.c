@@ -1,5 +1,5 @@
 //
-// menucgi.c
+// menuraw.c
 //
 // menus for the CGI-BIN version..
 //
@@ -40,7 +40,7 @@ extern  char    gcDebugFlag;
 // 4 = spoiler menu config.
 // 10 = end game menu config.
 //
-void menucgi_outputFullMenu (int iRestrict)
+int menuraw_outputFullMenu (int iRestrict)
 {
     int iRet;
     struct stat statFile;
@@ -49,20 +49,12 @@ void menucgi_outputFullMenu (int iRestrict)
 
     if (iRestrict != 1)
     {
-        iRet = futils_addStringToFileBufferEnd ("<hr/>\n<form action=\"BMPSv", &gstruct_FileBuffOut);
-
-        if (iRet == 0)
-            iRet = futils_addStringToFileBufferEnd (gszVersionStamp, &gstruct_FileBuffOut);
-
-        if ((iRet == 0) && (gcDebugFlag != 0))
-            iRet = futils_addStringToFileBufferEnd (".cheat", &gstruct_FileBuffOut);
-
-        if (iRet == 0)
-            iRet = futils_addStringToFileBufferEnd (".cgi#current\" method=\"POST\">\n<input type=\"submit\" name=\"menu\" value=\"About BMPS\" /> for information about this game, such as what it is about.<br/>\n</form>\n", &gstruct_FileBuffOut);
+        iRet = futils_addStringToFileBufferEnd ("<hr/>\n<form action=\"/#current\" method=\"POST\">\n<input type=\"submit\" name=\"menu\" value=\"About BMPS\" /> for information about this game, such as what it is about.<br/>\n</form>\n", &gstruct_FileBuffOut);
 
         if (iRet != 0)
         {
-            httpcgi_errorOutput ("Could not buffer the About menu link", 801);
+            printf ("\nCould not buffer the about menu link\n");
+            return 1;
         }
     }
 
@@ -70,20 +62,12 @@ void menucgi_outputFullMenu (int iRestrict)
     {
         // Start a new BMPS game, menu.
 
-        iRet = futils_addStringToFileBufferEnd ("<hr/>\n<form action=\"BMPSv", &gstruct_FileBuffOut);
-
-        if (iRet == 0)
-            iRet = futils_addStringToFileBufferEnd (gszVersionStamp, &gstruct_FileBuffOut);
-
-        if ((iRet == 0) && (gcDebugFlag != 0))
-            iRet = futils_addStringToFileBufferEnd (".cheat", &gstruct_FileBuffOut);
-
-        if (iRet == 0)
-            iRet = futils_addStringToFileBufferEnd (".cgi#current\" method=\"POST\">\n<input type=\"submit\" name=\"menu\" value=\"Start a new BMPS game\" /> to start a new game.<br/>\n</form>\n", &gstruct_FileBuffOut);
+        iRet = futils_addStringToFileBufferEnd ("<hr/>\n<form action=\"/#current\" method=\"POST\">\n<input type=\"submit\" name=\"menu\" value=\"Start a new BMPS game\" /> to start a new game.<br/>\n</form>\n", &gstruct_FileBuffOut);
 
         if (iRet != 0)
         {
-            httpcgi_errorOutput ("Could not buffer the start menu link", 802);
+            printf ("\nCould not buffer the start menu link\n");
+            return 1;
         }
 
         // Resume last BMPS autosave, menu.
@@ -94,20 +78,12 @@ void menucgi_outputFullMenu (int iRestrict)
 
         if (iRet == 0)
         {
-            iRet = futils_addStringToFileBufferEnd ("<hr/>\n<form action=\"BMPSv", &gstruct_FileBuffOut);
-
-            if (iRet == 0)
-                iRet = futils_addStringToFileBufferEnd (gszVersionStamp, &gstruct_FileBuffOut);
-
-            if ((iRet == 0) && (gcDebugFlag != 0))
-                iRet = futils_addStringToFileBufferEnd (".cheat", &gstruct_FileBuffOut);
-
-            if (iRet == 0)
-                iRet = futils_addStringToFileBufferEnd (".cgi#current\" method=\"POST\">\n<input type=\"submit\" name=\"menu\" value=\"Resume last BMPS autosave\" /> to pickup where you last left off.<br/>\n</form>\n", &gstruct_FileBuffOut);
+            iRet = futils_addStringToFileBufferEnd ("<hr/>\n<form action=\"/#current\" method=\"POST\">\n<input type=\"submit\" name=\"menu\" value=\"Resume last BMPS autosave\" /> to pickup where you last left off.<br/>\n</form>\n", &gstruct_FileBuffOut);
 
             if (iRet != 0)
             {
-                httpcgi_errorOutput ("Could not buffer the autosave load menu link", 803);
+                printf ("\nCould not buffer the autosave load menu link\n");
+                return 1;
             }
         }
 
@@ -148,20 +124,12 @@ void menucgi_outputFullMenu (int iRestrict)
 
             if (iRet == 0)
             {
-                iRet = futils_addStringToFileBufferEnd ("<hr/>\n<form action=\"BMPSv", &gstruct_FileBuffOut);
-
-                if (iRet == 0)
-                    iRet = futils_addStringToFileBufferEnd (gszVersionStamp, &gstruct_FileBuffOut);
-
-                if ((iRet == 0) && (gcDebugFlag != 0))
-                    iRet = futils_addStringToFileBufferEnd (".cheat", &gstruct_FileBuffOut);
-
-                if (iRet == 0)
-                    iRet = futils_addStringToFileBufferEnd (".cgi#current\" method=\"POST\">\n<input type=\"submit\" name=\"menu\" value=\"Load a previously saved BMPS game\" /> to load a game save you put aside.<br/>\n</form>\n", &gstruct_FileBuffOut);
+                iRet = futils_addStringToFileBufferEnd ("<hr/>\n<form action=\"/#current\" method=\"POST\">\n<input type=\"submit\" name=\"menu\" value=\"Load a previously saved BMPS game\" /> to load a game save you put aside.<br/>\n</form>\n", &gstruct_FileBuffOut);
 
                 if (iRet != 0)
                 {
-                    httpcgi_errorOutput ("Could not buffer the save load menu link", 804);
+                    printf ("\nCould not buffer the save load menu link\n");
+                    return 1;
                 }
             }
         }
@@ -171,20 +139,12 @@ void menucgi_outputFullMenu (int iRestrict)
 
     if (iRestrict != 3)
     {
-        iRet = futils_addStringToFileBufferEnd ("<hr/>\n<form action=\"BMPSv", &gstruct_FileBuffOut);
-
-        if (iRet == 0)
-            iRet = futils_addStringToFileBufferEnd (gszVersionStamp, &gstruct_FileBuffOut);
-
-        if ((iRet == 0) && (gcDebugFlag != 0))
-            iRet = futils_addStringToFileBufferEnd (".cheat", &gstruct_FileBuffOut);
-
-        if (iRet == 0)
-            iRet = futils_addStringToFileBufferEnd (".cgi#current\" method=\"POST\">\n<input type=\"submit\" name=\"menu\" value=\"BMPS credits\" /> for people involved.<br/>\n</form>\n", &gstruct_FileBuffOut);
+        iRet = futils_addStringToFileBufferEnd ("<hr/>\n<form action=\"/#current\" method=\"POST\">\n<input type=\"submit\" name=\"menu\" value=\"BMPS credits\" /> for people involved.<br/>\n</form>\n", &gstruct_FileBuffOut);
 
         if (iRet != 0)
         {
-            httpcgi_errorOutput ("Could not buffer the credits menu link", 805);
+            printf ("\nCould not buffer the credits menu link\n");
+            return 1;
         }
     }
 
@@ -192,20 +152,12 @@ void menucgi_outputFullMenu (int iRestrict)
 
     if (iRestrict != 4)
     {
-        iRet = futils_addStringToFileBufferEnd ("<hr/>\n<form action=\"BMPSv", &gstruct_FileBuffOut);
-
-        if (iRet == 0)
-            iRet = futils_addStringToFileBufferEnd (gszVersionStamp, &gstruct_FileBuffOut);
-
-        if ((iRet == 0) && (gcDebugFlag != 0))
-            iRet = futils_addStringToFileBufferEnd (".cheat", &gstruct_FileBuffOut);
-
-        if (iRet == 0)
-            iRet = futils_addStringToFileBufferEnd (".cgi#current\" method=\"POST\">\n<input type=\"submit\" name=\"menu\" value=\"BMPS spoilers\" /> Hints, tips, spoilers and cheats.<br/>\n</form>\n", &gstruct_FileBuffOut);
+        iRet = futils_addStringToFileBufferEnd ("<hr/>\n<form action=\"/#current\" method=\"POST\">\n<input type=\"submit\" name=\"menu\" value=\"BMPS spoilers\" /> Hints, tips, spoilers and cheats.<br/>\n</form>\n", &gstruct_FileBuffOut);
 
         if (iRet != 0)
         {
-            httpcgi_errorOutput ("Could not buffer the spoiler menu link", 806);
+            printf ("\nCould not buffer the spoiler menu link\n");
+            return 1;
         }
     }
 
@@ -213,31 +165,53 @@ void menucgi_outputFullMenu (int iRestrict)
 
     if (iRestrict != 0)
     {
-        iRet = futils_addStringToFileBufferEnd ("<hr/>\n<form action=\"BMPSv", &gstruct_FileBuffOut);
-
-        if (iRet == 0)
-            iRet = futils_addStringToFileBufferEnd (gszVersionStamp, &gstruct_FileBuffOut);
-
-        if ((iRet == 0) && (gcDebugFlag != 0))
-            iRet = futils_addStringToFileBufferEnd (".cheat", &gstruct_FileBuffOut);
-
-        if (iRet == 0)
-            iRet = futils_addStringToFileBufferEnd (".cgi#current\" method=\"POST\">\n<input type=\"submit\" name=\"menu\" value=\"BMPS main menu\" /> to go back to the main menu.<br/>\n</form>\n", &gstruct_FileBuffOut);
+        iRet = futils_addStringToFileBufferEnd ("<hr/>\n<form action=\"/#current\" method=\"POST\">\n<input type=\"submit\" name=\"menu\" value=\"BMPS main menu\" /> to go back to the main menu.<br/>\n</form>\n", &gstruct_FileBuffOut);
 
         if (iRet != 0)
         {
-            httpcgi_errorOutput ("Could not buffer the main menu link", 807);
+            printf ("\nCould not buffer the main menu link\n");
+            return 1;
         }
     }
-    else // Back to the list of games, menu.
+    else
     {
-        iRet = futils_addStringToFileBufferEnd ("<hr/>\n<form action=\"main.cgi\" method=\"POST\">\n<input type=\"submit\" name=\"menu\" value=\"Back to the list of games\" /> to back to the main list.<br/>\n</form>\n", &gstruct_FileBuffOut);
+        //
+        // This is the skin menu
+        //
+
+        iRet = futils_addStringToFileBufferEnd ("<hr/>\n<form action=\"/#current\" method=\"POST\">\n<select name=\"skin\" onchange=\"this.form.submit()\">\n<option value=\"X\" selected>--Select to change skin--</option>\n", &gstruct_FileBuffOut);
+
+        if (iRet == 0)
+            iRet = futils_addStringToFileBufferEnd ("<option value=\"A1\">Black on White, Monospace font</option>\n", &gstruct_FileBuffOut);
+
+        if (iRet == 0)
+            iRet = futils_addStringToFileBufferEnd ("<option value=\"A2\">White on Black, Monospace font</option>\n", &gstruct_FileBuffOut);
+
+        if (iRet == 0)
+            iRet = futils_addStringToFileBufferEnd ("<option value=\"B1\">Black on White, Sans-Serif font</option>\n", &gstruct_FileBuffOut);
+
+        if (iRet == 0)
+            iRet = futils_addStringToFileBufferEnd ("<option value=\"B2\">White on Black, Sans-Serif font</option>\n", &gstruct_FileBuffOut);
+
+        if (iRet == 0)
+            iRet = futils_addStringToFileBufferEnd ("<option value=\"C1\">Black on White, Serif font</option>\n", &gstruct_FileBuffOut);
+
+        if (iRet == 0)
+            iRet = futils_addStringToFileBufferEnd ("<option value=\"C2\">White on Black, Serif font</option>\n", &gstruct_FileBuffOut);
+
+        if (iRet == 0)
+            iRet = futils_addStringToFileBufferEnd ("</select> : Changes the appearance of the game and menus.<br/>\n<input type=\"hidden\" name=\"menu\" value=\"Skin change\" /></form>\n", &gstruct_FileBuffOut);
+
 
         if (iRet != 0)
         {
-            httpcgi_errorOutput ("Could not buffer the game menu link", 808);
+            printf ("\nCould not buffer the skin menu link\n");
+            return 1;
         }
+
     }
+
+    return 0;
 }
 
 
@@ -247,7 +221,7 @@ void menucgi_outputFullMenu (int iRestrict)
 // Assumes that the gstruct_FileBuffOut is setup and partially loaded with HTTP and HTML header information.
 // Also assumes that the CWD has been set to where the user data files are.
 //
-void menucgi_outputMainMenu ()
+int menuraw_outputMainMenu ()
 {
     int iRet;
 
@@ -264,10 +238,11 @@ void menucgi_outputMainMenu ()
 
     if (iRet != 0)
     {
-        httpcgi_errorOutput ("Could not buffer the game main text", 810);
+        printf ("\nCould not buffer the game main text\n");
+        return 1;
     }
 
-    menucgi_outputFullMenu (0);
+    return (menuraw_outputFullMenu (0));
 }
 
 
@@ -275,7 +250,7 @@ void menucgi_outputMainMenu ()
 // Function to output the about menu.
 //
 
-void menucgi_outputAboutMenu ()
+int menuraw_outputAboutMenu ()
 {
     int iRet;
 
@@ -310,10 +285,11 @@ void menucgi_outputAboutMenu ()
 
     if (iRet != 0)
     {
-        httpcgi_errorOutput ("Could not buffer the game about text", 812);
+        printf ("\nCould not buffer the game about text\n");
+        return 1;
     }
 
-    menucgi_outputFullMenu (1);
+    return (menuraw_outputFullMenu (1));
 }
 
 
@@ -321,7 +297,7 @@ void menucgi_outputAboutMenu ()
 // Function to output the credits menu.
 //
 
-void menucgi_outputCreditsMenu ()
+int menuraw_outputCreditsMenu ()
 {
     int iRet;
 
@@ -338,10 +314,11 @@ void menucgi_outputCreditsMenu ()
 
     if (iRet != 0)
     {
-        httpcgi_errorOutput ("Could not buffer the game credits text", 814);
+        printf ("\nCould not buffer the game credits text\n");
+        return 1;
     }
 
-    menucgi_outputFullMenu (3);
+    return (menuraw_outputFullMenu (3));
 }
 
 
@@ -349,20 +326,14 @@ void menucgi_outputCreditsMenu ()
 // Function to output the spoilers menu.
 //
 
-void menucgi_outputSpoilersMenu ()
+int menuraw_outputSpoilersMenu ()
 {
     int iRet;
 
     iRet = futils_addStringToFileBufferEnd ("<br/><B>Spoiler alert... Spoiler alert...</B><br/><br/>\nThe purpose of this page is to provide some details about some of the hidden aspects of Bunny, Mayoress, Prostitute &amp; Succubus (BMPS). I once dumped some information into a 4chan/d /dgg/ thread about how to play the game, and this is an extension of that.<br/><br/>\nIf you don&apos;t want to ruin the experience for yourself, then exit from this page.<br/><br/>\nWhile there is a fair amount of information contained in the &quot;about page&quot;, such as; how to play the game and the overall strategy, the &quot;about page&quot; does not reveal is where all of the hidden events are. This page is necessary only because my games aren&apos;t popular enough for some anon to go through the effort of creating a wiki that has a walk-through or two.<br/><br/>\n<I>With Hedonism Quest, Wilda’s Ascension (HQWA), I was able to point out the source code data that contains the information about the trigger elements on the maps. BMPS is a completely different game underneath the hood, so I have to do this another way.</I><br/><br/>\n", &gstruct_FileBuffOut);
 
     if (iRet == 0)
-        iRet = futils_addStringToFileBufferEnd ("<br/><B>Cheat/Debug:</B><br/><br/>\nThe &quot;standalone local web server&quot; version of the program have the -D command line switch.<br/><br/>\nThe web server (this) version does the same thing by altering the URL.<br/><br/>In the address bar of the web browser is a path to the program. When not in &quot;cheat&quot; mode it will be &quot;BMPSv", &gstruct_FileBuffOut);
-
-    if (iRet == 0)
-        iRet = futils_addStringToFileBufferEnd (gszVersionStamp, &gstruct_FileBuffOut);
-
-    if (iRet == 0)
-        iRet = futils_addStringToFileBufferEnd (".cgi&quot;. To activate the &quot;cheat&quot; mode, change the &quot;.cgi&quot; part of the address to &quot;.cheat.cgi&quot;. Doing so will take you back to the main menu, but you will see a notice at the end of the version number at the top of the main menu it will say &quot;#CHEAT-MODE-ON&quot;. The program will maintain the path to the &quot;.cheat.cgi&quot; until you exit &apos;back to the list of games&apos; menu, or you alter the address again.<br/><br/>\nCheat/Debug mode does only one thing for BMPS, it alters the &quot;Give me a hint&quot; menu item so that it is  always available... AND, it alters the &quot;Give me a hint&quot; menu so that it shows where all of the NPCs are (not just the ones that the PC knows), and it shows their progression values. It changes nothing else, but being able to see the progression of all of the NPCs turns out to be a useful thing (without it, you cannot make an assessment if a NPC is becoming too obedient).<br/><br/>\nThe known value fills up when it reaches 30. The trust value fills up when it reaches 100. The obedience value fills up when it reaches 200.<br/><br/>\nOf course, when the obedience value reaches 200 on any NPC other than the (former-)Mayor, the game ends, and the evaluation between a good and a bad ending happens.<br/><br/>\nRemember:<br/>\nEasy difficulty level, get 33 of 64 villagers to fully trust you.<br/>\nMedium difficulty level, get 54 of 64 villagers to fully trust you.<br/>\nHard difficulty level, get all of the 64 villagers to fully trust you.<br/><br/>\n", &gstruct_FileBuffOut);
+        iRet = futils_addStringToFileBufferEnd ("<br/><B>Cheat/Debug:</B><br/><br/>\nThe CURSES version and &quot;standalone local web server&quot; (this) version of the program have the -D command line switch.<br/><br/>\nThe web server (CGI-BIN) version does the same thing by altering the URL. I am not going to detail how to set it for the CGI-BIN version when you are clearly not using that version. You can just restart the program with the -D command line switch.<br/><br/>\nCheat/Debug mode does only one thing for BMPS, it alters the &quot;Give me a hint&quot; menu item so that it is  always available... AND, it alters the &quot;Give me a hint&quot; menu so that it shows where all of the NPCs are (not just the ones that the PC knows), and it shows their progression values. It changes nothing else, but being able to see the progression of all of the NPCs turns out to be a useful thing (without it, you cannot make an assessment if a NPC is becoming too obedient).<br/><br/>\nThe known value fills up when it reaches 30. The trust value fills up when it reaches 100. The obedience value fills up when it reaches 200.<br/><br/>\nOf course, when the obedience value reaches 200 on any NPC other than the (former-)Mayor, the game ends, and the evaluation between a good and a bad ending happens.<br/><br/>\nRemember:<br/>\nEasy difficulty level, get 33 of 64 villagers to fully trust you.<br/>\nMedium difficulty level, get 54 of 64 villagers to fully trust you.<br/>\nHard difficulty level, get all of the 64 villagers to fully trust you.<br/><br/>\n", &gstruct_FileBuffOut);
 
     if (iRet == 0)
         iRet = futils_addStringToFileBufferEnd ("<br/><B>Strategy:</B><br/><br/>\nAs already specified, the overall strategy is to get the NPCs to trust you (by having sex with them), then avoid them as much as possible when they trust you. The only exception is the (former-)Mayor, Zeke, who is already fully obedient, and therefore the one person that Bunny can have sex with at anytime, without bringing the game to a conclusion soooner. This is harder than it sounds considering that you might want to build up the trust of a NPC who is in a location of NPCs who already trust the PC. It is better to alternate between places like the tavern and the kitchen on the first couple of days, but after the PC knows everyone, you need to start intercepting the NPCs who don&apos;t trust her yet when they are away from the heavily populated locations.<br/><br/>\nOne useful thing to note is that the progression of the NPCs is faster when you have sex with less of them. Sexual encounters can be between 1 to 5 NPCs. If there are 6 NPCs available in a location, the game will prioritize order the NPCs (with a little bit of randomness thrown in), and those that &quot;don&apos;t make the cut&quot; are pure observers.<br/><br/>\nA NPC&apos;s willingness to have sex is dependant upon a number of factors, including what they are doing. If they are sound-asleep, then the PC cannot have sex with them.<br/><br/>\nOne important thing, the NPCs won&apos;t have sex with Bunny if she has worn them down first. Usually, whenever Bunny has sex with someone, their parameters shift. Except, when the NPC is asleep, and there is no-one else awake, then Bunny will suck them off, wearing them down, but not altering any of their other status (such as trust and obedience).<br/><br/>\nHowever, there are some NPCs who the PC has to have one-on-one sex with, to unlock them.<br/><br/>\n", &gstruct_FileBuffOut);
@@ -381,10 +352,11 @@ void menucgi_outputSpoilersMenu ()
 
     if (iRet != 0)
     {
-        httpcgi_errorOutput ("Could not buffer the game spoiler text", 815);
+        printf ("\nCould not buffer the game spoiler text\n");
+        return 1;
     }
 
-    menucgi_outputFullMenu (4);
+    return (menuraw_outputFullMenu (4));
 }
 
 
@@ -392,7 +364,7 @@ void menucgi_outputSpoilersMenu ()
 // Function to output the save slot menu.
 //
 
-void menucgi_outputSaveMenu ()
+int menuraw_outputSaveMenu ()
 {
     int iRet;
     int iSaveRet;
@@ -409,19 +381,7 @@ void menucgi_outputSaveMenu ()
     {
         for (iCount = 0; iCount < 9; iCount++)
         {
-            iRet = futils_addStringToFileBufferEnd ("<hr/>\n<form action=\"BMPSv", &gstruct_FileBuffOut);
-            if (iRet != 0) break;
-
-            iRet = futils_addStringToFileBufferEnd (gszVersionStamp, &gstruct_FileBuffOut);
-            if (iRet != 0) break;
-
-            if (gcDebugFlag != 0)
-            {
-                iRet = futils_addStringToFileBufferEnd (".cheat", &gstruct_FileBuffOut);
-                if (iRet != 0) break;
-            }
-
-            iRet = futils_addStringToFileBufferEnd (".cgi#current\" method=\"POST\">\n<input type=\"submit\" name=\"menu\" value=\"Save to slot ", &gstruct_FileBuffOut);
+            iRet = futils_addStringToFileBufferEnd ("<hr/>\n<form action=\"/#current\" method=\"POST\">\n<input type=\"submit\" name=\"menu\" value=\"Save to slot ", &gstruct_FileBuffOut);
             if (iRet != 0) break;
 
             sprintf (szSavePath, "%d", iCount + 1);
@@ -468,10 +428,11 @@ void menucgi_outputSaveMenu ()
 
     if (iRet != 0)
     {
-        httpcgi_errorOutput ("Could not buffer the game save text", 816);
+        printf ("\nCould not buffer the game save text\n");
+        return 1;
     }
 
-    menucgi_outputFullMenu (2);
+    return (menuraw_outputFullMenu (2));
 }
 
 
@@ -479,7 +440,7 @@ void menucgi_outputSaveMenu ()
 // Function to output the load slot menu.
 //
 
-void menucgi_outputLoadMenu ()
+int menuraw_outputLoadMenu ()
 {
     int iRet;
     int iSaveRet;
@@ -530,19 +491,7 @@ void menucgi_outputLoadMenu ()
             }
             else // iSaveRet == 0
             {
-                iRet = futils_addStringToFileBufferEnd ("<hr/>\n<form action=\"BMPSv", &gstruct_FileBuffOut);
-                if (iRet != 0) break;
-
-                iRet = futils_addStringToFileBufferEnd (gszVersionStamp, &gstruct_FileBuffOut);
-                if (iRet != 0) break;
-
-                if (gcDebugFlag != 0)
-                {
-                    iRet = futils_addStringToFileBufferEnd (".cheat", &gstruct_FileBuffOut);
-                    if (iRet != 0) break;
-                }
-
-                iRet = futils_addStringToFileBufferEnd (".cgi#current\" method=\"POST\">\n<input type=\"submit\" name=\"menu\" value=\"Slot ", &gstruct_FileBuffOut);
+                iRet = futils_addStringToFileBufferEnd ("<hr/>\n<form action=\"/#current\" method=\"POST\">\n<input type=\"submit\" name=\"menu\" value=\"Slot ", &gstruct_FileBuffOut);
                 if (iRet != 0) break;
 
                 sprintf (szSavePath, "%d", iCount + 1);
@@ -564,10 +513,11 @@ void menucgi_outputLoadMenu ()
 
     if (iRet != 0)
     {
-        httpcgi_errorOutput ("Could not buffer the game load text", 818);
+        printf ("\nCould not buffer the game load text\n");
+        return 1;
     }
 
-    menucgi_outputFullMenu (2);
+    return (menuraw_outputFullMenu (2));
 }
 
 

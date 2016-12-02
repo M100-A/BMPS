@@ -30,6 +30,7 @@ struct  gamelogic02_eventscenes
 // These need to be defined so that they can be referenced by the lookup array, without dumping EVERY single function into the one sourcecode listing.
 //
 
+#ifdef INTERFACE_CURSES
 // 00.c, menu elements
 int gamelogic00_scene0000 (int iSubSceneId, char cSubFlag);
 int gamelogic00_scene0001 (int iSubSceneId, char cSubFlag);
@@ -37,6 +38,7 @@ int gamelogic00_scene0002 (int iSubSceneId, char cSubFlag);
 int gamelogic00_scene0003 (int iSubSceneId, char cSubFlag);
 int gamelogic00_scene0004 (int iSubSceneId, char cSubFlag);
 int gamelogic00_scene0009 (int iSubSceneId, char cSubFlag);
+#endif // INTERFACE_CURSES
 
 // 01.c, main dialog (main scenes)
 int gamelogic01_scene1001 (int iSubSceneId, char cSubFlag);

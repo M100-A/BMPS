@@ -6318,7 +6318,12 @@ int statedata_allocAndInit ()
             if (iRet != 0) return iRet;
             return 6;
 #else
+#ifdef INTERFACE_CGI
             httpcgi_errorOutput (szWorkBuffer, 101);
+#else
+            printf ("Error-%s", szWorkBuffer);
+            return 6;
+#endif
 #endif
         }
 
@@ -6332,7 +6337,12 @@ int statedata_allocAndInit ()
                 if (iRet != 0) return iRet;
                 return 6;
 #else
+#ifdef INTERFACE_CGI
                 httpcgi_errorOutput (szWorkBuffer, 102);
+#else
+                printf ("Error-%s", szWorkBuffer);
+                return 6;
+#endif
 #endif
             }
 
@@ -6344,7 +6354,12 @@ int statedata_allocAndInit ()
                 if (iRet != 0) return iRet;
                 return 6;
 #else
+#ifdef INTERFACE_CGI
                 httpcgi_errorOutput (szWorkBuffer, 103);
+#else
+                printf ("Error-%s", szWorkBuffer);
+                return 6;
+#endif
 #endif
             }
 
@@ -6358,7 +6373,12 @@ int statedata_allocAndInit ()
                     if (iRet != 0) return iRet;
                     return 6;
 #else
+#ifdef INTERFACE_CGI
                     httpcgi_errorOutput (szWorkBuffer, 104);
+#else
+                    printf ("Error-%s", szWorkBuffer);
+                    return 6;
+#endif
 #endif
                 }
 
@@ -6382,7 +6402,12 @@ int statedata_allocAndInit ()
                     if (iRet != 0) return iRet;
                     return 6;
 #else
+#ifdef INTERFACE_CGI
                     httpcgi_errorOutput (szWorkBuffer, 105);
+#else
+                    printf ("Error-%s", szWorkBuffer);
+                    return 6;
+#endif
 #endif
                 }
 
@@ -6396,7 +6421,12 @@ int statedata_allocAndInit ()
                         if (iRet != 0) return iRet;
                         return 6;
 #else
+#ifdef INTERFACE_CGI
                         httpcgi_errorOutput (szWorkBuffer, 106);
+#else
+                        printf ("Error-%s", szWorkBuffer);
+                        return 6;
+#endif
 #endif
                     }
                 }
@@ -6414,7 +6444,12 @@ int statedata_allocAndInit ()
                 if (iRet != 0) return iRet;
                 return 6;
 #else
+#ifdef INTERFACE_CGI
                 httpcgi_errorOutput (szWorkBuffer, 107);
+#else
+                printf ("Error-%s", szWorkBuffer);
+                return 6;
+#endif
 #endif
             }
 
@@ -6428,7 +6463,12 @@ int statedata_allocAndInit ()
                     if (iRet != 0) return iRet;
                     return 6;
 #else
+#ifdef INTERFACE_CGI
                     httpcgi_errorOutput (szWorkBuffer, 108);
+#else
+                    printf ("Error-%s", szWorkBuffer);
+                    return 6;
+#endif
 #endif
                 }
             }
@@ -6441,7 +6481,12 @@ int statedata_allocAndInit ()
                 if (iRet != 0) return iRet;
                 return 6;
 #else
+#ifdef INTERFACE_CGI
                 httpcgi_errorOutput (szWorkBuffer, 109);
+#else
+                printf ("Error-%s", szWorkBuffer);
+                return 6;
+#endif
 #endif
             }
         }
@@ -6450,6 +6495,10 @@ int statedata_allocAndInit ()
 #ifdef INTERFACE_CURSES
     iRet = mdialog_addToDialogWithSrchRep ("Schedule: 64 NPCs loaded and checked.\n");
     if (iRet != 0) return iRet;
+#else
+#ifndef INTERFACE_CGI
+    printf ("Schedule: 64 NPCs loaded and checked.\n");
+#endif
 #endif
 
     return 0;

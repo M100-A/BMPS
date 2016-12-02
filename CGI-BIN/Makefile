@@ -5,9 +5,9 @@ statedata.o statefile.o
 CFLAGS=
 CC= gcc
 INCLUDES=
-LIBS= -lcurses
+LIBS=
 
-BMPSv0.70.cgi: ${OBJS}
+BMPSv0.80.cgi: ${OBJS}
 	${CC} ${CFLAGS} ${INCLUDES} -o $@ ${OBJS} ${LIBS}
 
 main.o: main.c common.h gamelogic.h statedata.h

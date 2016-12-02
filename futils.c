@@ -228,6 +228,105 @@ int futils_loadFileIntoMemory (char *pszFileName, struct futils_filebuff *pstruc
 }
 
 
+#ifdef INTERFACE_RAW_HTTP
+//
+// My function to pickup part of an already opened file, and load it into a memory buffer.
+//
+// Returns:
+// 0 if ok
+// 1 if there was an error
+//
+int futils_loadOpenedFileIntoMemory (int iFileHandle, int iSizeLoad, struct futils_filebuff *pstructFullFile)
+{
+    signed int siBytes;
+
+    // if the status was -1, then the file was not opened
+    if (iFileHandle == -1)
+        return 1;
+
+    //.. if there is no memory block allocated yet !!!
+    if (pstructFullFile->bMemFlag == FALSE)
+    {
+        pstructFullFile->ulBufferMax = (unsigned long)iSizeLoad + 2;
+
+        if (pstructFullFile->ulBufferMax < 8192)
+            pstructFullFile->ulBufferMax = 8192;
+        else
+        {
+            // align the size on a 8192 byte boundary
+            while (pstructFullFile->ulBufferMax % 8192)
+                pstructFullFile->ulBufferMax++;
+        }
+
+        // now we have the size of the memory allocation, lets allocate the memory
+        pstructFullFile->pcData = (char *)malloc (pstructFullFile->ulBufferMax + 2);
+
+        // check to see if it was allocated
+        if (pstructFullFile->pcData == NULL)
+        {
+            return 1;
+        }
+
+        pstructFullFile->bMemFlag = TRUE;
+    }
+    // otherwise we are checking to see if the memory block size is enough
+    else if (pstructFullFile->ulBufferMax < (unsigned long)(iSizeLoad + 2))
+    {
+        char *pcMemData;
+        unsigned long ulMemAllocAmount;
+
+        ulMemAllocAmount = (unsigned long)iSizeLoad + 2;
+
+        // align the size on a 8192 byte boundary
+        while (ulMemAllocAmount % 8192)
+            ulMemAllocAmount++;
+
+        pcMemData = (char *)realloc ((VOID *)pstructFullFile->pcData,
+                                      (size_t)(ulMemAllocAmount + 2));
+
+        // check to see that we allocated the structures ok
+        if (pcMemData == NULL)
+        {
+            return 1;
+        }
+
+        // save in the new values
+        pstructFullFile->pcData = pcMemData;
+        pstructFullFile->ulBufferMax = ulMemAllocAmount;
+    }
+
+    //
+    // Now that we have made sure that there are enough bytes allocated, we are going to load
+    //  in the file data input !
+    //
+
+    // read the data
+    siBytes = _read (iFileHandle, pstructFullFile->pcData,
+#ifdef WIN32
+                     (unsigned int)iSizeLoad);
+#else // WIN32
+                     (size_t)iSizeLoad);
+#endif // WIN32
+
+    if (siBytes != (signed int)iSizeLoad)
+    {
+        return 1;
+    }
+
+    // don't forget to cap the end of the allocated memory buffer
+    pstructFullFile->pcData[iSizeLoad] = 0;
+    pstructFullFile->ulFileTotSpc = (unsigned long)iSizeLoad;
+    pstructFullFile->ulBufferPos = 0;
+
+    //
+    // At this stage the entire buffer is loaded
+    //
+
+    return 0;
+}
+#endif // INTERFACE_RAW_HTTP
+
+
 //
 // Read a line from a buffered file in memory (using the CR/LF or LF combinations as the line delimiters).
 //

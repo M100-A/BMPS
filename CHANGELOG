@@ -1,5 +1,20 @@
 
-# Version 0.70 - Friday 11th October 2016
+# Version 0.80 - Friday 2nd December 2016
+
+This is another significant change to the game. For the "local version", has changed from the CURSES version to a standalone mini-web server. The reason for this is to allow for the images to be shown with the text. A CURSES command line version cannot show images (it is strictly for text).
+
+Version 0.70 save files for the CURSES version are not compatible with Version 0.80 mini-web server version.
+
+The CGI-BIN version has also been updated to have the images.
+
+The images are by Inkeranon (http://notreallybuttpants.tumblr.com).
+
+Spoiler pages have been added to the standalone mini-web server, and CGI-BIN versions.
+
+During testing, I found a bug with IE11, and had to change the way that the javascript works so that clicking on the link next to the radio button actually activates the radio button (Firefox was working correctly).
+
+
+# Version 0.70 - Friday 11th November 2016
 
 Some grammar and spelling errors have been fixed, but most of the changes were with the underlying code.
 

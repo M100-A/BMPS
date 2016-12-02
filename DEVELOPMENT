@@ -45,7 +45,7 @@ Could I expand BMPS? : Yes.
 Will I expand BMPS? : Probably not. I think I have taken BMPS as far as I can currently take it. With only one ommission, I stuck to the plan that I drafted for it. When you create a game that caters to a group of core fetishes, and then start adding new ones, eventually it is going to turn into a mess. That being said, I would not mind seeing someone else have a shot at expanding it. As it is, I think I catered for a few too many feishes (and only mentioned the secondary ones in a handful of events).
 
 
-During the storyline events, there are hints in there that the PC corrupted/enslaved the previous mayor, so he would will willingly tell her everything that he knew about the other NPCs. There are also hints that the PC knew that there were previous human female prostitutes that the village had hired, broken, and that they were "disposed rid of". What happened to those women was specifically not written down. It is possible that the PC might know, but that detail is not revealed.
+During the storyline events, there are hints in there that the PC corrupted/enslaved the previous mayor, so he would will willingly tell her everything that he knew about the other NPCs. There are also hints that the PC knew that there were previous human female prostitutes that the village had hired, broken, and that they were "disposed of". What happened to those women was specifically not written down. It is possible that the PC might know, but that detail is not revealed.
 
 
 Where HQWA was about navigating a dungeon, BMPS is a different gameplay layout in wondering around locations within a single village. The interface is the same, but the guts of the game underneath the hood is very different.
@@ -73,7 +73,7 @@ BMPS has a concept of "time of the day". At a specific time, the PC can navigate
 
 I felt that an hour was too long, and a half-hour was too short. So broke up the day into 45-minute segments, which turned into 32 segments for 24-hours (day).
 
-Also, because the PC is not human, she never sleeps. Primarily because she is surrounded by so much food.
+Also, because the PC is not human, she never sleeps. Primarily because she is surrounded by so much 'food'.
 
 HQWA had the NPCs at fixed locations, so outside of dialog and events, they really didn't exist in the code.
 
@@ -92,7 +92,7 @@ HQWA and BMPS have the concept of difficulty levels. In HQWA, I went through the
 
 While some people might have issues with the interface that I used for XLEA, HQWA, and now BMPS, there is a method in the madness.
 
-The interface sort of looks like old school interactive fiction (IF), but it isn't. Proper IF allows the user to enter a command string then tries to parse it, after entry. The thing that I have created has a list of allowed commands available, and allows the player to select from them (either using arrow-selection, or using the auto-complete). Really, it is nothing more than a list of "actions".
+The (CURSES) interface sort of looks like old school interactive fiction (IF), but it isn't. Proper IF allows the user to enter a command string then tries to parse it, after entry. The thing that I have created has a list of allowed commands available, and allows the player to select from them (either using arrow-selection, or using the auto-complete). Really, it is nothing more than a list of "actions".
 
 The "action selection" is nothing more than number associated with a menu string, which turns into a scene function inside the program. When I wrote XLEA, I wanted to have the option to potentially make the game available online.
 
@@ -105,4 +105,24 @@ I am currently aiming for a web server/browser model, instead of something to be
 
 M100
 18th October 2016
+
+------------
+
+27th November 2016 Addendum (v0.80)
+
+This additional note was added after constructing another version of BMPS that pushes the boundaries. The standalone mini-web server exists, but I haven't published it yet. v0.80 will be punched out after the commissioned images come back.
+
+At the beginning of November 2016, I started messing around with VMs for hosting the CGI-BIN versions of my games.
+
+Then on Friday 11th November 2016, after completing the VM with CGI-BIN versions of XLEA, HQWA and BMPS, I was silly enough to let people on the 4chan/d/ /dgg/ thread know about the URL.
+
+The day before that (10th) I had reached out to an artist to commission them to create images for my games. The idea was to start with BMPS first. It is my first time actually working with another person on my games (and an existing game).
+
+Inkeranon is making decent progress, and at this stage I am planning on releasing the v0.80 version sometime before the middle of December 2016, using the first round of images.
+
+However, because the game has images now, I had to change the way that the standalone version works. Instead of using the CURSES interface (which is still available), I reused a lot of the CGI-BIN programming to create a version that creates a miniature web server. It is a significant to change the interface, but the CGI-BIN version was working out so well, that I decided that it would be okay to upgrade it.
+
+
+M100
+27th November 2016
 

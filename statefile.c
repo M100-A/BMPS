@@ -820,13 +820,13 @@ int statefile_loadSaveFile (char *pszFileName)
 
     iValue = atoi (&szInputString[1]);
 
-#ifdef INTERFACE_CURSES
-    if (iValue > 65535)
-        return 1;
-#else
+#ifdef INTERFACE_CGI
     if (iValue > 16383)
         return 1;
-#endif // INTERFACE_CURSES
+#else
+    if (iValue > 65535)
+        return 1;
+#endif // INTERFACE_CGI
 
     // copy the archive data straight over
     strncpy (gpszArchiveBuffer, &gstruct_FileBuffGen.pcData[gstruct_FileBuffGen.ulBufferPos], iValue);
@@ -1055,7 +1055,7 @@ int statefile_writeSaveFile (char *pszFileName)
     unlink (pszFileName);
 
 #ifdef INTERFACE_CURSES
-    futils_writeFileHeaderAndData (pszFileName, "!Version 0.70\n", gstruct_FileBuffGen.pcData);
+    futils_writeFileHeaderAndData (pszFileName, "!Version 0.01\n", gstruct_FileBuffGen.pcData);
 #else
     sprintf (szInputString, "*%s\n", gszSessionTrackingId);
 

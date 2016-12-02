@@ -1,10 +1,13 @@
 Bunny, Mayoress, Prostitute & Succubus (BMPS) - Game
 
 Type: Text Adventure/Interactive Fiction
-Version: 0.70 (Friday 11th November 2016)
-Platforms: Linux (command line) and Windows, using the CURSES API
+Version: 0.80 (Friday 2nd December 2016)
+Platforms: Linux and Windows command prompt mini-web-server, accessed with a web browser.
 Original Author: M100 (M100-A)
+Images by: Inkeranon (http://notreallybuttpants.tumblr.com/)
 Synopsis: The mayor of Belchwood hired a new prostitute for his village, so he could watch his fellow male villagers reduce yet another unfortunate woman to being a mind broken sex slave. He accidentally hired a succubus for the job. She turned the mayor to being her obedient servant. Bunny then took over from the mayor, and now is now plotting to break the other 63 men of Belchwood.
+
+Github note: There is a file called BMPSfiles.dat, which contains all of the images that the mini-web-server serves. However, given that the file contains pornographic images, I should not be uploading that to github.
 
 
 # Usage (run) instructions:
@@ -21,22 +24,36 @@ On Windows:
 Run the program from either a command line or click on the program.
 Note: a Windows binary is available.
 
+When the program starts, it will output something like this:
+ BMPS Version 0.80 is starting.
+ BMPSfiles.dat Catalog = 331 bytes
+ BMPSfiles.dat CatalogEntries = 7
+ BMPSfiles.dat checks out ok.
+ Schedule: 64 NPCs loaded and checked.
+ bound & listening.
+ Connect with a web browser to this URL:
+ http://127.0.0.1:6081/
+ Use Ctrl-C to stop the program.
+
+The URL supplied is the one that you use a web browser to connect to.
+
+
+When you have finished with the program, you can press Ctrl-C in the window to close the program.
+
 
 # System requirements:
 
 On Linux:
 gcc compiler
 make
-curses library
 
 Note: you may need to load packages for your Linux distribution for any of the above.
 
 
 On Windows: (if you want to compile the code)
-a C compiler (Microsoft Visual C++ will do, or you could download CodeBlocks)
-Win32a PDCurses (http://www.projectpluto.com/win32a.htm)
+a C compiler (I used CodeBlocks with MinGW)
 
-Note: I supply the binary for Windows, which should work, so you should not require a compiler or the PDcurses library.
+Note: I supply the binary for Windows, which should work.
 
 
 # Compile instructions:
@@ -46,55 +63,59 @@ Unpack the files in a directory, navigate to that directory.
 Use the "make" command to create the program.
 "BMPS" will be created in the directory.
 
+
 On Windows:
-First, create the PDcurses-Win32a library (consult your favourite search engine about how to do this with your compiler of choice).
-Then create a project and import the BMPS source code.
-You will want to start with an empty project.
-You will need to amend the project configuration to reference the PDcurses-Win32a header file directory for your include files.
-You will need to amend the project configuration to reference the PDcurses-Win32a library file directory for your library files.
-You will also need to include the PDcurses-Win32a library (panel.lib) in the libraries to be built.
+Create a project within you compiler.
+Then import the BMPS source code.
+You will need to include the WIN32 compile define before compiling.
+You will need to link to the ws2_32 library before compiling/linking.
 Then start building the program.
-It should be noted that the compiler is likely to have a problem with the depreciated string utilities that BMPS uses.
 
 
 # Usage (play) instructions:
 
-There is a "help" screen available from the main menu in the program. Here is shortened overview.
+When you go to the URL with a web browser, you begin in the main menu, the program has a series of buttons.
 
-You can Ctrl-C or Ctrl-Q out of the program (which does not save anything).
+The standalone web server version borrows heavily from the CGI-BIN version, so autosave is turned on at all times. The menu mostly matches the CGI-BIN version.
 
-You can access the "Save Screen" while playing the game with Ctrl-S. To load a previous save, go to the main menu and select the "Load previous game" option.
-
-To start a new game, select the "Start new game" option.
-
-You can go back to the main menu (without saving anything) with Ctrl-U.
-
-When you are presented with text that can "scroll", there will be an inverted <more> in the lower right corner of the window.
-
-You can scroll up and down with the up and down arrow keys (single line) or the page up/down keys (entire page).
-
-Home key scrolls to the top of the current text, while the End key scrolls to the command prompt.
-
-When you have reached the end of the scrollable text, you will see a command prompt:
->
-..and the cursor will be next to it.
-
-Below it will be a status line showing the number of commands available to you. To find out what those are, you can just press the "tab" key, and the program will allow you to scroll through the commands using the arrow keys. You can get out of the "tab" selection mode by pressing "tab" again.
-
-You can also shortcut a command by partially typing it. Once the command is unique, the program will auto-complete the command in the status line below the command entry.
-
-To select/confirm a command press the "enter" key.
+You can also change the "skin" used by the program which dictates the type of font and if the text is black on white, or white on black.
 
 
-# Command line switches:
+# Command line options:
 
-BMPS has 3 optional command line switches.
-
--t changes to default the entry mode to Arrow-selection (instead of Direct-input).
-Using this switch means that if the user exclusively uses Arrow-selection mode all of the time, they don't have to press tab (or down arrow) to enter it. This saves the player (you) from pressing one key to enter the mode. Some people use this to play the game with a single hand, with just the Page Up, Page Down, Home, End, Enter and Arrow Keys in the list selection mode at all times.
+BMPS (standalone web server version) has 1 optional command line switch, and 2 optional parameters.
 
 -D turns on debug output. In BMPS this just changes the "Give me a hint" primary navigation menu, so that the locations of unknown and partially known NPCs are shown, "progress values" are shown next to the names of the NPCs, and #, * and $ identifiers are used for if the NPC is exhausted, sound asleep or is locked. Also, "Give me a hint" is always available (unlike in non-debug mode, it is unavailable for a while depending upon the difficulty level).
 
--L turns on a log output. A file called BMPS-Log.txt will be created in the current working directory and written to as the program runs. This is useful for windows users who want to get to the text to highlight mistakes or errors, as PDCurses does not allow for cut and paste of text.
+The first optional parameter is the port. The program defaults to 6081, but you can change it at the command line.
+For example: ./BMPS 8080
 
+The second optional parameter is the bind IPaddress. The program defaults to 127.0.0.1. However, you need to also specify the port before it.
+For example: ./BMPS 8080 127.0.0.2
+
+
+# Program output:
+
+As you play BMPS via the web browser, the program in its text window will be outputing the log information into the window as you do things.
+
+ Use Ctrl-C to stop the program.
+ client 127.0.0.1 18121: GET /, S 200 done.
+ client 127.0.0.1 18633: GET /favicon.ico, File ico done.
+ client 127.0.0.1 20169: POST /, 17 posted bytes, S 200 done.
+ client 127.0.0.1 20681: GET /images/Concept1.jpg, File jpg done.
+ client 127.0.0.1 21193: POST /, 19 posted bytes, S 200 done.
+ client 127.0.0.1 23241: POST /, 17 posted bytes, S 200 done.
+ client 127.0.0.1 23457: POST /, 43 posted bytes, S 200 done.
+ client 127.0.0.1 23969: GET /images/StartScene1.jpg, File jpg done.
+ client 127.0.0.1 23481: GET /images/StartScene2.jpg, File jpg done.
+ client 127.0.0.1 23993: POST /, 43 posted bytes, S 200 done.
+ client 127.0.0.1 24753: Invalid HTTP structure.. 500 done.
+ client 127.0.0.1 25529: POST /, 43 posted bytes, S 200 done.
+
+If you know your HTTP status codes, you would probably see that 500 an be freaking out (second last line). My only advice is don't.
+
+This sometimes happens when web browsers decide to connect to web servers, then realize after they have connected that they have no immediate use for the connection (this happens when caching is involved). The 500 response is triggered because the mini-web server is waiting for input from the web browser, however the web browser decides that it no longer needs the TCP/IP connection and closes it down. The mini-web server ends the communication by trying to send a 500 response back to the web browser, which explains why the 500 response is logged. The web browser should never see it.
+
+
+M100
 

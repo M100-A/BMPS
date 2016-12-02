@@ -273,11 +273,11 @@ int mutils_initAndClearDialogBuffer ()
     {
         // I only allocate the archive buffer once.
 
-#ifdef INTERFACE_CURSES
-        giArchiveBufferSize = 65534;
-#else
+#ifdef INTERFACE_CGI
         giArchiveBufferSize = 16382;
-#endif // INTERFACE_CURSES
+#else
+        giArchiveBufferSize = 65534;
+#endif // INTERFACE_CGI
 
         gpszArchiveBuffer = (char *)malloc ((size_t)(giArchiveBufferSize + 2));
 

@@ -4,11 +4,14 @@ The purpose of this directory is to contain the alterations for the CGI-BIN vers
 
 Makefile, main.c and common.c are overwritten with the versions in this directory.
 httpcgi.c and menucgi.c are added.
-savescreen.c and gamelogic00.c are ignored (if not deleted).
+(CURSES) savescreen.c and gamelogic00.c are ignored (if not deleted).
+(mini-web-server) htmlskin.c, httppost.c and menuraw.c are ignored (if not deleted).
+
+The rest of the listings and logic adjust themselves to running in a CGI-BIN setup, thanks to a #define in common.c that triggers #ifdef and #ifndef statements in the other listings.
 
 BMPS.ico is the icon file for the CGI-BIN directory
 
-The rest of the listings and logic adjust themselves to running in a CGI-BIN setup, thanks to a #define in common.c that triggers #ifdef and #ifndef statements in the other listings.
+Github note: while BMPS.ico is provided, the contents of the images directory is not loaded into github. Given that those are porn images, I should not uploading those (as image files) to github. They are in the full source code package on my site. I still maintain the github repositories for people with github logins who want to work with the code easier.
 
 It should be noted that I have never compiled the CGI-BIN version of this program under Windows. The Win32 sections have been removed from common.h. When you are targetting running the CGI-BIN versions under Linux Cloud VMs, as opposed to Windows Cloud VMs (which are more expensive due to licensing cost), that tends to happen.
 
@@ -16,16 +19,16 @@ As a running environment, I run this under Apache2, with CGI-BIN support of cour
 
 One key feature of the program is where it keeps its save files.
 
-When the REMOTE_USER environment variable is populated, the program reads the BMPSv0.70.conf file, extracts the base location of the user directory, and adds the REMOTE_USER environment variable onto the end of the path. Without the REMOTE_USER being set, all save files are saved/loaded in the location extracted from SCRIPT_FILENAME.
+When the REMOTE_USER environment variable is populated, the program reads the BMPSv0.80.conf file, extracts the base location of the user directory, and adds the REMOTE_USER environment variable onto the end of the path. Without the REMOTE_USER being set, all save files are saved/loaded in the location extracted from SCRIPT_FILENAME.
 
 REMOTE_USER is either non-existant, or empty, when not using a user authentication scheme (such as MD5digest or basic).
 
-When working with SCRIPT_FILENAME, the code is working with /'s and not \'s, which is why it is likely to fail in a windows environment.
+When working with SCRIPT_FILENAME, the code is working with /'s and not \'s, which is why it is likely to fail in a windows environment. However, the standalone web server version, which is the focus of v0.80, will work in a windows environment.
 
-To enable "Debug mode", the URL can be changed from BMPSv0.70.cgi to BMPSv0.70.cheat.cgi (you can either rename the file, copy or symlink it). When the code recognises when it is in "Debug mode", and keeps the path to BMPSv0.70.cheat.cgi intact for the post operations. "Debug mode" is the same as the -D flag for the CURSES command line version.
+To enable "Debug mode", the URL can be changed from BMPSv0.80.cgi to BMPSv0.80.cheat.cgi (you can either rename the file, copy or symlink it). When the code recognises when it is in "Debug mode", and keeps the path to BMPSv0.80.cheat.cgi intact for the post operations. "Debug mode" is the same as the -D flag for the CURSES and standalone web server command line versions.
 
 
-The code refers to a file called "user-css.conf" in the same directory as the save files (same directory as the CGI program in single user mode, or where BMPSv0.70.conf points to in multi-user mode).
+The code refers to a file called "user-css.conf" in the same directory as the save files (same directory as the CGI program in single user mode, or where BMPSv0.80.conf points to in multi-user mode).
 
 The contents of the file is maintained by main.cgi (which is the main menu of the site). It is common across all of the games that I have written, which is why there is nothing inside BMPS to maintain it. However, BMPS picks up the contents of the file and includes it into every page render (except for the error messages).
 

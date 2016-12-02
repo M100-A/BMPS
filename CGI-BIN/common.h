@@ -252,6 +252,8 @@ void menucgi_outputAboutMenu ();
 
 void menucgi_outputCreditsMenu ();
 
+void menucgi_outputSpoilersMenu ();
+
 void menucgi_outputSaveMenu ();
 
 void menucgi_outputLoadMenu ();

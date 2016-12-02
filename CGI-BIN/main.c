@@ -102,6 +102,7 @@ int main(void)
     // 2 = credits menu.
     // 3 = load menu.
     // 4 = save menu.
+    // 6 = spoiler menu.
     // 7 = load action (iSaveFile means something).
     // 8 = save action (iSaveFile means something).
     // 11 = restore last autosave.
@@ -109,7 +110,7 @@ int main(void)
     // 12 = start new.
 
     // set things up.
-    strcpy (gszVersionStamp, "0.70");
+    strcpy (gszVersionStamp, "0.80");
     gstruct_FileBuffGen.bMemFlag = FALSE;
     gstruct_FileBuffOut.bMemFlag = FALSE;
 
@@ -457,6 +458,10 @@ int main(void)
             {
                 iMainAction = 1; // about screen
             }
+            else if (strncmp (szMenuValue, "BMPS s", 6) == 0)
+            {
+                iMainAction = 6; // Spoiler menu
+            }
             else if (strncmp (szMenuValue, "BMPS c", 6) == 0)
             {
                 iMainAction = 2; // credits screen
@@ -585,6 +590,13 @@ int main(void)
     if ((cCompleteOutput == 0) && (iMainAction == 4))
     {
         menucgi_outputSaveMenu ();
+        cCompleteOutput = 1;
+    }
+
+    // if this is the Spoilers menu..
+    if ((cCompleteOutput == 0) && (iMainAction == 6))
+    {
+        menucgi_outputSpoilersMenu ();
         cCompleteOutput = 1;
     }
 
@@ -806,7 +818,14 @@ int main(void)
 
         for (iPos = 0; iPos < giCommandListUsed; iPos++)
         {
-            sprintf (szBuffer, "function sel%d%c%d() {\n document.forms[\"nav\"][\"%d%c%d\"].checked=true;\n document.forms[\"nav\"][\"submit\"].disabled=false;\n}\n",
+            // ergh.. Microsoft IE 11 has a "wonderful" bug, where it cannot find radio button elements that are in the form array,
+            //  so it is necessary to change the code so it looks up the radio button by the element id. Funnily enough it can
+            //  still work the right way, when there are multiple "submit" buttons involved (go figure).
+//            sprintf (szBuffer, "function sel%d%c%d() {\n document.forms[\"nav\"][\"%d%c%d\"].checked=true;\n document.forms[\"nav\"][\"submit\"].disabled=false;\n}\n",
+//                    (int)gstruct_CommandList[iPos].iSceneId, 'w', (int)gstruct_CommandList[iPos].iSubSceneId,
+//                    (int)gstruct_CommandList[iPos].iSceneId, '.', (int)gstruct_CommandList[iPos].iSubSceneId);
+
+            sprintf (szBuffer, "function sel%d%c%d() {\n document.getElementById(\'%d%c%d\').checked=true;\n document.forms[\"nav\"][\"submit\"].disabled=false;\n}\n",
                     (int)gstruct_CommandList[iPos].iSceneId, 'w', (int)gstruct_CommandList[iPos].iSubSceneId,
                     (int)gstruct_CommandList[iPos].iSceneId, '.', (int)gstruct_CommandList[iPos].iSubSceneId);
 

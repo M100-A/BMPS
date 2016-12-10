@@ -110,7 +110,7 @@ int main(void)
     // 12 = start new.
 
     // set things up.
-    strcpy (gszVersionStamp, "0.80");
+    strcpy (gszVersionStamp, "0.81");
     gstruct_FileBuffGen.bMemFlag = FALSE;
     gstruct_FileBuffOut.bMemFlag = FALSE;
 
@@ -279,7 +279,7 @@ int main(void)
     }
 
     // start by populating the HTTP return headers (Apache2 is going to add to these anyway).
-    iRet = futils_addStringToFileBufferEnd ("Content-type: text/html\nPragma: No-cache\nCache-Control: no-cache\n\n", &gstruct_FileBuffOut);
+    iRet = futils_addStringToFileBufferEnd ("Content-type: text/html; charset=UTF-8\nPragma: No-cache\nCache-Control: no-cache\n\n", &gstruct_FileBuffOut);
     if (iRet != 0)
     {
         httpcgi_errorOutput ("Cannot start output headers", 11);
@@ -290,7 +290,14 @@ int main(void)
     // There was no need to insert a "Connection: close" header in, because Apache2.4 nicely handles things for us.
 
     // write out the start of the HTML document.
-    iRet = futils_addStringToFileBufferEnd ("<!DOCTYPE html>\n<html>\n<head>\n<link rel=\"icon\" type=\"image/x-icon\" href=\"BMPS.ico\" />\n<meta name=\"RATING\" content=\"RTA-5042-1996-1400-1577-RTA\" />\n<title>Bunny, Mayoress, Prostitute & Succubus (BMPS) v0.70</title>\n<style type=\"text/css\">\n", &gstruct_FileBuffOut);
+    iRet = futils_addStringToFileBufferEnd ("<!DOCTYPE html>\n<html>\n<head>\n<link rel=\"icon\" type=\"image/x-icon\" href=\"BMPS.ico\" />\n<meta name=\"RATING\" content=\"RTA-5042-1996-1400-1577-RTA\" />\n<title>Bunny, Mayoress, Prostitute & Succubus (BMPS) v", &gstruct_FileBuffOut);
+
+    if (iRet == 0)
+        iRet = futils_addStringToFileBufferEnd (gszVersionStamp, &gstruct_FileBuffOut);
+
+    if (iRet == 0)
+        iRet = futils_addStringToFileBufferEnd ("</title>\n<style type=\"text/css\">\n", &gstruct_FileBuffOut);
+
     if (iRet != 0)
     {
         httpcgi_errorOutput ("Cannot start output initial", 12);

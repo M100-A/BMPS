@@ -303,6 +303,9 @@ void menucgi_outputAboutMenu ()
         iRet = futils_addStringToFileBufferEnd ("<br/><b>ChangeLog:</b><br/><br/>\n", &gstruct_FileBuffOut);
 
     if (iRet == 0)
+        iRet = futils_addStringToFileBufferEnd ("<b># Version 0.81 - Sunday 11th December 2016</b><br/>2 new images from Inkeranon. Set the WIN32 version to autostart the default web browser.<br/><br/>\n", &gstruct_FileBuffOut);
+
+    if (iRet == 0)
         iRet = futils_addStringToFileBufferEnd ("<b># Version 0.80 - Friday 2nd December 2016</b><br/>First standalone web server version, replacing the standalone CURSES version.<br/>Included the first batch of images from Inkeranon (the primary reason that the standalone web server version was created).<br/>Included a spoilers menu page.<br/><br/>\n", &gstruct_FileBuffOut);
 
     if (iRet == 0)
@@ -353,7 +356,7 @@ void menucgi_outputSpoilersMenu ()
 {
     int iRet;
 
-    iRet = futils_addStringToFileBufferEnd ("<br/><B>Spoiler alert... Spoiler alert...</B><br/><br/>\nThe purpose of this page is to provide some details about some of the hidden aspects of Bunny, Mayoress, Prostitute &amp; Succubus (BMPS). I once dumped some information into a 4chan/d /dgg/ thread about how to play the game, and this is an extension of that.<br/><br/>\nIf you don&apos;t want to ruin the experience for yourself, then exit from this page.<br/><br/>\nWhile there is a fair amount of information contained in the &quot;about page&quot;, such as; how to play the game and the overall strategy, the &quot;about page&quot; does not reveal is where all of the hidden events are. This page is necessary only because my games aren&apos;t popular enough for some anon to go through the effort of creating a wiki that has a walk-through or two.<br/><br/>\n<I>With Hedonism Quest, Wilda’s Ascension (HQWA), I was able to point out the source code data that contains the information about the trigger elements on the maps. BMPS is a completely different game underneath the hood, so I have to do this another way.</I><br/><br/>\n", &gstruct_FileBuffOut);
+    iRet = futils_addStringToFileBufferEnd ("<br/><B>Spoiler alert... Spoiler alert...</B><br/><br/>\nThe purpose of this page is to provide some details about some of the hidden aspects of Bunny, Mayoress, Prostitute &amp; Succubus (BMPS). I once dumped some information into a 4chan/d /dgg/ thread about how to play the game, and this is an extension of that.<br/><br/>\nIf you don&apos;t want to ruin the experience for yourself, then exit from this page.<br/><br/>\nWhile there is a fair amount of information contained in the &quot;about page&quot;, such as; how to play the game and the overall strategy, the &quot;about page&quot; does not reveal is where all of the hidden events are. This page is necessary only because my games aren&apos;t popular enough for some anon to go through the effort of creating a wiki that has a walk-through or two.<br/><br/>\n<I>With Hedonism Quest, Wilda&apos;s Ascension (HQWA), I was able to point out the source code data that contains the information about the trigger elements on the maps. BMPS is a completely different game underneath the hood, so I have to do this another way.</I><br/><br/>\n", &gstruct_FileBuffOut);
 
     if (iRet == 0)
         iRet = futils_addStringToFileBufferEnd ("<br/><B>Cheat/Debug:</B><br/><br/>\nThe &quot;standalone local web server&quot; version of the program have the -D command line switch.<br/><br/>\nThe web server (this) version does the same thing by altering the URL.<br/><br/>In the address bar of the web browser is a path to the program. When not in &quot;cheat&quot; mode it will be &quot;BMPSv", &gstruct_FileBuffOut);

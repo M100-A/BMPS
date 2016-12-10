@@ -7,37 +7,36 @@
 //
 // Given that I tend to write "semi-portable" code, there is a lot of ifdef WIN32 stuff in here..
 //
-// Unless I test for the platform, there is no gurantee that it will work..
+// Unless I test for the platform, there is no guarantee that it will work..
 //
 
-// this is the raw HTTP version of the program, so the curses interface is knocked out.
+// this is the raw HTTP version of the program, so the curses and CGI-BIN interfaces are knocked out.
 //#define INTERFACE_CURSES 1
 //#define INTERFACE_CGI 1
-
 #define INTERFACE_RAW_HTTP 1
 
-// I knocked out all of the WIN32 cross compile stuff, as this is meant only to compile on *NIX.
+// This version needs to be able to cross compile, so there are conditional WIN32 statements in here.
 
 #ifdef WIN32
 
-#include	<windows.h>
-#include	<winsock2.h>
-#include	<ws2tcpip.h>
+#include    <windows.h>
+#include    <winsock2.h>
+#include    <ws2tcpip.h>
 
-#include	<stdio.h>		// for sprintf
-#include	<stdarg.h>
-#include	<stdlib.h>
-#include	<fcntl.h>
-#include	<io.h>
-#include	<sys/types.h>
-#include	<sys/stat.h>
-#include	<fcntl.h>
-#include	<ctype.h>
-#include	<string.h>		// for strlen
-#include	<memory.h>		// for malloc
-#include	<time.h>		// for localtime
-#include	<ctype.h>		// for islower, isupper
-#include	<signal.h>		// for signal stuff
+#include    <stdio.h>       // for sprintf
+#include    <stdarg.h>
+#include    <stdlib.h>
+#include    <fcntl.h>
+#include    <io.h>
+#include    <sys/types.h>
+#include    <sys/stat.h>
+#include    <fcntl.h>
+#include    <ctype.h>
+#include    <string.h>      // for strlen
+#include    <memory.h>      // for malloc
+#include    <time.h>        // for localtime
+#include    <ctype.h>       // for islower, isupper
+#include    <signal.h>      // for signal stuff
 
 #define PERM_FILE (_S_IREAD | _S_IWRITE)
 
@@ -52,31 +51,31 @@
 #else
 
 #ifdef HAVE_CONFIG_H
-#include	<config.h>
+#include    <config.h>
 #endif
 
 #ifdef INTERFACE_CURSES
 #include    <ncurses.h>     // for the *NIX curses library
 #endif // INTERFACE_CURSES
-#include	<stdio.h>
-#include	<stdarg.h>
-#include	<stdlib.h>
-#include	<unistd.h>
-#include	<sys/types.h>
-#include	<sys/stat.h>
-#include	<fcntl.h>
-#include	<ctype.h>
-#include	<string.h>		// for strlen
-#include	<memory.h>		// for malloc
-#include	<time.h>		// for localtime
+#include    <stdio.h>
+#include    <stdarg.h>
+#include    <stdlib.h>
+#include    <unistd.h>
+#include    <sys/types.h>
+#include    <sys/stat.h>
+#include    <fcntl.h>
+#include    <ctype.h>
+#include    <string.h>      // for strlen
+#include    <memory.h>      // for malloc
+#include    <time.h>        // for localtime
 #ifdef INTERFACE_RAW_HTTP
-#include	<signal.h>		// for signal stuff
+#include    <signal.h>      // for signal stuff
 #include    <sys/socket.h>
 #include    <arpa/inet.h>
 #include    <netinet/in.h>
 #endif // INTERFACE_RAW_HTTP
-#include	<poll.h>		// for poll (used to simulate sleep()).
-#include	<dirent.h>
+#include    <poll.h>        // for poll (used to simulate sleep()).
+#include    <dirent.h>
 
 //----------------------------------------------------------------------
 //
@@ -112,11 +111,6 @@
 #endif
 
 
-// I knocked out all of the WIN32 cross compile stuff, as this is meant only to compile on *NIX.
-
-// need to add this back in..
-
-
 
 //----------------------------------------------------------------------
 //
@@ -127,17 +121,17 @@
 struct	futils_filebuff
 {
                     // pointer to the buffer
-	char	        *pcData;
+    char            *pcData;
                     // size of allocated buffer
-	unsigned long	ulBufferSize;
+    unsigned long   ulBufferSize;
                     // position in the buffer
-	unsigned long	ulBufferPos;
+    unsigned long   ulBufferPos;
                     // amount of data currently in buffer
-	unsigned long	ulBufferMax;
+    unsigned long   ulBufferMax;
 
-	unsigned long   ulFileTotSpc;
+    unsigned long   ulFileTotSpc;
                     // set if there is a memory buffer allocated !
-	BOOL			bMemFlag;
+    BOOL            bMemFlag;
 };
 
 // replacement for strnicmp

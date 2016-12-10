@@ -1,4 +1,11 @@
 
+# Version 0.81 - Sunday 11th December 2016
+
+2 more images from Inkeranon.
+
+And a slight change for the WIN32 standalone mini-web-server. After a discussion on /dgg/ I decided to alter the WIN32 mini-web-server to try to automatically start the default web browser.
+
+
 # Version 0.80 - Friday 2nd December 2016
 
 This is another significant change to the game. For the "local version", has changed from the CURSES version to a standalone mini-web server. The reason for this is to allow for the images to be shown with the text. A CURSES command line version cannot show images (it is strictly for text).

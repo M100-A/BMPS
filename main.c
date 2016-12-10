@@ -18,9 +18,9 @@ extern char    *gpszArchiveBuffer;
 extern int     giArchiveBufferUsed;
 
 // storage of the file load structure..
-struct	futils_filebuff         gstruct_FileBuffGen;
-struct	futils_filebuff         gstruct_FileBuffOut;
-struct	futils_filebuff         gstruct_FileBuffHdr;
+struct futils_filebuff          gstruct_FileBuffGen;
+struct futils_filebuff          gstruct_FileBuffOut;
+struct futils_filebuff          gstruct_FileBuffHdr;
 
 // storage for the session tracking id.
 char     gszSessionTrackingId[50];
@@ -28,7 +28,7 @@ char     gszSessionTrackingId[50];
 char     gszVersionStamp[20];
 
 // this is the debug output flag
-char    gcDebugFlag = 0;
+char     gcDebugFlag = 0;
 // this is referenced in a lot of the scene files to turn on logging in most places where flags are set and used
 // unfortunately, this messes up the dialog display.
 // this is turned on by the -D command line switch (CURSES version).
@@ -124,6 +124,7 @@ int main (int argc, char **argv)
     time_t tTime;
 
 #ifdef WIN32
+    char cAutoStartWebBrowser = 1;
     WSADATA wsaData;
     int wsaerr;
 #endif // WIN32
@@ -155,6 +156,12 @@ int main (int argc, char **argv)
             case 'D':
                 gcDebugFlag = 1;
                 break;
+#ifdef WIN32
+            // -W turns off the automatic startup of the web browser
+            case 'W':
+                cAutoStartWebBrowser = 0;
+                break;
+#endif //WIN32
             }
         }
         else if (iPort == 0)
@@ -175,7 +182,7 @@ int main (int argc, char **argv)
 #endif //WIN32
 
     // load in the version number
-    strcpy (gszVersionStamp, "0.80");
+    strcpy (gszVersionStamp, "0.81");
 
     if (gcDebugFlag != 0)
         printf("BMPS Version %s, with debugging turned on, is starting.\n", gszVersionStamp);
@@ -535,8 +542,25 @@ int main (int argc, char **argv)
         return 1;
     }
 
-    printf("bound & listening.\nConnect with a web browser to this URL:\n");
+    printf("bound & listening.");
+#ifdef WIN32
+    if (cAutoStartWebBrowser == 1)
+    {
+        printf(" Auto-starting the default web browser.\nStarting the web browser using this command:\n");
+        sprintf (szBuffer, "cmd /c start http://%s:%d/", szIPAddress, iPort);
+        printf ("%s\n", szBuffer);
+        system (szBuffer);
+        printf("Web browser should be running.\n");
+    }
+    else
+    {
+        printf(" Not auto-starting the web browser.\nConnect with a web browser to this URL:\n");
+        printf("http://%s:%d/\n", szIPAddress, iPort);
+    }
+#else
+    printf("\nConnect with a web browser to this URL:\n");
     printf("http://%s:%d/\n", szIPAddress, iPort);
+#endif // WIN32
     printf("Use Ctrl-C to stop the program.\n");
 
     //

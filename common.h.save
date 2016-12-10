@@ -123,15 +123,15 @@ struct	futils_filebuff
                     // pointer to the buffer
     char            *pcData;
                     // size of allocated buffer
-    unsigned long   ulBufferSize;
+	unsigned long	ulBufferSize;
                     // position in the buffer
-    unsigned long   ulBufferPos;
+	unsigned long	ulBufferPos;
                     // amount of data currently in buffer
-    unsigned long   ulBufferMax;
+	unsigned long	ulBufferMax;
 
-    unsigned long   ulFileTotSpc;
+	unsigned long   ulFileTotSpc;
                     // set if there is a memory buffer allocated !
-    BOOL            bMemFlag;
+	BOOL			bMemFlag;
 };
 
 // replacement for strnicmp

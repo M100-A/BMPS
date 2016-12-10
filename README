@@ -1,7 +1,7 @@
 Bunny, Mayoress, Prostitute & Succubus (BMPS) - Game
 
 Type: Text Adventure/Interactive Fiction
-Version: 0.80 (Friday 2nd December 2016)
+Version: 0.81 (Sunday 11th December 2016)
 Platforms: Linux and Windows command prompt mini-web-server, accessed with a web browser.
 Original Author: M100 (M100-A)
 Images by: Inkeranon (http://notreallybuttpants.tumblr.com/)
@@ -35,6 +35,7 @@ When the program starts, it will output something like this:
  http://127.0.0.1:6081/
  Use Ctrl-C to stop the program.
 
+(As of 0.81, on Windows, the program will attempt to start a web browser for you).
 The URL supplied is the one that you use a web browser to connect to.
 
 
@@ -83,7 +84,9 @@ You can also change the "skin" used by the program which dictates the type of fo
 
 # Command line options:
 
-BMPS (standalone web server version) has 1 optional command line switch, and 2 optional parameters.
+BMPS (standalone web server version) has 1 optional command line switch (2 if it is windows), and 2 optional parameters.
+
+(Windows only) -W stops the program from starting a web browser upon startup.
 
 -D turns on debug output. In BMPS this just changes the "Give me a hint" primary navigation menu, so that the locations of unknown and partially known NPCs are shown, "progress values" are shown next to the names of the NPCs, and #, * and $ identifiers are used for if the NPC is exhausted, sound asleep or is locked. Also, "Give me a hint" is always available (unlike in non-debug mode, it is unavailable for a while depending upon the difficulty level).
 

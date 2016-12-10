@@ -131,7 +131,7 @@ int httpcgi_extractEntry (char *pPostData, char *pszLock, char *pszOutput, int i
 //
 void httpcgi_errorOutput (char *szErrorResult, int iErrorCode)
 {
-    printf ("Content-type: text/html\nPragma: No-cache\nCache-Control: no-cache\n\n");
+    printf ("Content-type: text/html; charset=UTF-8\nPragma: No-cache\nCache-Control: no-cache\n\n");
     printf ("<!DOCTYPE html>\n<html>\n<body>\nProgram Error:<br/>\n&nbsp;&nbsp;%04d: %s.<br/>\n</body>\n</html>\n", iErrorCode, szErrorResult);
     exit (0);
 }

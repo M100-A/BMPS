@@ -7,7 +7,7 @@ CC= gcc
 INCLUDES=
 LIBS=
 
-BMPSv0.80.cgi: ${OBJS}
+BMPSv0.81.cgi: ${OBJS}
 	${CC} ${CFLAGS} ${INCLUDES} -o $@ ${OBJS} ${LIBS}
 
 main.o: main.c common.h gamelogic.h statedata.h

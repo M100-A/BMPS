@@ -310,7 +310,7 @@ int main (int argc, char **argv)
     }
 
 #ifdef __PDCURSES__
-    PDC_set_title( "Bunny, Mayoress, Prostitute & Succubus v0.80");
+    PDC_set_title( "Bunny, Mayoress, Prostitute & Succubus v0.81");
 #endif
 
     // this is the main while loop..
@@ -449,7 +449,7 @@ int main (int argc, char **argv)
         // I turned this into something that is activated by a command line switch.
         //
         if (cLogEnable != 0)
-            futils_writeFileHeaderAndData ("BMPS-Log.txt", "#BMPS v0.80 log output\n", gpszDialogBuffer);
+            futils_writeFileHeaderAndData ("BMPS-Log.txt", "#BMPS v0.81 log output\n", gpszDialogBuffer);
 
         for (iOffset = 0; iOffset < 399; iOffset++)
             szInputString[iOffset] = 0;

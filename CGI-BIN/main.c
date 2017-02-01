@@ -110,7 +110,7 @@ int main(void)
     // 12 = start new.
 
     // set things up.
-    strcpy (gszVersionStamp, "0.81");
+    strcpy (gszVersionStamp, "0.82");
     gstruct_FileBuffGen.bMemFlag = FALSE;
     gstruct_FileBuffOut.bMemFlag = FALSE;
 

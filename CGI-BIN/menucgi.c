@@ -303,6 +303,9 @@ void menucgi_outputAboutMenu ()
         iRet = futils_addStringToFileBufferEnd ("<br/><b>ChangeLog:</b><br/><br/>\n", &gstruct_FileBuffOut);
 
     if (iRet == 0)
+        iRet = futils_addStringToFileBufferEnd ("<b># Version 0.82 - Wednesday 1st February 2017</b><br/>4 new images from Inkeranon.<br/><br/>\n", &gstruct_FileBuffOut);
+
+    if (iRet == 0)
         iRet = futils_addStringToFileBufferEnd ("<b># Version 0.81 - Sunday 11th December 2016</b><br/>2 new images from Inkeranon. Set the WIN32 version to autostart the default web browser.<br/><br/>\n", &gstruct_FileBuffOut);
 
     if (iRet == 0)

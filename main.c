@@ -182,7 +182,7 @@ int main (int argc, char **argv)
 #endif //WIN32
 
     // load in the version number
-    strcpy (gszVersionStamp, "0.81");
+    strcpy (gszVersionStamp, "0.82");
 
     if (gcDebugFlag != 0)
         printf("BMPS Version %s, with debugging turned on, is starting.\n", gszVersionStamp);

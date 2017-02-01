@@ -1055,7 +1055,7 @@ int statefile_writeSaveFile (char *pszFileName)
     unlink (pszFileName);
 
 #ifdef INTERFACE_CURSES
-    futils_writeFileHeaderAndData (pszFileName, "!Version 0.81\n", gstruct_FileBuffGen.pcData);
+    futils_writeFileHeaderAndData (pszFileName, "!Version 0.82\n", gstruct_FileBuffGen.pcData);
 #else
     sprintf (szInputString, "*%s\n", gszSessionTrackingId);
 

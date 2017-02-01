@@ -1311,7 +1311,15 @@ int gamelogic02_scene1024 (int iSubSceneId, char cSubFlag)
             {
                 // I don't have to unlock Redinald again, it is permanent.
 
-                iRet = mdialog_addToDialogWithSrchRep ("\n\nAs #!00# enters #!08#\'s room, #!00# notices that #!08# seems to be checking to see if anyone else followed her. #!00# glances at the open door to #!08#\'s room, then looks at #!08#, and says \"I think... it is just me\".\n\n#!08# glances at #!00#, stands up, walks over to the door of the room, closes the door, and then locks it. Without looking at #!00#, #!08# utters \"Good\".\n\n#!00# then watches #!08#, as he walks over to a table, picks up a small empty glass and approaches #!00#. #!08# holds out the glass and says \"Could I trouble you to... pee... into this\".\n\n#!00# is not surprised. She already heard from #!01# about #!08#\'s little fetish. #!00# asks \"Wouldn\'t it be better... to just drink straight... from the source?\"\n\n#!08#'s eyes widen, as he exclaims \"Heaven should forbid it. The amount of rancid filth that must have accumulated down there... before you joined us... is considerable\".\n\n#!00# decides that while she could have fun arguing the point with #!08#, she can just teach him another way. #!00# takes the empty glass from #!08#, and asks \"I suppose you want to watch\".\n\n#!08# responds \"Of course\".\n\n#!00# grins.\n\n\n[10 minutes later...]\n\n#!08# is sitting on the edge of his bed, without his pants on. #!08# looks at #!00#, and asks \"Are you sure this is the best way for you to... make more?\"\n\n#!00# crouches down between #!08#\'s legs, looks up at him, and says \"I am sure\". #!00# then starts eagerly licking and sucking #!08#'s penis before his \'clean freak streak\' kicks in again.\n\n#!00# then skillfully manipulates #!08#\'s arousal so he reaches close to a climax, then holds him there.\n\n\n[15 minutes later...]\n\n#!08# is laying flat on his back, on his bed, in a dazed state. #!00#, is crouching near #!08#, and says \"I am ready now\".\n\n#!08# sleepily responds \"Yes... from the source... germs are on the glass... Yes... from the source... germs are on the glass\".\n\n#!00# lightly smiles, and considers that humans are so easy to manipulate at times. #!00# then straddles #!08# face. #!08# starts licking #!00#\'s pussy.\n\n#!00# says \"that\'s it... keep doing that... and you will get your drink\".\n\n\n[A while later...]\n\n");
+                iRet = mdialog_addToDialogWithSrchRep ("\n\nAs #!00# enters #!08#\'s room, #!00# notices that #!08# seems to be checking to see if anyone else followed her. #!00# glances at the open door to #!08#\'s room, then looks at #!08#, and says \"I think... it is just me\".\n\n#!08# glances at #!00#, stands up, walks over to the door of the room, closes the door, and then locks it. Without looking at #!00#, #!08# utters \"Good\".\n\n#!00# then watches #!08#, as he walks over to a table, picks up a small empty glass and approaches #!00#. #!08# holds out the glass and says \"Could I trouble you to... pee... into this\".\n\n#!00# is not surprised. She already heard from #!01# about #!08#\'s little fetish. #!00# asks \"Wouldn\'t it be better... to just drink straight... from the source?\"\n\n#!08#'s eyes widen, as he exclaims \"Heaven should forbid it. The amount of rancid filth that must have accumulated down there... before you joined us... is considerable\".\n\n#!00# decides that while she could have fun arguing the point with #!08#, she can just teach him another way. #!00# takes the empty glass from #!08#, and asks \"I suppose you want to watch\".\n\n#!08# responds \"Of course\".\n\n#!00# grins.\n\n\n[10 minutes later...]\n\n#!08# is sitting on the edge of his bed, without his pants on. #!08# looks at #!00#, and asks \"Are you sure this is the best way for you to... make more?\"\n\n#!00# crouches down between #!08#\'s legs, looks up at him, and says \"I am sure\". #!00# then starts eagerly licking and sucking #!08#'s penis before his \'clean freak streak\' kicks in again.\n\n#!00# then skillfully manipulates #!08#\'s arousal so he reaches close to a climax, then holds him there.\n\n\n[15 minutes later...]\n\n#!08# is laying flat on his back, on his bed, in a dazed state. #!00#, is crouching near #!08#, and says \"I am ready now\".\n\n");
+                if (iRet != 0) return iRet;
+
+#ifndef INTERFACE_CURSES
+                iRet = mutils_addToDialogBuffer ("<center><img src=\"images/BMPS-POV1-by-Inkeranon.jpg\" /></center><br/>\n");
+                if (iRet != 0) return iRet;
+#endif
+
+                iRet = mdialog_addToDialogWithSrchRep ("#!08# sleepily responds \"Yes... from the source... germs are on the glass... Yes... from the source... germs are on the glass\".\n\n#!00# lightly smiles, and considers that humans are so easy to manipulate at times. #!00# then straddles #!08# face. #!08# starts licking #!00#\'s pussy.\n\n#!00# says \"that\'s it... keep doing that... and you will get your drink\".\n\n\n[A while later...]\n\n");
                 if (iRet != 0) return iRet;
 
                 // this is how the values are increased for the stored parameters (also resets the energy value).
@@ -1645,7 +1653,15 @@ int gamelogic02_scene1026 (int iSubSceneId, char cSubFlag)
                 switch (cEval1)
                 {
                 case 0:
-                    iRet = mdialog_addToDialogWithSrchRep ("\n\n#!00# enters #!14#\'s room. #!14# is here, but isn\'t paying immediate attention to #!00#. #!14# is currently focusing on something else. #!00# looks around the small room, that is both an examination room, and the place where #!14# sleeps.\n\nFinally, #!14# stands up from his chair and looks at #!00#, and says \"Time for your examination. Sit down, here\". #!14# points at another empty chair next to the one he was sitting on.\n\n#!00# decides to play along, so she saunters over to the second chair and sits on it. While sitting on the chair, #!00# notices what #!14# was working on. There are a collection of syringes lined up on the table. Once seated, #!00# asks #!14# \"So, how are we going to do this?... Do you want to stay standing, and I suck you cock... or\"...\n\n#!14# interjects \"No.. Quite frankly\", then #!14# picks up one of the syringes and carefully inspects the needle, and continues \"I am concerned about something... So I need to be thorough\".\n\n#!00# responds with a simple \"Oh\". #!01# had already told her about #!14#\'s fetish. Despite the fact that #!14# is attempting to act professionally, his boner is painfully straining against the fabric of his pants.\n\n#!14# looks at #!00# and says \"Now, this is going to sting, but... it is going to be worth it\".\n\n");
+                    iRet = mdialog_addToDialogWithSrchRep ("\n\n#!00# enters #!14#\'s room. #!14# is here, but isn\'t paying immediate attention to #!00#. #!14# is currently focusing on something else. #!00# looks around the small room, that is both an examination room, and the place where #!14# sleeps.\n\nFinally, #!14# stands up from his chair and looks at #!00#, and says \"Time for your examination. Sit down, here\". #!14# points at another empty chair next to the one he was sitting on.\n\n#!00# decides to play along, so she saunters over to the second chair and sits on it. While sitting on the chair, #!00# notices what #!14# was working on. There are a collection of syringes lined up on the table. Once seated, #!00# asks #!14# \"So, how are we going to do this?... Do you want to stay standing, and I suck you cock... or\"...\n\n#!14# interjects \"No.. Quite frankly\", then #!14# picks up one of the syringes and carefully inspects the needle, and continues \"I am concerned about something... So I need to be thorough\".\n\n");
+                if (iRet != 0) return iRet;
+
+#ifndef INTERFACE_CURSES
+                iRet = mutils_addToDialogBuffer ("<center><img src=\"images/BMPS-Doctor1-by-Inkeranon.jpg\" /></center><br/>\n");
+                if (iRet != 0) return iRet;
+#endif
+
+                iRet = mdialog_addToDialogWithSrchRep ("#!00# responds with a simple \"Oh\". #!01# had already told her about #!14#\'s fetish. Despite the fact that #!14# is attempting to act professionally, his boner is painfully straining against the fabric of his pants.\n\n#!14# looks at #!00# and says \"Now, this is going to sting, but... it is going to be worth it\".\n\n");
                     break;
 
                 case 1:
@@ -1717,7 +1733,15 @@ int gamelogic02_scene1026 (int iSubSceneId, char cSubFlag)
                     break;
 
                 default: // case 4:
-                    iRet = mdialog_addToDialogWithSrchRep ("#!14# stops petting #!00#, stands up, undoes his pants, and mutters \"verify\".\n\n#!00# glances at the pre-cum dribbling from the tip of #!14#\'s cock, and comes to the conclusion that #!14# has pretty much lost it. As #!00# swallows #!14#\'s penis and immediately backs off stimulating him, to not make #!14# cum his brains out, #!00# decides to fuck some sense into #!14#.\n\nAfter all, #!14# is now #!00#\'s patient.");
+                    iRet = mdialog_addToDialogWithSrchRep ("#!14# stops petting #!00#, stands up, undoes his pants, and mutters \"verify\".\n\n#!00# glances at the pre-cum dribbling from the tip of #!14#\'s cock, and comes to the conclusion that #!14# has pretty much lost it. As #!00# swallows #!14#\'s penis and immediately backs off stimulating him, to not make #!14# cum his brains out, #!00# decides to fuck some sense into #!14#.\n\n");
+                if (iRet != 0) return iRet;
+
+#ifndef INTERFACE_CURSES
+                iRet = mutils_addToDialogBuffer ("<center><img src=\"images/BMPS-Nurse1-by-Inkeranon.jpg\" /></center><br/>\n");
+                if (iRet != 0) return iRet;
+#endif
+
+                iRet = mdialog_addToDialogWithSrchRep ("After all, #!14# is now #!00#\'s patient.");
                     break;
                 }
                 if (iRet != 0) return iRet;
@@ -3116,7 +3140,15 @@ int gamelogic02_scene1037 (int iSubSceneId, char cSubFlag)
             {
                 // I don't have to unlock the 2 farmers again, this change is permanent.
 
-                iRet = mdialog_addToDialogWithSrchRep ("\n\n#!00# enters the shack, and looks around. Both #!48# and #!47# are there. #!48# and #!47# look at each other, then at #!00#. #!47# talks to #!00# \"Nice pair of udders you have there missy\".\n\n#!00# is perplexed, then she looks down and remembers that she made her breasts larger, to convince #!14# that the stuff that he was injecting her with had some effect.\n\n#!00# glances at #!47#, then looks at #!48#. #!48# talks next \"I reckon we have ourselves a new cow\".\n\n#!47# nods in agreement, and says \"Mmm Hmm... looks like milkin\' time\".\n\n#!48# replies with a simple \"Yup\".\n\n#!00# smiles, as she remembered that #!01# mentioned something about these two having some weird \'dairy farmer\' fetish. #!00# asks \"Okay, so... how do we go about this?\"\n\n\n[5 minutes later...]\n\n#!47# is to #!00#\'s right, sucking on #!00#\'s right breast, while #!00# is stroking his cock with her right hand. #!48# is #!00#\'s left, doing the same to #!00#\'s left breast, while #!00#\'s left hand is working #!47#\'s penis.\n\n#!00# smiles as she lets out some breast milk, while the two men eagerly lap it up and ejaculate almost simultaneously. #!00# notices that most of the semen was wasted, so she will have to change things around a bit.\n\n#!00# decides that she is going to have to train her two new \'sperm cows\' to do this properly.\n\n\n[A while later...]\n\n");
+                iRet = mdialog_addToDialogWithSrchRep ("\n\n#!00# enters the shack, and looks around. Both #!48# and #!47# are there. #!48# and #!47# look at each other, then at #!00#. #!47# talks to #!00# \"Nice pair of udders you have there missy\".\n\n#!00# is perplexed, then she looks down and remembers that she made her breasts larger, to convince #!14# that the stuff that he was injecting her with had some effect.\n\n#!00# glances at #!47#, then looks at #!48#. #!48# talks next \"I reckon we have ourselves a new cow\".\n\n#!47# nods in agreement, and says \"Mmm Hmm... looks like milkin\' time\".\n\n#!48# replies with a simple \"Yup\".\n\n#!00# smiles, as she remembered that #!01# mentioned something about these two having some weird \'dairy farmer\' fetish. #!00# asks \"Okay, so... how do we go about this?\"\n\n\n[5 minutes later...]\n\n#!47# is to #!00#\'s right, sucking on #!00#\'s right breast, while #!00# is stroking his cock with her right hand. #!48# is at #!00#\'s left, doing the same to #!00#\'s left breast, while #!00#\'s left hand is working #!47#\'s penis.\n\n");
+                if (iRet != 0) return iRet;
+
+#ifndef INTERFACE_CURSES
+                iRet = mutils_addToDialogBuffer ("<center><img src=\"images/BMPS-Milking1-by-Inkeranon.jpg\" /></center><br/>\n");
+                if (iRet != 0) return iRet;
+#endif
+
+                iRet = mdialog_addToDialogWithSrchRep ("#!00# smiles as she lets out some breast milk, while the two men eagerly lap it up and ejaculate almost simultaneously. #!00# notices that most of the semen was wasted, so she will have to change things around a bit.\n\n#!00# decides that she is going to have to train her two new \'sperm cows\' to do this properly.\n\n\n[A while later...]\n\n");
                 if (iRet != 0) return iRet;
 
                 // this is how the values are increased for the stored parameters (also resets the energy value).
